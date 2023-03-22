@@ -12,7 +12,7 @@ public class ventana extends JFrame{
 
 
         // Icono de la ventana
-        Image icono = new ImageIcon("C:\\Users\\ik012982i9\\Pictures\\X8.png").getImage();
+        Image icono = new ImageIcon("src\\X8.png").getImage();
         frame.setIconImage(icono);
 
         //Panel contenido
@@ -27,12 +27,8 @@ public class ventana extends JFrame{
         panelCentro.setLayout(new GridLayout(2,1));
 
         JPanel panel1 = new JPanel();
-        //panel1.setBackground(Color.RED);
-        panel1.setPreferredSize(new Dimension(1000,330));
 
         JPanel panel2 = new JPanel();
-        //panel2.setBackground(Color.BLUE);
-        panel2.setPreferredSize(new Dimension(1000,330));
 
         // Botón de inicio de sesión
         JButton botonLogin = new JButton("Iniciar sesión");
@@ -46,22 +42,19 @@ public class ventana extends JFrame{
         panelNorte.add(botonLogin, BorderLayout.EAST);
 
         // Botones opciones
-        ImageIcon fondo1 = new ImageIcon("C:\\Users\\ik012982i9\\Pictures\\xlr8bus.jpg");
+        ImageIcon fondo1 = new ImageIcon("src\\xlr8bus.jpg");
         JButton opcion1 = new JButton();
         opcion1.setIcon(fondo1);
         opcion1.setBorder(null);
-        //panel1.add(opcion1);
+        opcion1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(ventana.this, "Has iniciado sesión correctamente","INICIO DE SESIÓN",JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        panel1.add(opcion1);
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weightx = 0.5;
-        constraints.weighty = 0.0;
-        constraints.insets = new Insets(10, 10, 10, 10);
-        panel1.add(opcion1, constraints);
-
-        ImageIcon fondo2 = new ImageIcon("C:\\Users\\ik012982i9\\Pictures\\xlr8camion.jpg");
+        ImageIcon fondo2 = new ImageIcon("src\\xlr8camion.jpg");
         JButton opcion2 = new JButton();
         opcion2.setIcon(fondo2);
         opcion2.setBorder(null);
@@ -77,7 +70,7 @@ public class ventana extends JFrame{
 
 
         // Mostrar la ventana principal
-        frame.pack();
+        frame.setSize(900,1080);
         frame.setVisible(true);
     }
 }

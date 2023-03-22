@@ -8,7 +8,7 @@ public class login extends JFrame {
     public login() {
         JFrame frame = new JFrame("Introduce usuario y contraseña");
 
-        Image icono = new ImageIcon("C:\\Users\\ik012982i9\\Pictures\\X8.png").getImage();
+        Image icono = new ImageIcon("src\\X8.png").getImage();
         frame.setIconImage(icono);
 
         JLabel usuer = new JLabel("Usuario:");
@@ -36,8 +36,8 @@ public class login extends JFrame {
                 String password = new String(passT.getPassword());
 
                 if (authenticate(username, password)) {
-                    // Aquí se puede abrir la ventana principal de la aplicación
                     JOptionPane.showMessageDialog(login.this, "Has iniciado sesión correctamente","INICIO DE SESIÓN",JOptionPane.INFORMATION_MESSAGE);
+                    frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(login.this, "Usuario o contraseña incorrecta","ERROR",JOptionPane.ERROR_MESSAGE);
                 }
