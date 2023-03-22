@@ -27,8 +27,12 @@ public class ventana extends JFrame{
         panelCentro.setLayout(new GridLayout(2,1));
 
         JPanel panel1 = new JPanel();
+        //panel1.setBackground(Color.RED);
+        panel1.setPreferredSize(new Dimension(1000,330));
 
         JPanel panel2 = new JPanel();
+        //panel2.setBackground(Color.BLUE);
+        panel2.setPreferredSize(new Dimension(1000,330));
 
         // Botón de inicio de sesión
         JButton botonLogin = new JButton("Iniciar sesión");
@@ -46,13 +50,15 @@ public class ventana extends JFrame{
         JButton opcion1 = new JButton();
         opcion1.setIcon(fondo1);
         opcion1.setBorder(null);
+        panel1.add(opcion1);
         opcion1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(ventana.this, "Has iniciado sesión correctamente","INICIO DE SESIÓN",JOptionPane.INFORMATION_MESSAGE);
+                frame.getContentPane().removeAll();
+                buses b = new buses(frame);
             }
         });
-        panel1.add(opcion1);
+
 
         ImageIcon fondo2 = new ImageIcon("src\\xlr8camion.jpg");
         JButton opcion2 = new JButton();
@@ -70,7 +76,7 @@ public class ventana extends JFrame{
 
 
         // Mostrar la ventana principal
-        frame.setSize(900,1080);
+        frame.pack();
         frame.setVisible(true);
     }
 }
