@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ventana {
+public class ventana extends JFrame{
 
     public ventana() {
         // Ventana principal
@@ -14,6 +14,10 @@ public class ventana {
         // Icono de la ventana
         Image icono = new ImageIcon("C:\\Users\\ik012982i9\\Pictures\\X8.png").getImage();
         frame.setIconImage(icono);
+
+        //Panel contenido
+        JPanel contentPane = new JPanel(new BorderLayout());
+        contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Paneles
         JPanel panelNorte = new JPanel();
@@ -32,6 +36,7 @@ public class ventana {
 
         // Botón de inicio de sesión
         JButton botonLogin = new JButton("Iniciar sesión");
+        botonLogin.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,15 +50,30 @@ public class ventana {
         JButton opcion1 = new JButton();
         opcion1.setIcon(fondo1);
         opcion1.setBorder(null);
-        //opcion1.setPreferredSize(new Dimension(1000, 500));
-        panel1.add(opcion1);
+        //panel1.add(opcion1);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 0.5;
+        constraints.weighty = 0.0;
+        constraints.insets = new Insets(10, 10, 10, 10);
+        panel1.add(opcion1, constraints);
+
+        ImageIcon fondo2 = new ImageIcon("C:\\Users\\ik012982i9\\Pictures\\xlr8camion.jpg");
+        JButton opcion2 = new JButton();
+        opcion2.setIcon(fondo2);
+        opcion2.setBorder(null);
+        panel2.add(opcion2);
 
 
         // Agregar paneles
-        frame.add(panelNorte, BorderLayout.NORTH);
+        contentPane.add(panelNorte, BorderLayout.NORTH);
         panelCentro.add(panel1);
         panelCentro.add(panel2);
-        frame.add(panelCentro, BorderLayout.CENTER);
+        contentPane.add(panelCentro, BorderLayout.CENTER);
+        frame.add(contentPane);
 
 
         // Mostrar la ventana principal
