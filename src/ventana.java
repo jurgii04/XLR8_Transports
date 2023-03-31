@@ -96,6 +96,7 @@ public class ventana extends JFrame{
                         frame.getContentPane().repaint();
                         frame.add(panelNorte, BorderLayout.NORTH);
                         frame.add(contentPane);
+                        frame.setTitle("XLR8 Transports");
 
                     }
                 });

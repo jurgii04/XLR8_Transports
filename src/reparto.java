@@ -23,15 +23,18 @@ public class reparto extends JFrame {
         panel1.setPreferredSize(new Dimension(100 , 100));
             panel1.setBorder(BorderFactory.createTitledBorder("Servecio 1"));
             panel1.setLayout(new FlowLayout());
-            panel1.add(new JLabel("internacuiona"));
+            panel1.add(new JLabel("internacional"));
+            panel1.add(new JLabel(new ImageIcon("src\\inter.png")));
             mainPanel.add(panel1);
 
             // Segundo ejemplo de reparto
             JPanel panel2 = new JPanel();
             panel2.setPreferredSize(new Dimension(100 , 100));
             panel2.setBorder(BorderFactory.createTitledBorder("Servecio 1"));
+            panel2.setPreferredSize(new Dimension(100 , 100));
             panel2.setLayout(new FlowLayout());
             panel2.add(new JLabel("Nacional"));
+            panel2.add(new JLabel(new ImageIcon("src\\nacional.png")));
             mainPanel.add(panel2);
 
 
