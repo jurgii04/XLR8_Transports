@@ -1,3 +1,5 @@
+package Windows;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,9 +44,9 @@ public class buses extends JFrame {
                     v1.setLayout(new BorderLayout());
                     JLabel label = new JLabel(optionOrg + "==>" + optionDis + " Precio 100€" + "\n" + "22:00 (7h)");
                     v1.add(label , BorderLayout.CENTER);
-                    ImageIcon img = new ImageIcon("src\\barcelona.jpg");
+                    ImageIcon img = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
 
-                    ImageIcon img2 = new ImageIcon("src\\madrid.jpg");
+                    ImageIcon img2 = new ImageIcon("src\\Windows\\images\\madrid.jpg");
                     JLabel labelimg1= new JLabel(img);
                     labelimg1.setPreferredSize(new Dimension(100 , 100));
                     JLabel labelimg2= new JLabel(img2);
@@ -61,9 +63,9 @@ public class buses extends JFrame {
                     vII.setLayout(new BorderLayout());
                     JLabel labelII = new JLabel(optionOrg + "==>" + optionDis + " Precio 50€" + "\n" + "6:00 (12h)");
                     vII.add(labelII , BorderLayout.CENTER);
-                    ImageIcon imgII = new ImageIcon("src\\barcelona.jpg");
+                    ImageIcon imgII = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
 
-                    ImageIcon img2II = new ImageIcon("src\\madrid.jpg");
+                    ImageIcon img2II = new ImageIcon("src\\Windows\\images\\madrid.jpg");
                     JLabel labelimg1II= new JLabel(imgII);
                     labelimg1II.setPreferredSize(new Dimension(100 , 100));
                     JLabel labelimg2II= new JLabel(img2II);

@@ -1,3 +1,5 @@
+package Windows;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,7 +26,7 @@ public class reparto extends JFrame {
             panel1.setBorder(BorderFactory.createTitledBorder("Servecio 1"));
             panel1.setLayout(new FlowLayout());
             panel1.add(new JLabel("internacional"));
-            panel1.add(new JLabel(new ImageIcon("src\\inter.png")));
+            panel1.add(new JLabel(new ImageIcon("src\\Windows\\images\\inter.png")));
             mainPanel.add(panel1);
 
             // Segundo ejemplo de reparto
@@ -34,7 +36,7 @@ public class reparto extends JFrame {
             panel2.setPreferredSize(new Dimension(100 , 100));
             panel2.setLayout(new FlowLayout());
             panel2.add(new JLabel("Nacional"));
-            panel2.add(new JLabel(new ImageIcon("src\\nacional.png")));
+            panel2.add(new JLabel(new ImageIcon("src\\Windows\\images\\nacional.png")));
             mainPanel.add(panel2);
 
 

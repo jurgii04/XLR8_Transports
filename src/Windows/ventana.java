@@ -1,3 +1,5 @@
+package Windows;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +14,7 @@ public class ventana extends JFrame{
 
 
         // Icono de la ventana
-        Image icono = new ImageIcon("src\\X8.png").getImage();
+        Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
         frame.setIconImage(icono);
 
         //Panel contenido
@@ -46,7 +48,7 @@ public class ventana extends JFrame{
         panelNorte.add(botonLogin, BorderLayout.EAST);
 
         // Botones opciones
-        ImageIcon fondo1 = new ImageIcon("src\\xlr8bus.jpg");
+        ImageIcon fondo1 = new ImageIcon("src\\Windows\\images\\xlr8bus.jpg");
         JButton opcion1 = new JButton();
         opcion1.setIcon(fondo1);
         opcion1.setBorder(null);
@@ -78,7 +80,7 @@ public class ventana extends JFrame{
         });
 
 
-        ImageIcon fondo2 = new ImageIcon("src\\xlr8camion.jpg");
+        ImageIcon fondo2 = new ImageIcon("src\\Windows\\images\\xlr8camion.jpg");
         JButton opcion2 = new JButton();
         opcion2.addActionListener(new ActionListener() {
             @Override

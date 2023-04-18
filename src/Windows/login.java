@@ -1,3 +1,5 @@
+package Windows;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,7 +10,7 @@ public class login extends JFrame {
     public login() {
         JFrame frame = new JFrame("Introduce usuario y contraseña");
 
-        Image icono = new ImageIcon("src\\X8.png").getImage();
+        Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
         frame.setIconImage(icono);
 
         JLabel usuer = new JLabel("Usuario:");
