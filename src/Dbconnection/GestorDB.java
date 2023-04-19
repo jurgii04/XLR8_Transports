@@ -64,9 +64,38 @@ public class GestorDB {
             throw new RuntimeException(e);
         }
     }
+    public void update(String table_name , String whereStAt , Map<String,Object> data){
+        String updateStat="update " + table_name + " set ";
+        String values="";
+        String where = " where "+whereStAt ;
+        PreparedStatement ps;
+        for (String column : data.keySet()){
+            values = values + column + "=?" + ",";
+        }
+        values=values.substring(0,(values.length()-1));
+        updateStat=updateStat + values +where ;
+
+        int index=1;
+        try {
+
+            ps= conn.prepareStatement(updateStat);
+            for (Object valor:data.values()){
+
+                ps.setObject(index , valor);
+            }
+
+            ps.executeUpdate();
+            System.out.println("DATA updated 100%");
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void main(String[] arg) {
         GestorDB DB = new GestorDB();
+        //------------------------insert testing
         /**
          *This code uses the SimpleDateFormat class in Java to convert a date string from one format to another.
          *
@@ -101,6 +130,15 @@ public class GestorDB {
         data.put("JEFE", 16);
         //System.out.println(data.keySet());
         //System.out.println(data.values());
-        DB.insert("EMPLEADOS", data);
+        //DB.insert("EMPLEADOS", data);
+        //-------------------------------------update testing----------------------------------
+        Map<String, Object> updata = new LinkedHashMap<>();
+        updata.put("NOMBRE_APELLIDO" , "lionel messi");
+        /*for (Map.Entry<String,Object> datageter : updata .entrySet()){
+            //values = values + datageter.getKey() + "=" + datageter.getValue() + ",";
+            System.out.println(datageter.getKey() + "=" + datageter.getValue() + ",");
+        }*/
+
+        DB.update("EMPLEADOS" , "NUEMP=16" , updata);
     }
 }
