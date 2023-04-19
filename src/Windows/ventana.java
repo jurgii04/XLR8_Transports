@@ -36,6 +36,12 @@ public class ventana extends JFrame{
         //panel2.setBackground(Color.BLUE);
         panel2.setPreferredSize(new Dimension(1000,330));
 
+        ImageIcon usuario = new ImageIcon("src\\Windows\\images\\usuario.png");
+        JLabel user = new JLabel();
+        user.setIcon(usuario);
+        user.setBorder(null);
+        panelNorte.add(user);
+
         // Botón de inicio de sesión
         JButton botonLogin = new JButton("Iniciar sesión");
         botonLogin.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));

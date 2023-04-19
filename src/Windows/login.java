@@ -45,7 +45,13 @@ public class login extends JFrame {
                 if (authenticate(username, password)) {
                     frame.dispose();
 
-                    //Crear una nueva etiqueta para mostrar el nombre de usuario después de iniciar sesión
+                    //Añadir icono de usuario
+                    ImageIcon icon = new ImageIcon("src\\Windows\\images\\usuario.png");
+                    JLabel iconLabel = new JLabel();
+                    iconLabel.setIcon(icon);
+                    panelNorte.add(iconLabel, BorderLayout.EAST);
+
+                    //Mostrar el nombre de usuario
                     JLabel nombreLabel = new JLabel();
                     panelNorte.add(nombreLabel, BorderLayout.EAST);
 
