@@ -2,10 +2,8 @@ package Dbconnection;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class GestorDB {
     static final String SERVER_IP = "localhost";
@@ -17,6 +15,7 @@ public class GestorDB {
     private Connection conn;
     private Statement st;
     private ResultSet resu;
+    private ResultSetMetaData resumeta;
 
     public GestorDB() {
         try {
@@ -85,6 +84,7 @@ public class GestorDB {
             }
 
             ps.executeUpdate();
+            ps.close();
             System.out.println("DATA updated 100%");
 
 
@@ -92,6 +92,106 @@ public class GestorDB {
             throw new RuntimeException(e);
         }
     }
+    public void delete(String tablename , String WHERE_condition){
+        String statment="delete from "+ tablename +" where " + WHERE_condition;
+
+        try {
+            st= conn.createStatement();
+            int rowsDeleted = st.executeUpdate(statment);
+            st.close();
+            System.out.println("DATA deleted 100% , " + rowsDeleted + " deleted");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    /*public Map<String , Object> select(String tablename , String columns , String where_condition){
+        String statment = "select "+ columns+" from " + tablename + " where " + where_condition;
+        Map<String , Object> data = new LinkedHashMap<>();
+        try {
+            st=conn.createStatement();
+            resu=st.executeQuery(statment);
+            resumeta=resu.getMetaData();
+            while (resu.next()){
+                for(int i =0 ; i<resumeta.getColumnCount();i++){
+
+                    Object value=resu.getObject(i);
+                    data.put("1",value);
+                }
+            }
+            st.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(data);
+        return data;
+    }*/
+    public  void selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
+
+
+        try {
+
+
+            // Build the SQL query
+            String sql = "SELECT ";
+            if (columnNames.length == 0) {
+                sql += "*";
+            } else {
+                for (int i = 0; i < columnNames.length; i++) {
+                    sql += columnNames[i];
+                    if (i < columnNames.length - 1) {
+                        sql += ", ";
+                    }
+                }
+            }
+            sql += " FROM " + tableName;
+            if (whereConditions.length > 0) {
+                sql += " WHERE ";
+                for (int i = 0; i < whereConditions.length; i++) {
+                    sql += whereConditions[i];
+                    if (i < whereConditions.length - 1) {
+                        sql += " AND ";
+                    }
+                }
+            }
+
+
+            st = conn.createStatement();
+            resu = st.executeQuery(sql);
+
+
+            while (resu.next()) {
+                for (int i = 0; i < columnNames.length; i++) {
+                    String columnName = columnNames[i];
+                    String columnValue = resu.getString(columnName);
+                    System.out.println(columnName + ": " + columnValue);
+                }
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (resu != null) {
+                    resu.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
 
     public static void main(String[] arg) {
         GestorDB DB = new GestorDB();
@@ -123,10 +223,10 @@ public class GestorDB {
         }
 
         Map<String, Object> data = new LinkedHashMap<>();
-        data.put("NUEMP", 17);
+        data.put("NUEMP", 16);
         data.put("FECHA_CONTRATO", formattedDate);
         data.put("DNI", 1548740);
-        data.put("NOMBRE_APELLIDO", "test from java");
+        data.put("NOMBRE_APELLIDO", "goat");
         data.put("JEFE", 16);
         //System.out.println(data.keySet());
         //System.out.println(data.values());
@@ -139,6 +239,12 @@ public class GestorDB {
             System.out.println(datageter.getKey() + "=" + datageter.getValue() + ",");
         }*/
 
-        DB.update("EMPLEADOS" , "NUEMP=16" , updata);
+        //DB.update("EMPLEADOS" , "NUEMP=16" , updata);
+        //---------------------- delete method testing
+        //DB.delete("EMPLEADOS" , "NUEMP in (16 , 17)");
+        //------------select method testing
+        String[] columnNames = {"NUEMP" ,"NOMBRE_APELLIDO" };
+        String[] whereConditions = {"JEFE=3"};
+        DB.selectFromTable("EMPLEADOS" , columnNames , whereConditions);
     }
 }
