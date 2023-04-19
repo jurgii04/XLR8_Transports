@@ -25,7 +25,7 @@ public class reparto extends JFrame {
         panel1.setPreferredSize(new Dimension(100 , 100));
             panel1.setBorder(BorderFactory.createTitledBorder("Servecio 1"));
             panel1.setLayout(new FlowLayout());
-            panel1.add(new JLabel("internacional"));
+            panel1.add(new JLabel("Internacional"));
             panel1.add(new JLabel(new ImageIcon("src\\Windows\\images\\inter.png")));
             mainPanel.add(panel1);
 
