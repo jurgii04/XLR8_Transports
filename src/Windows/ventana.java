@@ -42,7 +42,7 @@ public class ventana extends JFrame{
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login login = new login();
+                login login = new login(botonLogin, panelNorte);
             }
         });
         panelNorte.add(botonLogin, BorderLayout.EAST);
