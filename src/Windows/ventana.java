@@ -1,6 +1,6 @@
 package Windows;
 
-/*import javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,14 +12,13 @@ public class ventana extends JFrame{
         JFrame frame = new JFrame("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         // Icono de la ventana
         Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
         frame.setIconImage(icono);
 
         //Panel contenido
         JPanel contentPane = new JPanel(new BorderLayout());
-        contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
 
         // Paneles
         JPanel panelNorte = new JPanel();
@@ -36,15 +35,12 @@ public class ventana extends JFrame{
         //panel2.setBackground(Color.BLUE);
         panel2.setPreferredSize(new Dimension(1000,330));
 
-        ImageIcon usuario = new ImageIcon("src\\Windows\\images\\usuario.png");
-        JLabel user = new JLabel();
-        user.setIcon(usuario);
-        user.setBorder(null);
-        panelNorte.add(user);
-
         // Botón de inicio de sesión
-        JButton botonLogin = new JButton("Iniciar sesión");
+        JButton botonLogin = new JButton(("<html><u>Iniciar sesión</u></html>"));
         botonLogin.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        botonLogin.setForeground(new Color(255, 255, 255));
+        botonLogin.setBackground(new Color(0, 150, 136));
+        botonLogin.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,6 +48,7 @@ public class ventana extends JFrame{
             }
         });
         panelNorte.add(botonLogin, BorderLayout.EAST);
+        panelNorte.setBackground(new Color(0, 150, 136));
 
         // Botones opciones
         ImageIcon fondo1 = new ImageIcon("src\\Windows\\images\\xlr8bus.jpg");
@@ -66,21 +63,6 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                JButton VOLVER = new JButton("Volver");
-                panelNorte.add(VOLVER, BorderLayout.WEST);
-                VOLVER.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame.getContentPane().removeAll();
-                        frame.getContentPane().revalidate();
-                        frame.getContentPane().repaint();
-                        frame.add(panelNorte, BorderLayout.NORTH);
-                        frame.add(contentPane);
-
-                    }
-                });
-                frame.add(panelNorte, BorderLayout.NORTH);
-
                 buses b = new buses(frame);
             }
         });
@@ -131,9 +113,9 @@ public class ventana extends JFrame{
         frame.pack();
         frame.setVisible(true);
     }
-}*/
+}
 
-import javax.swing.*;
+/*import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -143,7 +125,6 @@ public class ventana extends JFrame {
     public ventana() {
         // Configurar la ventana
         JFrame frame = new JFrame("XLR8 Transports");
-        frame.setTitle("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(new BorderLayout());
@@ -220,7 +201,7 @@ public class ventana extends JFrame {
         // Mostrar la ventana
         frame.setVisible(true);
     }
-}
+}*/
 
 
 

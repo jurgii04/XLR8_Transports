@@ -45,20 +45,15 @@ public class login extends JFrame {
                 if (authenticate(username, password)) {
                     frame.dispose();
 
-                    //Añadir icono de usuario
-                    ImageIcon icon = new ImageIcon("src\\Windows\\images\\usuario.png");
-                    JLabel iconLabel = new JLabel();
-                    iconLabel.setIcon(icon);
-                    panelNorte.add(iconLabel, BorderLayout.EAST);
 
                     //Mostrar el nombre de usuario
                     JLabel nombreLabel = new JLabel();
                     panelNorte.add(nombreLabel, BorderLayout.EAST);
 
                     nombreLabel.setText("Bienvenido " + username);
+                    nombreLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 30));
 
                     //Ocultar el botón "Iniciar sesión"
-                    //botonLogin.setVisible(false);
                     panelNorte.remove(botonLogin);
 
                 } else {
