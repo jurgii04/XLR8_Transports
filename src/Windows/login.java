@@ -9,9 +9,11 @@ public class login extends JFrame {
     public login(JButton botonLogin, JPanel panelNorte) {
         // Configurar la ventana principal
         JFrame frame = new JFrame("Introduce usuario y contraseña");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         frame.setLayout(new BorderLayout());
         frame.setSize(350, 150);
+        frame.setResizable(false);
+
 
         // Configurar el panel de contenido
         JPanel contentPane = new JPanel(new GridLayout(2, 2));

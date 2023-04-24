@@ -18,7 +18,7 @@ public class ventana extends JFrame{
 
         //Panel contenido
         JPanel contentPane = new JPanel(new BorderLayout());
-
+        contentPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 
         // Paneles
         JPanel panelNorte = new JPanel();
@@ -36,10 +36,9 @@ public class ventana extends JFrame{
         panel2.setPreferredSize(new Dimension(1000,330));
 
         // Botón de inicio de sesión
-        JButton botonLogin = new JButton(("<html><u>Iniciar sesión</u></html>"));
-        botonLogin.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        JButton botonLogin = new JButton("<html><u>Iniciar sesión</u></html>");
         botonLogin.setForeground(new Color(255, 255, 255));
-        botonLogin.setBackground(new Color(0, 150, 136));
+        botonLogin.setBackground(new Color(4, 140, 128, 255));
         botonLogin.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         botonLogin.addActionListener(new ActionListener() {
             @Override
@@ -63,7 +62,7 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                buses b = new buses(frame);
+                buses b = new buses(frame, panelNorte, contentPane);
             }
         });
 
@@ -76,22 +75,7 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                JButton VOLVER = new JButton("Volver");
-                panelNorte.add(VOLVER, BorderLayout.WEST);
-                VOLVER.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame.getContentPane().removeAll();
-                        frame.getContentPane().revalidate();
-                        frame.getContentPane().repaint();
-                        frame.add(panelNorte, BorderLayout.NORTH);
-                        frame.add(contentPane);
-                        frame.setTitle("XLR8 Transports");
-
-                    }
-                });
-                frame.add(panelNorte, BorderLayout.NORTH);
-                reparto r= new reparto(frame);
+                reparto r= new reparto(frame, panelNorte, contentPane);
             }
         });
         opcion2.setIcon(fondo2);
