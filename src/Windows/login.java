@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class login extends JFrame {
+    private boolean loginstate=false;
+    private boolean done=false;
 
-    public login(JButton botonLogin, JPanel panelNorte) {
+    public login(JButton botonLogin, JPanel panelNorte , boolean paymode) {
         // Configurar la ventana principal
         JFrame frame = new JFrame("Introduce usuario y contraseña");
 
@@ -57,10 +59,18 @@ public class login extends JFrame {
 
                     //Ocultar el botón "Iniciar sesión"
                     panelNorte.remove(botonLogin);
+                    setLoginstate(true);
+                    setDone(true);
+                    if (paymode){
+                        PayWindow P=new PayWindow();
+                    }
+
+
 
                 } else {
                     JOptionPane.showMessageDialog(login.this, "Usuario o contraseña incorrecta","ERROR",JOptionPane.ERROR_MESSAGE);
                     passField.setText("");
+                    setLoginstate(false);
                 }
             }
         });
@@ -88,7 +98,22 @@ public class login extends JFrame {
     }
 
     private boolean authenticate(String username, String password) {
-        return username.equals("bsadmn") && password.equals("admin");
+        return username.equals("admin") && password.equals("admin");
     }
 
+    public boolean isLoginstate() {
+        return loginstate;
+    }
+
+    public void setLoginstate(boolean loginstate) {
+        this.loginstate = loginstate;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 }

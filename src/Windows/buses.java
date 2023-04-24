@@ -1,19 +1,26 @@
 package Windows;
 
+
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class buses extends JFrame {
-    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane){
+    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin ){
 
-
+        FlatLightLaf.install();
         JPanel pb= new JPanel();
         buses.setTitle("Buses");
+        JPanel formulario = new JPanel();
+        JPanel boton = new JPanel();
 
-        JButton volver = new JButton("<html><u>Volver</u></html>");
-        volver.setForeground(new Color(255, 255, 255));
+        JButton volver = new JButton("Volver");
+        volver.setForeground(Color.WHITE);
         volver.setBackground(new Color(4, 140, 128, 255));
         volver.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         panelNorte.add(volver, BorderLayout.WEST);
@@ -33,20 +40,27 @@ public class buses extends JFrame {
         buses.add(pb, BorderLayout.CENTER);
         //--------
         JPanel centre = new JPanel();
-        //buses.setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
+        centre.setLayout(new BoxLayout(centre, BoxLayout.Y_AXIS));
+        centre.setPreferredSize(new Dimension(600,500));
+        centre.setBackground(Color.WHITE);
+        JLabel title = new JLabel("<html><span style='font-family: Calibri, sans-serif; font-size: 32px; color: #333333; font-weight: bold;'>BUSCA TU VIAJE</span></html>");
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setVerticalAlignment(JLabel.CENTER);
 
-        centre.setPreferredSize(new Dimension(500 , 600));
-        centre.setBackground(Color.GRAY);
-        JLabel  title = new JLabel("BUSCA TU VIAJE");
-        JLabel  destination = new JLabel("Destino");
         String [] destinos = {"BARCELONA" , "BILBAO" , "MADRID"};
         String []origin = {"MADRID" , "BILBAO" , "BARCELONA"};
 
+        JLabel  destination = new JLabel("    Destino    ");
         JComboBox dest = new JComboBox<>(destinos);
-        JLabel  origen = new JLabel("Origen");
+        dest.setPreferredSize(new Dimension(150, dest.getPreferredSize().height));
+        JLabel  origen = new JLabel("Origen    ");
         JComboBox org= new JComboBox<>(origin);
+        org.setPreferredSize(new Dimension(150 , 30));
         JButton buscar =new JButton("Buscar");
-        int i=0;
+        buscar.setForeground(Color.WHITE);
+        buscar.setBackground(new Color(4, 140, 128, 255));
+        buscar.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        boton.add(buscar);
         buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,78 +70,100 @@ public class buses extends JFrame {
                 if (optionOrg.equals(optionDest)){
                     JOptionPane.showMessageDialog(null , "El destino y el origen no pueden ser iguales", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
+                    centre.remove(boton);
+                    // Create main panel
                     JPanel viajes = new JPanel();
-                    viajes.setBackground(Color.DARK_GRAY);
                     viajes.setLayout(new BoxLayout(viajes, BoxLayout.Y_AXIS));
-                    JPanel v1= new JPanel();
-                    v1.setLayout(new BorderLayout());
-                    JLabel label = new JLabel(optionOrg + "==>" + optionDest + " Precio 100€" + "\n" + "22:00 (7h)");
-                    v1.add(label , BorderLayout.CENTER);
+
+                    // Create first trip panel
+                    JPanel v1 = new JPanel(new BorderLayout());
+                    v1.setBackground(Color.WHITE);
+                    JLabel labelI = new JLabel("<html><span style='font-size:16px; color:#333333;'>" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>6:00 (12h)</span></html>");
+                    v1.add(labelI, BorderLayout.CENTER);
                     ImageIcon img = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
-
                     ImageIcon img2 = new ImageIcon("src\\Windows\\images\\madrid.jpg");
-                    JLabel labelimg1= new JLabel(img);
-                    labelimg1.setPreferredSize(new Dimension(100 , 100));
-                    JLabel labelimg2= new JLabel(img2);
-                    labelimg2.setPreferredSize(new Dimension(100 , 100));
-                    v1.add(labelimg1 ,BorderLayout.EAST);
-                    v1.add(labelimg2 , BorderLayout.WEST);
+                    JLabel labelimg1 = new JLabel(img);
+                    labelimg1.setPreferredSize(new Dimension(100, 100));
+                    JLabel labelimg2 = new JLabel(img2);
+                    labelimg2.setPreferredSize(new Dimension(100, 100));
+                    v1.add(labelimg1, BorderLayout.EAST);
+                    v1.add(labelimg2, BorderLayout.WEST);
                     JButton comprar = new JButton("Comprar");
-                    v1.add(comprar , BorderLayout.SOUTH);
-                    JScrollPane P= new JScrollPane(viajes);
+                    comprar.setBackground(new Color(46, 204, 113));
+                    comprar.setForeground(Color.WHITE);
 
+                    comprar.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            /*PayWindow P = new PayWindow();
+                            boolean use = test.get();
+                            System.out.println(use);
+                            if (use==false) {
+                                login l = new login(botonLogin, panelNorte);
+                                test.set(l.isLoginstate());
+                            } else {
+                                P.Pay();
+                            }*/
+                            login l = new login(botonLogin, panelNorte,true);
+                        }
+                    });
+
+                    v1.add(comprar, BorderLayout.SOUTH);
                     viajes.add(v1);
-                    //---------------------------------------------------
-                    JPanel vII= new JPanel();
-                    vII.setLayout(new BorderLayout());
-                    JLabel labelII = new JLabel(optionOrg + "==>" + optionDest + " Precio 50€" + "\n" + "6:00 (12h)");
-                    vII.add(labelII , BorderLayout.CENTER);
-                    ImageIcon imgII = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
 
+                    // Create second trip panel
+                    JPanel vII = new JPanel(new BorderLayout());
+                    vII.setBackground(Color.WHITE);
+                    JLabel labelII = new JLabel("<html><span style='font-size:16px; color:#333333;'>" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>6:00 (12h)</span></html>");
+                    vII.add(labelII, BorderLayout.CENTER);
+                    ImageIcon imgII = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
                     ImageIcon img2II = new ImageIcon("src\\Windows\\images\\madrid.jpg");
-                    JLabel labelimg1II= new JLabel(imgII);
-                    labelimg1II.setPreferredSize(new Dimension(100 , 100));
-                    JLabel labelimg2II= new JLabel(img2II);
-                    labelimg2II.setPreferredSize(new Dimension(100 , 100));
-                    vII.add(labelimg1II ,BorderLayout.EAST);
-                    vII.add(labelimg2II , BorderLayout.WEST);
+                    JLabel labelimg1II = new JLabel(imgII);
+                    labelimg1II.setPreferredSize(new Dimension(100, 100));
+                    JLabel labelimg2II = new JLabel(img2II);
+                    labelimg2II.setPreferredSize(new Dimension(100, 100));
+                    vII.add(labelimg1II, BorderLayout.EAST);
+                    vII.add(labelimg2II, BorderLayout.WEST);
                     JButton comprarII = new JButton("Comprar");
-                    vII.add(comprarII , BorderLayout.SOUTH);
+                    comprarII.setBackground(new Color(46, 204, 113));
+                    comprarII.setForeground(Color.WHITE);
+                    vII.add(comprarII, BorderLayout.SOUTH);
                     viajes.add(vII);
+                    JScrollPane scrollPane = new JScrollPane(viajes);
+                    add(scrollPane);
+
+
 
 
                     //-------------
-                    centre.add(viajes,BorderLayout.CENTER);
+                    centre.add(viajes);
                     //centre.repaint();
+                    centre.add(boton);
                     centre.revalidate();
 
                 }
-
             }
         });
         JPanel TITLE=new JPanel();
         TITLE.add(title);
-        JPanel buscarp = new JPanel();
-        buscarp.add(origen);
-        buscarp.add(org);
-        buscarp.add(destination);
-        buscarp.add(dest);
-        buscarp.add(buscar);
 
-        centre.add(TITLE , BorderLayout.NORTH);
-        centre.add(buscarp);
-        //centre.add(destination);
-        //centre.add(dest);
-        //centre.add(origen);
-        //centre.add(org);
-        //centre.add(buscar);
+        centre.add(TITLE);
+
+        formulario.setLayout(new GridBagLayout());
+        formulario.add(origen);
+        formulario.add(org);
+        formulario.add(destination);
+        formulario.add(dest);
+
+        centre.add(formulario);
+
+
+        centre.add(boton);
         pb.add(centre);
-        buses.add(pb);
-
-
-
-
-
+        pack();
     }
 
+
+
 }
+
