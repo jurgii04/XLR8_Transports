@@ -53,6 +53,13 @@ public class ventana extends JFrame{
 
             }
         });
+        ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\logo.png");
+        Image img = checkIcon.getImage();
+        Image resizedImg = img.getScaledInstance(100, 70, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImg);
+        JLabel iconLabel = new JLabel(resizedIcon);
+
+        panelNorte.add(iconLabel, BorderLayout.CENTER);
         panelNorte.add(botonLogin, BorderLayout.EAST);
         panelNorte.setBackground(new Color(0, 150, 136));
 
