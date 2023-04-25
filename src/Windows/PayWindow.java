@@ -2,6 +2,8 @@ package Windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PayWindow extends JFrame {
     public PayWindow() {// Set the title of the window
@@ -63,6 +65,25 @@ public class PayWindow extends JFrame {
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 setBackground(new Color(5, 253, 9));
+            }
+        });
+        payButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JLabel successLabel = new JLabel("Transaction completed successfully!");
+                ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\deal.png");
+                Image img = checkIcon.getImage();
+                Image resizedImg = img.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(resizedImg);
+                JLabel iconLabel = new JLabel(resizedIcon);
+                JPanel successPanel = new JPanel();
+                successPanel.add(iconLabel);
+                successPanel.add(successLabel);
+                JFrame successFrame = new JFrame("Transaction Successful");
+                successFrame.add(successPanel);
+                successFrame.setSize(300, 100);
+                successFrame.setLocationRelativeTo(null);
+                successFrame.setVisible(true);
             }
         });
         buttonPanel.add(payButton);
