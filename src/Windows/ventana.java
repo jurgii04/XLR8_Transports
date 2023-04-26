@@ -1,5 +1,7 @@
 package Windows;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,7 @@ public class ventana extends JFrame{
      boolean loginstate=false;
 
     public ventana() {
+        FlatLightLaf.install();
         // Ventana principal
         JFrame frame = new JFrame("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,9 +61,12 @@ public class ventana extends JFrame{
         Image resizedImg = img.getScaledInstance(100, 70, java.awt.Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(resizedImg);
         JLabel iconLabel = new JLabel(resizedIcon);
+        JLabel labelAux = new JLabel();
+        labelAux.setPreferredSize(new Dimension(100, 70));
 
         panelNorte.add(iconLabel, BorderLayout.CENTER);
         panelNorte.add(botonLogin, BorderLayout.EAST);
+        panelNorte.add(labelAux, BorderLayout.WEST);
         panelNorte.setBackground(new Color(0, 150, 136));
 
         // Botones opciones
@@ -128,93 +134,6 @@ public class ventana extends JFrame{
     }
 }
 
-/*import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class ventana extends JFrame {
-
-    public ventana() {
-        // Configurar la ventana
-        JFrame frame = new JFrame("XLR8 Transports");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setLayout(new BorderLayout());
-
-        // Establecer margen y fondo del panel de los botones
-        JPanel panelCentral = new JPanel(new GridLayout(2, 1));
-        panelCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        panelCentral.setBackground(new Color(255, 255, 255, 200));
-
-        // Crear los botones con imágenes de fondo y aplicar estilos
-        ImageIcon icono1 = new ImageIcon("src\\Windows\\images\\xlr8bus.jpg");
-        ImageIcon icono2 = new ImageIcon("src\\Windows\\images\\xlr8camion.jpg");
-        Image imagen1 = icono1.getImage().getScaledInstance(847, 435, Image.SCALE_SMOOTH);
-        Image imagen2 = icono2.getImage().getScaledInstance(847, 435, Image.SCALE_SMOOTH);
-        JButton btnBuses = new JButton(new ImageIcon(imagen1));
-        JButton btnRep = new JButton(new ImageIcon(imagen2));
-        btnBuses.setBorderPainted(false);
-        btnRep.setBorderPainted(false);
-        btnBuses.setFocusPainted(false);
-        btnRep.setFocusPainted(false);
-        btnBuses.setContentAreaFilled(false);
-        btnRep.setContentAreaFilled(false);
-        btnBuses.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnRep.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        Dimension dimension1 = new Dimension(imagen1.getWidth(null), imagen1.getHeight(null));
-        Dimension dimension2 = new Dimension(imagen2.getWidth(null), imagen2.getHeight(null));
-        btnBuses.setPreferredSize(dimension1);
-        btnRep.setPreferredSize(dimension2);
-        panelCentral.add(btnBuses);
-        panelCentral.add(btnRep);
-
-        // Crear el botón de inicio de sesión y aplicar estilos
-        JButton btnLogin = new JButton("Iniciar sesión");
-        btnLogin.setForeground(new Color(255, 255, 255));
-        btnLogin.setBackground(new Color(0, 150, 136));
-        btnLogin.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelSuperior.setBackground(new Color(0, 150, 136));
-        panelSuperior.add(btnLogin);
-        frame.add(panelSuperior, BorderLayout.NORTH);
-
-        btnBuses.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //System.out.println(frame.getTitle());
-                panelCentral.removeAll();
-                panelCentral.revalidate();
-                panelCentral.repaint();
-                JButton VOLVER = new JButton("Volver");
-                panelSuperior.add(VOLVER, BorderLayout.WEST);
-                VOLVER.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame.getContentPane().removeAll();
-                        frame.getContentPane().revalidate();
-                        frame.getContentPane().repaint();
-                        frame.add(panelSuperior, BorderLayout.NORTH);
-
-
-                    }
-                });
-                buses b = new buses(frame);
-            }
-        });
-
-        // Agregar el panel de los botones a la ventana
-        frame.add(panelCentral, BorderLayout.CENTER);
-
-        // Aplicar fuente personalizada
-        Font customFont = new Font("Arial", Font.PLAIN, 16);
-        UIManager.put("Button.font", customFont);
-
-        // Mostrar la ventana
-        frame.setVisible(true);
-    }
-}*/
 
 
 

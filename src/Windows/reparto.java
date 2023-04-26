@@ -6,14 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import com.formdev.flatlaf.FlatLightLaf;
 
-public class Reparto extends JFrame {
+public class reparto extends JFrame {
 
-    public Reparto(JFrame reparto, JPanel panelNorte, JPanel contentPane) {
+    public reparto(JFrame reparto, JPanel panelNorte, JPanel contentPane) {
         FlatLightLaf.install();
 
         // Set up the "Volver" button
 
         JButton volver = new JButton("<html><u>Volver</u></html>");
+        volver.setPreferredSize(new Dimension(100, 70));
         volver.setForeground(Color.WHITE);
         volver.setBackground(new Color(4, 140, 128, 255));
         volver.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));

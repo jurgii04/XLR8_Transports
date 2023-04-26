@@ -40,8 +40,9 @@ public class login extends JFrame {
         JButton cancelButton = new JButton("Cancelar");
         JButton Crear = new JButton("Crear Cuenta");
         buttonPane.add(loginButton);
-        buttonPane.add(cancelButton);
         buttonPane.add(Crear);
+        buttonPane.add(cancelButton);
+
         Crear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

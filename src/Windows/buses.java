@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import Dbconnection.GestorDB;
-import com.formdev.flatlaf.FlatLightLaf;
 
 public class buses extends JFrame {
     GestorDB db ;
@@ -22,6 +21,7 @@ public class buses extends JFrame {
         JPanel boton = new JPanel();
 
         JButton volver = new JButton("Volver");
+        volver.setPreferredSize(new Dimension(100, 70));
         volver.setForeground(Color.WHITE);
         volver.setBackground(new Color(4, 140, 128, 255));
         volver.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));

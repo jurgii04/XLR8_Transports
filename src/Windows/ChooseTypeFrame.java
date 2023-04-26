@@ -20,7 +20,7 @@ public class ChooseTypeFrame extends JFrame {
         setSize(300, 150);
 
         // Create the labels
-        JLabel questionLabel = new JLabel("<html><h2 style='text-align:center'>¿eres <b>persona</b> o <b>empresa</b>?</h2></html>");
+        JLabel questionLabel = new JLabel("<html><h2 style='text-align:center'>¿Eres <b>cliente</b> o <b>empresa</b>?</h2></html>");
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
 
         // Create the buttons
