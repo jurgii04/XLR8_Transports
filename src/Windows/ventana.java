@@ -4,13 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ventana extends JFrame{
+
      boolean loginstate=false;
 
     public ventana() {
+        FlatLightLaf.install();
         // Ventana principal
         JFrame frame = new JFrame("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +93,9 @@ public class ventana extends JFrame{
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
                 JButton VOLVER = new JButton("Volver");
+                VOLVER.setForeground(Color.WHITE);
+                VOLVER.setBackground(new Color(4, 140, 128, 255));
+                VOLVER.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
                 panelNorte.add(VOLVER, BorderLayout.WEST);
                 VOLVER.addActionListener(new ActionListener() {
                     @Override
@@ -104,7 +110,7 @@ public class ventana extends JFrame{
                     }
                 });
                 frame.add(panelNorte, BorderLayout.NORTH);
-                reparto r= new reparto(frame , panelNorte,contentPane);
+                Reparto r= new Reparto(frame , panelNorte,contentPane);
             }
         });
         opcion2.setIcon(fondo2);
@@ -122,7 +128,7 @@ public class ventana extends JFrame{
 
         // Mostrar la ventana principal
         frame.setPreferredSize(new Dimension(900,900));
-
+        setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
     }

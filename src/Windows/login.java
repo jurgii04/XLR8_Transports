@@ -3,12 +3,14 @@ package Windows;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class login extends JFrame {
     private boolean loginstate=false;
     private boolean done=false;
 
     public login(JButton botonLogin, JPanel panelNorte , boolean paymode) {
+        FlatLightLaf.install();
         // Configurar la ventana principal
         JFrame frame = new JFrame("Introduce usuario y contraseña");
 
@@ -33,8 +35,16 @@ public class login extends JFrame {
         JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton loginButton = new JButton("Iniciar sesión");
         JButton cancelButton = new JButton("Cancelar");
+        JButton Crear = new JButton("Crear Cuenta");
         buttonPane.add(loginButton);
         buttonPane.add(cancelButton);
+        buttonPane.add(Crear);
+        Crear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChooseTypeFrame c=new ChooseTypeFrame();
+            }
+        });
 
         // Agregar los paneles a la ventana
         frame.add(contentPane, BorderLayout.CENTER);

@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class PayWindow extends JFrame {
     public PayWindow() {// Set the title of the window
+        FlatLightLaf.install();
         setTitle("Pay for Ticket");
 
         // Set a beautiful theme for the window
