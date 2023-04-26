@@ -35,6 +35,7 @@ public class buses extends JFrame {
                 panelNorte.remove(volver);
                 buses.add(panelNorte, BorderLayout.NORTH);
                 buses.add(contentPane, BorderLayout.CENTER);
+                buses.setTitle("XLR8 Transports");
             }
         });
 
@@ -66,18 +67,20 @@ public class buses extends JFrame {
         buscar.setBackground(new Color(4, 140, 128, 255));
         buscar.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         boton.add(buscar);
+        JPanel viajes = new JPanel();
         buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                viajes.removeAll();
 
                 String optionOrg = org.getSelectedItem().toString();
                 String optionDest = dest.getSelectedItem().toString();
                 if (optionOrg.equals(optionDest)){
                     JOptionPane.showMessageDialog(null , "El destino y el origen no pueden ser iguales", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
-                    centre.remove(boton);
+
                     // Create main panel
-                    JPanel viajes = new JPanel();
+
                     viajes.setLayout(new BoxLayout(viajes, BoxLayout.Y_AXIS));
 
                     // Create first trip panel
