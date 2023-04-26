@@ -8,10 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class buses extends JFrame {
+    GestorDB db ;
     public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin ){
+        db = new GestorDB();
 
         FlatLightLaf.install();
         JPanel pb= new JPanel();
@@ -46,9 +49,9 @@ public class buses extends JFrame {
         JLabel title = new JLabel("<html><span style='font-family: Calibri, sans-serif; font-size: 32px; color: #333333; font-weight: bold;'>BUSCA TU VIAJE</span></html>");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
-
-        String [] destinos = {"BARCELONA" , "BILBAO" , "MADRID"};
-        String []origin = {"MADRID" , "BILBAO" , "BARCELONA"};
+        String[] columnNames = {"destino"};
+        String [] destinos = db.selectFromTable("Viajes" , columnNames, new String[]{});
+        String []origin = db.selectFromTable("Viajes" , new String[]{"origen"}, new String[]{});
 
         JLabel  destination = new JLabel("    Destino    ");
         JComboBox dest = new JComboBox<>(destinos);
@@ -127,6 +130,13 @@ public class buses extends JFrame {
                     JButton comprarII = new JButton("Comprar");
                     comprarII.setBackground(new Color(46, 204, 113));
                     comprarII.setForeground(Color.WHITE);
+                    comprarII.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
+                            login l = new login(botonLogin, panelNorte,true);
+                        }
+                    });
                     vII.add(comprarII, BorderLayout.SOUTH);
                     viajes.add(vII);
                     JScrollPane scrollPane = new JScrollPane(viajes);

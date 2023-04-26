@@ -20,9 +20,9 @@ public class GestorDB {
     public GestorDB() {
         try {
             Class.forName(JDBC_DRIVER);
-            System.out.println("driver done1 100%");
+
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("connected 100%");
+
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
@@ -128,7 +128,9 @@ public class GestorDB {
         System.out.println(data);
         return data;
     }*/
-    public  void selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
+    public  String[] selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
+        ArrayList<String> data=new ArrayList<>();
+
 
 
         try {
@@ -166,7 +168,9 @@ public class GestorDB {
                 for (int i = 0; i < columnNames.length; i++) {
                     String columnName = columnNames[i];
                     String columnValue = resu.getString(columnName);
-                    System.out.println(columnName + ": " + columnValue);
+                    //System.out.println(columnName + ": " + columnValue);
+
+                    data.add(columnValue);
                 }
             }
 
@@ -183,13 +187,12 @@ public class GestorDB {
                 if (st != null) {
                     st.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
+
             } catch (SQLException se) {
                 se.printStackTrace();
             }
         }
+        return data.toArray(new String[data.size()]);
     }
 
 
