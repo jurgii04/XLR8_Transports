@@ -69,7 +69,7 @@ public class login extends JFrame {
                     JLabel nombreLabel = new JLabel();
                     panelNorte.add(nombreLabel, BorderLayout.EAST);
 
-                    nombreLabel.setText("Bienvenido " + username);
+                    nombreLabel.setText("<html><b>Bienvenido " + username + "</b></html>→");
                     nombreLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 30));
 
                     //Ocultar el botón "Iniciar sesión"

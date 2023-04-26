@@ -1,7 +1,5 @@
 package Windows;
 
-
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,8 +31,12 @@ public class buses extends JFrame {
                 buses.getContentPane().revalidate();
                 buses.getContentPane().repaint();
                 panelNorte.remove(volver);
+                JLabel labelAux = new JLabel();
+                labelAux.setPreferredSize(new Dimension(100, 70));
+                panelNorte.add(labelAux, BorderLayout.WEST);
                 buses.add(panelNorte, BorderLayout.NORTH);
                 buses.add(contentPane, BorderLayout.CENTER);
+                buses.setTitle("XLR8 Transports");
             }
         });
 
@@ -55,12 +57,12 @@ public class buses extends JFrame {
         String [] destinos = {"Bilbao", "Madrid", "Barcelona"};
         String []origin = {"Bilbao", "Madrid", "Barcelona"};
 
-        JLabel  destination = new JLabel("    Destino    ");
+        JLabel  destination = new JLabel("    Destino →  ");
         JComboBox dest = new JComboBox<>(destinos);
         dest.setPreferredSize(new Dimension(150, dest.getPreferredSize().height));
-        JLabel  origen = new JLabel("Origen    ");
+        JLabel  origen = new JLabel("Origen →  ");
         JComboBox org= new JComboBox<>(origin);
-        org.setPreferredSize(new Dimension(150 , 30));
+        org.setPreferredSize(new Dimension(150 , org.getPreferredSize().height));
         JButton buscar =new JButton("Buscar");
         buscar.setForeground(Color.WHITE);
         buscar.setBackground(new Color(4, 140, 128, 255));
