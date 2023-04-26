@@ -12,6 +12,9 @@ public class login extends JFrame {
         // Configurar la ventana principal
         JFrame frame = new JFrame("Introduce usuario y contraseña");
 
+        Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
+        frame.setIconImage(icono);
+
         frame.setLayout(new BorderLayout());
         frame.setSize(350, 150);
         frame.setResizable(false);
@@ -48,6 +51,7 @@ public class login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = userField.getText();
                 String password = new String(passField.getPassword());
+
 
                 if (authenticate(username, password)) {
                     frame.dispose();
@@ -95,6 +99,8 @@ public class login extends JFrame {
                 }
             }
         });
+
+        frame.setLocationRelativeTo(null);
 
         // Mostrar la ventana
         frame.setVisible(true);
