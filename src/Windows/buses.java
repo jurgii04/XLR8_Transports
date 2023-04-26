@@ -20,7 +20,7 @@ public class buses extends JFrame {
         JPanel formulario = new JPanel();
         JPanel boton = new JPanel();
 
-        JButton volver = new JButton("Volver");
+        JButton volver = new JButton("<html><u>Volver</u></html>");
         volver.setPreferredSize(new Dimension(100, 70));
         volver.setForeground(Color.WHITE);
         volver.setBackground(new Color(4, 140, 128, 255));

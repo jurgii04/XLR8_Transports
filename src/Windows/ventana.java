@@ -82,7 +82,7 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                buses b = new buses(frame , panelNorte,contentPane,botonLogin );
+                buses b = new buses(frame , panelNorte, contentPane, botonLogin );
             }
         });
 
@@ -95,22 +95,7 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                JButton VOLVER = new JButton("Volver");
-                panelNorte.add(VOLVER, BorderLayout.WEST);
-                VOLVER.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        frame.getContentPane().removeAll();
-                        frame.getContentPane().revalidate();
-                        frame.getContentPane().repaint();
-                        frame.add(panelNorte, BorderLayout.NORTH);
-                        frame.add(contentPane);
-                        frame.setTitle("XLR8 Transports");
-
-                    }
-                });
-                frame.add(panelNorte, BorderLayout.NORTH);
-                reparto r= new reparto(frame , panelNorte,contentPane);
+                reparto r= new reparto(frame, panelNorte, contentPane);
             }
         });
         opcion2.setIcon(fondo2);

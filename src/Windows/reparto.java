@@ -18,6 +18,7 @@ public class reparto extends JFrame {
         volver.setForeground(Color.WHITE);
         volver.setBackground(new Color(4, 140, 128, 255));
         volver.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        panelNorte.add(volver, BorderLayout.WEST);
         volver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -29,6 +30,7 @@ public class reparto extends JFrame {
                 reparto.add(contentPane, BorderLayout.CENTER);
             }
         });
+        reparto.add(panelNorte, BorderLayout.NORTH);
 
         // Set up the panel that holds the "Volver" button
         JPanel pb = new JPanel();
