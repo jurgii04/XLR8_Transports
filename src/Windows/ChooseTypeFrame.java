@@ -66,9 +66,7 @@ public class ChooseTypeFrame extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        new ChooseTypeFrame();
-    }
+
 }
 
 

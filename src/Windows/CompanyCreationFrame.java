@@ -124,7 +124,5 @@ public class CompanyCreationFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
-        new CompanyCreationFrame();
-    }
+
 }

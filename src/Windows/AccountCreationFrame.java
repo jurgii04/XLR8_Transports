@@ -116,8 +116,6 @@ public class AccountCreationFrame extends JFrame {
 
 
 
-    public static void main(String[] args) {
-        new AccountCreationFrame();
-    }
+
 }
 
