@@ -33,8 +33,11 @@ public class login extends JFrame {
         JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton loginButton = new JButton("Iniciar sesión");
         JButton cancelButton = new JButton("Cancelar");
+        JButton Crear = new JButton("Crear Cuenta");
         buttonPane.add(loginButton);
         buttonPane.add(cancelButton);
+        //buttonPane.add(Crear);
+
 
         // Agregar los paneles a la ventana
         frame.add(contentPane, BorderLayout.CENTER);
