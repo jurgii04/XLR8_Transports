@@ -14,9 +14,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 public class buses extends JFrame {
     GestorDB db ;
     public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin ){
-        db = new GestorDB();
+        //db = new GestorDB();
 
-        FlatLightLaf.install();
         JPanel pb= new JPanel();
         buses.setTitle("Buses");
         JPanel formulario = new JPanel();
@@ -50,8 +49,11 @@ public class buses extends JFrame {
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         String[] columnNames = {"destino"};
-        String [] destinos = db.selectFromTable("Viajes" , columnNames, new String[]{});
-        String []origin = db.selectFromTable("Viajes" , new String[]{"origen"}, new String[]{});
+        //String [] destinos = db.selectFromTable("Viajes" , columnNames, new String[]{});
+        //String []origin = db.selectFromTable("Viajes" , new String[]{"origen"}, new String[]{});
+
+        String [] destinos = {"Bilbao", "Madrid", "Barcelona"};
+        String []origin = {"Bilbao", "Madrid", "Barcelona"};
 
         JLabel  destination = new JLabel("    Destino    ");
         JComboBox dest = new JComboBox<>(destinos);
