@@ -2,9 +2,9 @@ package Windows;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
 import java.awt.*;
 import java.awt.event.*;
-
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class adminBuses extends JFrame {
@@ -12,8 +12,16 @@ public class adminBuses extends JFrame {
     private ViajesModeloTabla modeloTabla;
 
     public adminBuses() {
+
+
+
+
         super("Ventana de Viajes");
+
         FlatLightLaf.install();
+
+
+
 
         // Crear el modelo de tabla personalizado y agregar los datos iniciales
         modeloTabla = new ViajesModeloTabla();
@@ -56,8 +64,12 @@ public class adminBuses extends JFrame {
         panelBotones.add(btnAgregar);
         panelBotones.add(btnActualizar);
         panelBotones.add(btnEliminar);
+        JPanel tablaslist=new JPanel();
+        JComboBox<String> lista=new JComboBox<>(new String[]{"tabla1","tabla2","tabla3","tabla4","tabla5","tabla6"});
+        tablaslist.add(lista,BorderLayout.CENTER);
 
         // Agregar la tabla y el panel de botones a la ventana principal
+        add(tablaslist, BorderLayout.NORTH);
         add(new JScrollPane(tablaViajes), BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
 
