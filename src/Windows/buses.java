@@ -113,7 +113,7 @@ public class buses extends JFrame {
                             } else {
                                 P.Pay();
                             }*/
-                            login l = new login(botonLogin, panelNorte,true);
+                            login l = new login(botonLogin, panelNorte,true, buses);
                         }
                     });
 
@@ -140,7 +140,7 @@ public class buses extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            login l = new login(botonLogin, panelNorte,true);
+                            login l = new login(botonLogin, panelNorte,true, buses);
                         }
                     });
                     vII.add(comprarII, BorderLayout.SOUTH);

@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 public class ventana extends JFrame{
      boolean loginstate=false;
 
+
     public ventana() {
         FlatLightLaf.install();
         // Ventana principal
@@ -53,7 +54,7 @@ public class ventana extends JFrame{
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login login = new login(botonLogin, panelNorte,false);
+                login login = new login(botonLogin, panelNorte,false, frame);
 
 
             }
@@ -84,7 +85,7 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                buses b = new buses(frame , panelNorte, contentPane, botonLogin );
+                buses b = new buses(frame , panelNorte, contentPane, botonLogin);
             }
         });
 

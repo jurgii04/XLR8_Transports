@@ -12,8 +12,10 @@ public class adminBuses extends JFrame {
     private ViajesModeloTabla modeloTabla;
 
     public adminBuses() {
-        super("Ventana de Viajes");
+        super("Administrador de Autobuses");
         FlatLightLaf.install();
+
+        setLocationRelativeTo(null);
 
         // Crear el modelo de tabla personalizado y agregar los datos iniciales
         modeloTabla = new ViajesModeloTabla();
@@ -63,7 +65,6 @@ public class adminBuses extends JFrame {
 
         // Establecer el tamaño de la ventana y hacerla visible
         setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
@@ -84,7 +85,7 @@ public class adminBuses extends JFrame {
             return columnas[col];
         }
 
-        public Object getValueAt(int fila, int col) {
+        public Object getValueAt(int fila, int col)  {
             return datos[fila][col];
         }
 

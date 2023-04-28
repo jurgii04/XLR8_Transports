@@ -9,7 +9,7 @@ public class login extends JFrame {
     private boolean loginstate=false;
     private boolean done=false;
 
-    public login(JButton botonLogin, JPanel panelNorte , boolean paymode) {
+    public login(JButton botonLogin, JPanel panelNorte , boolean paymode, JFrame ventana) {
         FlatLightLaf.install();
         // Configurar la ventana principal
         JFrame frame = new JFrame("Introduce usuario y contraseña");
@@ -62,22 +62,29 @@ public class login extends JFrame {
 
 
                 if (authenticate(username, password)) {
-                    frame.dispose();
+
+                    if (username.equals("admin") && password.equals("admin")) {
+                        frame.dispose();
+                        adminBuses adminBuses = new adminBuses();
+
+                    } else {
+                        frame.dispose();
 
 
-                    //Mostrar el nombre de usuario
-                    JLabel nombreLabel = new JLabel();
-                    panelNorte.add(nombreLabel, BorderLayout.EAST);
+                        //Mostrar el nombre de usuario
+                        JLabel nombreLabel = new JLabel();
+                        panelNorte.add(nombreLabel, BorderLayout.EAST);
 
-                    nombreLabel.setText("<html><b>Bienvenido " + username + "</b></html>→");
-                    nombreLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 30));
+                        nombreLabel.setText("<html><b>Bienvenido " + username + "</b></html>→");
+                        nombreLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 30));
 
-                    //Ocultar el botón "Iniciar sesión"
-                    panelNorte.remove(botonLogin);
-                    setLoginstate(true);
-                    setDone(true);
-                    if (paymode){
-                        PayWindow P=new PayWindow();
+                        //Ocultar el botón "Iniciar sesión"
+                        panelNorte.remove(botonLogin);
+                        setLoginstate(true);
+                        setDone(true);
+                        if (paymode){
+                            PayWindow P=new PayWindow();
+                        }
                     }
 
 
@@ -115,7 +122,7 @@ public class login extends JFrame {
     }
 
     private boolean authenticate(String username, String password) {
-        return username.equals("admin") && password.equals("admin");
+        return username.equals("admin") && password.equals("admin") || username.equals("pepe") && password.equals("pepe");
     }
 
     public boolean isLoginstate() {
