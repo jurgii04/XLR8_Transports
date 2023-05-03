@@ -11,7 +11,7 @@ public class AccountCreationFrame extends JFrame {
         private JLabel nameLabel, lastNameLabel,password, emailLabel, dobLabel, dniLabel;
         private JTextField nameField, lastNameField, emailField, dobField, dniField;
         private JPasswordField passwordf;
-        private JRadioButton maleRadioButton, femaleRadioButton;
+        private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
         private JButton createButton;
 
     public AccountCreationFrame() {
@@ -37,12 +37,14 @@ public class AccountCreationFrame extends JFrame {
             dniField = new JTextField(20);
 
             // Create the radio buttons
-            maleRadioButton = new JRadioButton("Male");
-            femaleRadioButton = new JRadioButton("Female");
+            maleRadioButton = new JRadioButton("Masculino");
+            femaleRadioButton = new JRadioButton("Femenino");
+            otroRadioButton = new JRadioButton("Otro");
             maleRadioButton.setSelected(true); // Select the male radio button by default
             ButtonGroup genderGroup = new ButtonGroup();
             genderGroup.add(maleRadioButton);
             genderGroup.add(femaleRadioButton);
+            genderGroup.add(otroRadioButton);
 
             // Create the button
             createButton = new JButton("Create");
@@ -85,11 +87,12 @@ public class AccountCreationFrame extends JFrame {
             panel.add(dniField, c);
             c.gridx = 0;
             c.gridy = 6;
-            panel.add(new JLabel("Gender:"), c);
+            panel.add(new JLabel("Genero:"), c);
             c.gridx = 1;
             JPanel genderPanel = new JPanel();
             genderPanel.add(maleRadioButton);
             genderPanel.add(femaleRadioButton);
+            genderPanel.add(otroRadioButton);
             panel.add(genderPanel, c);
             c.gridx = 1;
             c.gridy = 7;
