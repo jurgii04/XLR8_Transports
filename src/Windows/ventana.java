@@ -49,6 +49,7 @@ public class ventana extends JFrame{
         botonLogin.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         botonLogin.setForeground(new Color(255, 255, 255));
         botonLogin.setBackground(new Color(0, 150, 136));
+        botonLogin.setPreferredSize(new Dimension(100,70));
         botonLogin.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         botonLogin.addActionListener(new ActionListener() {

@@ -72,11 +72,31 @@ public class login extends JFrame {
 
 
                         //Mostrar el nombre de usuario
-                        JLabel nombreLabel = new JLabel();
-                        panelNorte.add(nombreLabel, BorderLayout.EAST);
 
-                        nombreLabel.setText("<html><b>Bienvenido " + username + "</b></html>→");
-                        nombreLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 30));
+                        JMenuBar menuBar = new JMenuBar();
+                        JMenu menu = new JMenu("<html><b>Bienvenido<br><u>" + username + "</u></b></html>");
+                        JMenuItem editarPerfil = new JMenuItem("Editar perfil");
+                        JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
+                        menuBar.setBackground(new Color(0, 150, 136));
+                        menuBar.setPreferredSize(new Dimension(100, 70));
+                        menuBar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, -70));
+
+
+                        int textWidth = username.length();
+                        if (textWidth > 10) {
+                            String usernameSubstring = username.substring(0,8) + "...";
+                            menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
+                        }
+
+
+
+                        menu.add(editarPerfil);
+                        menu.add(cerrarSesion);
+                        menuBar.add(menu);
+
+                        panelNorte.add(menuBar, BorderLayout.EAST);
+                        panelNorte.revalidate();
+                        panelNorte.repaint();
 
                         //Ocultar el botón "Iniciar sesión"
                         panelNorte.remove(botonLogin);
@@ -122,7 +142,7 @@ public class login extends JFrame {
     }
 
     private boolean authenticate(String username, String password) {
-        return username.equals("admin") && password.equals("admin") || username.equals("pepe") && password.equals("pepe");
+        return username.equals("admin") && password.equals("admin") || username.equals("Pep Guardiola") && password.equals("");
     }
 
     public boolean isLoginstate() {
