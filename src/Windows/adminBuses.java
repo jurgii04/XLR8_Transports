@@ -2,63 +2,91 @@ package Windows;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class adminBuses extends JFrame {
     private JTable tablaViajes;
-    private ViajesModeloTabla modeloTabla;
+    private MyTableModel modeloTabla;
 
     public adminBuses() {
+
+
+
+
         super("Ventana de Viajes");
+
         FlatLightLaf.install();
-
-        // Crear el modelo de tabla personalizado y agregar los datos iniciales
-        modeloTabla = new ViajesModeloTabla();
-        modeloTabla.agregarViaje(new Viaje("Madrid", "Barcelona", "25/04/2023", 50.0));
-        modeloTabla.agregarViaje(new Viaje("Barcelona", "Valencia", "26/04/2023", 30.0));
-
-        // Crear la tabla y establecer el modelo de tabla personalizado
-        tablaViajes = new JTable(modeloTabla);
 
         // Crear los botones para insertar, actualizar y eliminar filas
         JButton btnAgregar = new JButton("Agregar");
-        btnAgregar.addActionListener(new ActionListener() {
+        /*btnAgregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 modeloTabla.agregarViaje(new Viaje("", "", "", 0.0));
             }
-        });
+        });*/
 
         JButton btnActualizar = new JButton("Actualizar");
-        btnActualizar.addActionListener(new ActionListener() {
+       /* btnActualizar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int filaSeleccionada = tablaViajes.getSelectedRow();
                 if (filaSeleccionada != -1) {
                     modeloTabla.actualizarViaje(filaSeleccionada);
                 }
             }
-        });
+        });*/
 
         JButton btnEliminar = new JButton("Eliminar");
-        btnEliminar.addActionListener(new ActionListener() {
+        /*btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int filaSeleccionada = tablaViajes.getSelectedRow();
                 if (filaSeleccionada != -1) {
                     modeloTabla.eliminarViaje(filaSeleccionada);
                 }
             }
-        });
+        });*/
 
         // Crear un panel para los botones y agregarlos
         JPanel panelBotones = new JPanel(new GridLayout(1, 3));
         panelBotones.add(btnAgregar);
         panelBotones.add(btnActualizar);
         panelBotones.add(btnEliminar);
+        JPanel tablaslist=new JPanel();
+        JComboBox<String> lista=new JComboBox<>(new String[]{"VIAJES","BILLETES","BUSES","CONDUCE_BUS" , "CLIENTES" , "HACER" , "TELEFONOS_CLI"});
+
+        JPanel c=new JPanel();
+        lista.addActionListener(new ActionListener() {
+            JScrollPane s;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                c.removeAll();
+                String table= lista.getSelectedItem().toString();
+                System.out.println(table);
+                //modeloTabla.updateData(table);
+                MyTableModel m=new MyTableModel(table);
+                JTable t=new JTable(m);
+                m.updateData(table);
+
+                 s=new JScrollPane(t);
+
+                 c.add(s);
+
+
+
+
+
+            }
+        });
+        tablaslist.add(lista,BorderLayout.NORTH);
+        add(c, BorderLayout.CENTER);
 
         // Agregar la tabla y el panel de botones a la ventana principal
-        add(new JScrollPane(tablaViajes), BorderLayout.CENTER);
+        add(tablaslist, BorderLayout.NORTH);
+        //add(new JScrollPane(tablaViajes), BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
 
         // Establecer el tamaño de la ventana y hacerla visible
@@ -68,113 +96,83 @@ public class adminBuses extends JFrame {
     }
 
     // Clase interna para el modelo de tabla personalizado
-    private class ViajesModeloTabla extends AbstractTableModel {
-        private String[] columnas = {"Origen", "Destino", "Fecha", "Precio"};
-        private Object[][] datos = {};
+    public class MyTableModel extends AbstractTableModel {
+        private String[] columnNames;
+        private Object[][] data;
+        private GestorDB db;
 
-        public int getColumnCount() {
-            return columnas.length;
+        public MyTableModel(String tableName) {
+            db = new GestorDB();
+
+
+            updateData(tableName);
+        }
+        public void updateData(String tableName) {
+
+            this.columnNames = db.selectFromTable("all_tab_columns" , new String[]{"column_name"},new String[]{"table_name = '"+tableName+"'"});
+
+            String[] dbData = db.selectFromTable(tableName, columnNames, new String[]{});
+            int rowCount = dbData.length / columnNames.length;
+            data = new Object[rowCount][columnNames.length];
+            for (int i = 0; i < rowCount; i++) {
+                for (int j = 0; j < columnNames.length; j++) {
+                    data[i][j] = dbData[i * columnNames.length + j];
+                }
+            }
+
+            // notify any listeners that the model has changed
+            fireTableDataChanged();
         }
 
+        @Override
         public int getRowCount() {
-            return datos.length;
+            return data.length;
         }
 
+        @Override
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            return data[row][col];
+        }
+
+        @Override
         public String getColumnName(int col) {
-            return columnas[col];
+            return columnNames[col];
         }
 
-        public Object getValueAt(int fila, int col) {
-            return datos[fila][col];
-        }
+       /* @Override
+       public void setValueAt(Object value, int row, int col) {
+            data[row][col] = value;
+            fireTableCellUpdated(row, col);
+            // save changes to database
+            String tableName = ...; // set the name of the table you want to update
+            String columnName = columnNames[col];
+            String newValue = value.toString();
+            String[] whereConditions = ...; // set any conditions for the update, e.g. the primary key of the row
+            String updateSql = "UPDATE " + tableName + " SET " + columnName + " = '" + newValue + "'";
+            if (whereConditions.length > 0) {
+                updateSql += " WHERE ";
+                for (int i = 0; i < whereConditions.length; i++) {
+                    updateSql += whereConditions[i];
+                    if (i < whereConditions.length - 1) {
+                        updateSql += " AND ";
+                    }
+                }
+            }
+            db.executeUpdate(updateSql);
+        }*/
 
-        public boolean isCellEditable(int fila, int col) {
+        @Override
+        public boolean isCellEditable(int row, int col) {
+            // allow editing of all cells
             return true;
         }
-
-        public void setValueAt(Object valor, int fila, int col) {
-            datos[fila][col] = valor;
-            fireTableCellUpdated(fila, col);
-        }
-
-        public void agregarViaje(Viaje viaje) {
-            Object[] fila = {viaje.getOrigen(), viaje.getDestino(), viaje.getFecha(), viaje.getPrecio()};
-            datos = agregarFila(datos, fila);
-            fireTableDataChanged();
-        }
-
-        public void actualizarViaje(int fila) {
-            Viaje viaje = new Viaje(
-                    (String)getValueAt(fila, 0),
-                    (String)getValueAt(fila, 1),
-                    (String)getValueAt(fila, 2),
-                    (Double)getValueAt(fila, 3)
-            );
-            // Lógica para actualizar los datos en la base de datos
-            fireTableDataChanged();
-        }
-
-        public void eliminarViaje(int fila) {
-            datos = eliminarFila(datos, fila);
-            fireTableDataChanged();
-        }
-
-        private Object[][] agregarFila(Object[][] datos, Object[] fila) {
-            Object[][] nuevosDatos = new Object[datos.length + 1][4];
-            for (int i = 0; i < datos.length; i++) {
-                for (int j = 0; j < 4; j++) {
-                    nuevosDatos[i][j] = datos[i][j];
-                }
-            }
-            nuevosDatos[datos.length] = fila;
-            return nuevosDatos;
-        }
-
-        private Object[][] eliminarFila(Object[][] datos, int fila) {
-            Object[][] nuevosDatos = new Object[datos.length - 1][4];
-            int indice = 0;
-            for (int i = 0; i < datos.length; i++) {
-                if (i != fila) {
-                    for (int j = 0; j < 4; j++) {
-                        nuevosDatos[indice][j] = datos[i][j];
-                    }
-                    indice++;
-                }
-            }
-            return nuevosDatos;
-        }
     }
 
-    // Clase interna para representar un viaje
-    private class Viaje {
-        private String origen;
-        private String destino;
-        private String fecha;
-        private double precio;
-
-        public Viaje(String origen, String destino, String fecha, double precio) {
-            this.origen = origen;
-            this.destino = destino;
-            this.fecha = fecha;
-            this.precio = precio;
-        }
-
-        public String getOrigen() {
-            return origen;
-        }
-
-        public String getDestino() {
-            return destino;
-        }
-
-        public String getFecha() {
-            return fecha;
-        }
-
-        public double getPrecio() {
-            return precio;
-        }
-    }
 
     public static void main(String[] args) {
         adminBuses ventana = new adminBuses();

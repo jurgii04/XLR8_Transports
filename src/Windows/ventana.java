@@ -1,5 +1,6 @@
 package Windows;
 
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
@@ -11,10 +12,11 @@ import java.awt.event.WindowEvent;
 
 public class ventana extends JFrame{
      boolean loginstate=false;
-
+        GestorDB db;
 
     public ventana() {
         FlatLightLaf.install();
+        db=new GestorDB();
         // Ventana principal
         JFrame frame = new JFrame("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +56,7 @@ public class ventana extends JFrame{
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login login = new login(botonLogin, panelNorte,false, frame);
+                login login = new login(botonLogin, panelNorte,false,frame);
 
 
             }
@@ -85,7 +87,7 @@ public class ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                buses b = new buses(frame , panelNorte, contentPane, botonLogin);
+                buses b = new buses(frame , panelNorte, contentPane, botonLogin,db );
             }
         });
 

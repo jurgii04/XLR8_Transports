@@ -13,6 +13,7 @@ public class Billetes {
     private int Num_viaje;
     public Billetes(){
 
+
     }
 
     public int getNum_billete() {

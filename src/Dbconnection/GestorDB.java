@@ -92,12 +92,12 @@ public class GestorDB {
             throw new RuntimeException(e);
         }
     }
-    public void delete(String tablename , String WHERE_condition){
+    public int delete(String tablename , String WHERE_condition){
         String statment="delete from "+ tablename +" where " + WHERE_condition;
-
+        int rowsDeleted=0;
         try {
             st= conn.createStatement();
-            int rowsDeleted = st.executeUpdate(statment);
+             rowsDeleted = st.executeUpdate(statment);
             st.close();
             System.out.println("DATA deleted 100% , " + rowsDeleted + " deleted");
 
@@ -105,29 +105,9 @@ public class GestorDB {
             throw new RuntimeException(e);
         }
 
+        return rowsDeleted;
     }
-    /*public Map<String , Object> select(String tablename , String columns , String where_condition){
-        String statment = "select "+ columns+" from " + tablename + " where " + where_condition;
-        Map<String , Object> data = new LinkedHashMap<>();
-        try {
-            st=conn.createStatement();
-            resu=st.executeQuery(statment);
-            resumeta=resu.getMetaData();
-            while (resu.next()){
-                for(int i =0 ; i<resumeta.getColumnCount();i++){
 
-                    Object value=resu.getObject(i);
-                    data.put("1",value);
-                }
-            }
-            st.close();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(data);
-        return data;
-    }*/
     public  String[] selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
         ArrayList<String> data=new ArrayList<>();
 
@@ -214,7 +194,7 @@ public class GestorDB {
          * Finally, the code formats the date by calling the format method on the format object, passing in the Date object as an argument. The resulting
          * string is assigned to the formattedDate variable.
          * */
-        SimpleDateFormat formatchnger = null;
+        /*SimpleDateFormat formatchnger = null;
         Date myDate = null;
         String formattedDate=null;
         try {
@@ -240,14 +220,19 @@ public class GestorDB {
         /*for (Map.Entry<String,Object> datageter : updata .entrySet()){
             //values = values + datageter.getKey() + "=" + datageter.getValue() + ",";
             System.out.println(datageter.getKey() + "=" + datageter.getValue() + ",");
-        }*/
+        }
 
         //DB.update("EMPLEADOS" , "NUEMP=16" , updata);
         //---------------------- delete method testing
         //DB.delete("EMPLEADOS" , "NUEMP in (16 , 17)");
         //------------select method testing
         String[] columnNames = {"NUEMP" ,"NOMBRE_APELLIDO" };
-        String[] whereConditions = {"JEFE=3"};
-        DB.selectFromTable("EMPLEADOS" , columnNames , whereConditions);
+        String[] whereConditions = {"JEFE=3"};*/
+        //DB.selectFromTable("EMPLEADOS" , new String[]{"DNI"} , new String[]{});
+
+
+        System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
+
+
     }
 }

@@ -118,10 +118,11 @@ public class login extends JFrame {
         frame.setLocationRelativeTo(null);
 
         // Mostrar la ventana
+        setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private boolean authenticate(String username, String password) {
+    public boolean authenticate(String username, String password) {
         return username.equals("admin") && password.equals("admin") || username.equals("pepe") && password.equals("pepe");
     }
 
