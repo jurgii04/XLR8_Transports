@@ -18,7 +18,7 @@ public class Admin extends JFrame {
     private JComboBox<String> lista;
     private JPanel c;
 
-    public Admin(String [] TablesToAcces) {
+    public Admin(String  AdminType) {
 
 
         super("Ventana de Viajes");
@@ -72,6 +72,24 @@ public class Admin extends JFrame {
         panelBotones.add(btnActualizar);
         panelBotones.add(btnEliminar);
         JPanel tablaslist = new JPanel();
+        String[] TablesToAcces;
+        String admin=AdminType.toLowerCase();
+
+
+        switch (admin){
+            case "adminbuses":
+                TablesToAcces=new String[]{"VIAJES", "BILLETES", "BUSES", "CONDUCE_BUS", "CLIENTES", "HACER", "TELEFONOS_CLI"};
+                break;
+            case "adminreparto":
+                TablesToAcces=new String[]{"CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN"};
+                break;
+            case "jefe":
+                TablesToAcces=new String[]{"VIAJES", "BILLETES", "BUSES", "CONDUCE_BUS", "CLIENTES", "HACER", "TELEFONOS_CLI","CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN","VEHÍCULOS","TELÉFONOS_EMP","EMPLEADOS","EMPLEADOS"};
+
+                break;
+            default:
+                TablesToAcces=new String[]{"null"};
+        }
         lista = new JComboBox<>(TablesToAcces);
 
         c = new JPanel();
@@ -379,9 +397,8 @@ public class Admin extends JFrame {
 
     }
     public static void main(String[] args) {
-        String [] buses=new String[]{"VIAJES", "BILLETES", "BUSES", "CONDUCE_BUS", "CLIENTES", "HACER", "TELEFONOS_CLI"};
-        String [] reparto=new String[]{"CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN"};
-        String [] jefe=new String[]{"VIAJES", "BILLETES", "BUSES", "CONDUCE_BUS", "CLIENTES", "HACER", "TELEFONOS_CLI","CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN","VEHÍCULOS","TELÉFONOS_EMP","EMPLEADOS","EMPLEADOS"};
-        Admin ventana = new Admin(jefe);
+       // jefe/adminreparto/adminbuses
+
+        Admin ventana = new Admin("adminreparto");
     }
 }
