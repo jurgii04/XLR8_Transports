@@ -65,7 +65,7 @@ public class login extends JFrame {
 
                     if (username.equals("admin") && password.equals("admin")) {
                         frame.dispose();
-                        adminBuses adminBuses = new adminBuses();
+                        //Admin adminBuses = new Admin();
 
                     } else {
                         frame.dispose();

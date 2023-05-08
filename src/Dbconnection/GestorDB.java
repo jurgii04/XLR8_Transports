@@ -32,7 +32,7 @@ public class GestorDB {
     public void closeDB() {
         try {
             conn.close();
-            System.out.println("connection closed");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -57,7 +57,7 @@ public class GestorDB {
                 index++;
             }
             ps.executeUpdate();
-            System.out.println("DATA INSERTED 100%");
+
             ps.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -85,7 +85,7 @@ public class GestorDB {
 
             ps.executeUpdate();
             ps.close();
-            System.out.println("DATA updated 100%");
+
 
 
         } catch (SQLException e) {
@@ -99,7 +99,7 @@ public class GestorDB {
             st= conn.createStatement();
              rowsDeleted = st.executeUpdate(statment);
             st.close();
-            System.out.println("DATA deleted 100% , " + rowsDeleted + " deleted");
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -117,7 +117,7 @@ public class GestorDB {
 
 
             // Build the SQL query
-            String sql = "SELECT ";
+            String sql = "SELECT DISTINCT ";
             if (columnNames.length == 0) {
                 sql += "*";
             } else {
