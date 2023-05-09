@@ -11,7 +11,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ventana extends JFrame{
-     boolean loginstate=false;
+     public static boolean loginstat=false;
+    public static String tipouser="";
         GestorDB db;
 
     public ventana() {

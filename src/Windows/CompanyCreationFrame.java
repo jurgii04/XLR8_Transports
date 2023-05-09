@@ -2,6 +2,10 @@ package Windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class CompanyCreationFrame extends JFrame {
@@ -13,6 +17,7 @@ public class CompanyCreationFrame extends JFrame {
 
     public CompanyCreationFrame() {
         FlatLightLaf.install();
+        GestorDB db=new GestorDB();
 
         // Set the title and size of the frame
         setTitle("Crear cuenta de empresa");
@@ -117,7 +122,33 @@ public class CompanyCreationFrame extends JFrame {
 
         // Add action listener to the create button
         createButton.addActionListener(e -> {
-            // TODO: Implement account creation logic here
+            //passwordF,companyNameField, addressField,emailField, dniField, phoneField, sectorField;
+            encription enc=new encription();
+            String name=companyNameField.getText();
+            String address=addressField.getText();
+            String email=emailField.getText();
+            String dni=dniField.getText();
+            String phone=phoneField.getText();
+            String sector=sectorField.getText();
+            String password=enc.encriptar(passwordF.getText());
+            Map<String,Object> datos=new LinkedHashMap<>();
+            datos.put("nombre_completo",name);
+            datos.put("tipo_user","Empresa");
+            datos.put("email",email);
+            datos.put("fecha_nacimiento","");
+            datos.put("DNI",dni);
+            datos.put("genero","");
+            datos.put("direccion",address);
+            datos.put("telefono",phone);
+            datos.put("sector",sector);
+            datos.put("contrasena",password);
+            try {
+                db.insert("USERSACCS",datos);
+                JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Cuenta creada!");
+            }catch (Exception x){
+                JOptionPane.showMessageDialog(CompanyCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
+            }
         });
 
         // Set the frame to be centered on the screen

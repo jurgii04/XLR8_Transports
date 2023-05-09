@@ -3,6 +3,10 @@ package Windows;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class AccountCreationFrame extends JFrame {
@@ -13,12 +17,15 @@ public class AccountCreationFrame extends JFrame {
         private JPasswordField passwordf;
         private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
         private JButton createButton;
+        private encription encry;
+        GestorDB db;
 
     public AccountCreationFrame() {
             FlatLightLaf.install();
             // Set the title and size of the frame
             setTitle("Crear una cuenta");
             setSize(400, 350);
+            db=new GestorDB();
 
             // Create the labels
             nameLabel = new JLabel("Nombre:");
@@ -112,7 +119,66 @@ public class AccountCreationFrame extends JFrame {
             createButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // TODO: Implement account creation logic here
+                        //nameField, lastNameField, emailField, dobField, dniField;
+                        encry=new encription();
+                        String nombre=nameField.getText();
+                        String apellido=lastNameField.getText();
+                        String email=emailField.getText();
+                        String fecha_nac=dobField.getText();
+                        String dni=dniField.getText();
+                        String password=encry.encriptar(passwordf.getText());
+                        String gender="";
+                        //maleRadioButton, femaleRadioButton, otroRadioButton;
+                        if(maleRadioButton.isSelected()){
+                                gender="Male";
+                        } else if (femaleRadioButton.isSelected()) {
+                                gender="Female";
+                        }
+                        else {gender="otro";}
+
+                        Map<String,Object> datos=new LinkedHashMap<>();
+                        datos.put("nombre_completo",nombre+" "+apellido);
+                        datos.put("tipo_user","Persona");
+                        datos.put("email",email);
+                        datos.put("fecha_nacimiento",fecha_nac);
+                        datos.put("DNI",dni);
+                        datos.put("genero",gender);
+                        datos.put("direccion","");
+                        datos.put("telefono","");
+                        datos.put("sector","");
+                        datos.put("contrasena",password);
+                        try {
+                                db.insert("USERSACCS",datos);
+                                JOptionPane.showMessageDialog(AccountCreationFrame.this,"Cuenta creada!");
+                        }
+                        catch (Exception x){
+                                JOptionPane.showMessageDialog(AccountCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
+                        }
+
+                        /*nombre_completo VARCHAR(255) PRIMARY KEY,
+                          email VARCHAR(255),
+                          fecha_nacimiento VARCHAR(255),
+                          DNI VARCHAR(255),
+                          genero VARCHAR(255),
+                          contrasena VARCHAR(500),
+                          direccion VARCHAR(255),
+                          telefono VARCHAR(255),
+                          sector VARCHAR(255),
+                          tipo_user VARCHAR(255)*/
+
+
+
+                        /*System.out.println(nombre);
+                        System.out.println(apellido);
+                        System.out.println(email);
+                        System.out.println(fecha_nac);
+                        System.out.println(dni);
+                        System.out.println(password);
+                        System.out.println(gender);*/
+
+
+
                 }
             });
         }

@@ -1,4 +1,7 @@
 package Dbconnection;
+import Windows.CompanyCreationFrame;
+
+import javax.swing.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -173,6 +176,23 @@ public class GestorDB {
             }
         }
         return data.toArray(new String[data.size()]);
+    }
+    public String [] logindata(String email){
+        String [] data=new String[2];
+
+
+        try {
+            int count = Integer.parseInt(selectFromTable("USERSACCS" , new String[]{"count(EMAIL)"}, new String[]{"EMAIL='"+email+"'"})[0]);
+            if (count==0){
+                return null;
+            }else{
+                data=selectFromTable("USERSACCS",new String[]{"TIPO_USER","CONTRASENA"},new String[]{"EMAIL='"+email+"'"} );
+
+            }
+        }catch (Exception x){
+            throw x;
+        }
+        return data;
     }
 
 

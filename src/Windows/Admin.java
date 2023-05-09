@@ -399,6 +399,6 @@ public class Admin extends JFrame {
     public static void main(String[] args) {
        // jefe/adminreparto/adminbuses
 
-        Admin ventana = new Admin("adminreparto");
+        Admin ventana = new Admin("jefe");
     }
 }

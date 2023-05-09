@@ -4,7 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import static Windows.login.ea;
+import static Windows.ventana.*;
+
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class ContactarConNos extends JFrame {
@@ -16,6 +25,7 @@ public class ContactarConNos extends JFrame {
 
     public ContactarConNos() {
         FlatLightLaf.install();
+        GestorDB db = new GestorDB();
 
         // Set the title and size of the frame
         setTitle("Crear cuenta de empresa");
@@ -43,8 +53,50 @@ public class ContactarConNos extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Gracias! Os contactaremos lo antes posible");
+                try {
+                    LocalDate currentDate = LocalDate.now();
+
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+                    String formattedDate = currentDate.format(formatter);
+
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\DatosEmpresas.txt"));
+                    writer.write("Empresa : " + companyNameField.getText());
+                    writer.newLine();
+                    writer.write("Email: "+ emailField.getText());
+                    writer.newLine();
+                    writer.write("Dni: "+ dniField.getText());
+                    writer.newLine();
+                    writer.write("Telefono: "+ phoneField.getText());
+                    writer.newLine();
+                    writer.write("Sector: "+ sectorField.getText());
+                    writer.newLine();
+                    writer.write("FICHA: "+ formattedDate);
+                    writer.newLine();
+                    writer.write("==========================================================================================================");
+                    writer.close();
+
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
+        if (tipouser.equals("Empresa")){
+
+            String name=db.selectFromTable("USERSACCS",new String[]{"nombre_completo"},new String[]{"EMAIL='"+ea+"'"})[0];
+            String ema=db.selectFromTable("USERSACCS",new String[]{"email"},new String[]{"EMAIL='"+ea+"'"})[0];
+            String DNI=db.selectFromTable("USERSACCS",new String[]{"DNI"},new String[]{"EMAIL='"+ea+"'"})[0];
+            String tele=db.selectFromTable("USERSACCS",new String[]{"telefono"},new String[]{"EMAIL='"+ea+"'"})[0];
+            String sector=db.selectFromTable("USERSACCS",new String[]{"sector"},new String[]{"EMAIL='"+ea+"'"})[0];
+            companyNameField.setText(name);
+            emailField.setText(ema);
+            dniField.setText(DNI);
+            phoneField.setText(tele);
+            sectorField.setText(sector);
+
+        }
 
         // Create a panel and add the components to it
         JPanel panel = new JPanel(new GridBagLayout());
@@ -122,14 +174,13 @@ public class ContactarConNos extends JFrame {
         // Set the default close operation
 
 
-        // Add action listener to the create button
-        createButton.addActionListener(e -> {
-            // TODO: Implement account creation logic here
-        });
+
 
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
     }
+
+
 
 
 }

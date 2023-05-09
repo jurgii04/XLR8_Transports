@@ -3,14 +3,20 @@ package Windows;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
+import static Windows.ventana.*;
+
 public class login extends JFrame {
-    private boolean loginstate=false;
+
     private boolean done=false;
+    public static String ea;
 
     public login(JButton botonLogin, JPanel panelNorte , boolean paymode, JFrame ventana) {
         FlatLightLaf.install();
+        GestorDB db=new GestorDB();
         // Configurar la ventana principal
         JFrame frame = new JFrame("Introduce usuario y contraseña");
 
@@ -25,7 +31,7 @@ public class login extends JFrame {
         // Configurar el panel de contenido
         JPanel contentPane = new JPanel(new GridLayout(2, 2));
         contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JLabel userLabel = new JLabel("Usuario:");
+        JLabel userLabel = new JLabel("Email:");
         JTextField userField = new JTextField();
         JLabel passLabel = new JLabel("Contraseña:");
         JPasswordField passField = new JPasswordField();
@@ -57,63 +63,88 @@ public class login extends JFrame {
         // Configurar el botón de inicio de sesión
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String username = userField.getText();
-                String password = new String(passField.getPassword());
+                try{
+                    encription enc=new encription();
+                    String username = userField.getText();
+                    ea=username;
+                    String password = enc.encriptar(passField.getText());
 
+                    String [] data=db.logindata(username);
+                    if (data==null){
+                        JOptionPane.showMessageDialog(login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
 
-                if (authenticate(username, password)) {
-
-                    if (username.equals("admin") && password.equals("admin")) {
-                        frame.dispose();
-                        //Admin adminBuses = new Admin();
-
-                    } else {
-                        frame.dispose();
-
-
-                        //Mostrar el nombre de usuario
-
-                        JMenuBar menuBar = new JMenuBar();
-                        JMenu menu = new JMenu("<html><b>Bienvenido<br><u>" + username + "</u></b></html>");
-                        JMenuItem editarPerfil = new JMenuItem("Editar perfil");
-                        JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
-                        menuBar.setBackground(new Color(0, 150, 136));
-                        menuBar.setPreferredSize(new Dimension(100, 70));
-                        menuBar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, -70));
-
-
-                        int textWidth = username.length();
-                        if (textWidth > 10) {
-                            String usernameSubstring = username.substring(0,8) + "...";
-                            menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
-                        }
-
-
-
-                        menu.add(editarPerfil);
-                        menu.add(cerrarSesion);
-                        menuBar.add(menu);
-
-                        panelNorte.add(menuBar, BorderLayout.EAST);
-                        panelNorte.revalidate();
-                        panelNorte.repaint();
-
-                        //Ocultar el botón "Iniciar sesión"
-                        panelNorte.remove(botonLogin);
-                        setLoginstate(true);
-                        setDone(true);
-                        if (paymode){
-                            PayWindow P=new PayWindow();
-                        }
                     }
+                    else {
+                        String pass=data[1];
+                        String tipo=data[0];
+                        //System.out.println(pass);
+                        Admin  a;
+                        if (password.equals(pass)){
+                            switch (tipo){
+                                case "adminbuses":
+                                    frame.dispose();
+                                    a= new Admin(tipo);
+
+                                    break;
+                                case "adminreparto":
+                                    a= new Admin(tipo);
+                                    frame.dispose();
+                                    break;
+                                case "jefe":
+                                    a= new Admin(tipo);
+                                    frame.dispose();
+                                    break;
+                                default:
+                                    frame.dispose();
+                                    String name=db.selectFromTable("USERSACCS",new String[]{"NOMBRE_COMPLETO"},new String[]{"EMAIL='"+username+"'"})[0];
+
+
+                                    //Mostrar el nombre de usuario
+                                    tipouser=tipo;
+
+                                    JMenuBar menuBar = new JMenuBar();
+                                    JMenu menu = new JMenu("<html><b>Bienvenido<br><u>" + name + "</u></b></html>");
+                                    JMenuItem editarPerfil = new JMenuItem("Editar perfil");
+                                    JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
+                                    menuBar.setBackground(new Color(0, 150, 136));
+                                    menuBar.setPreferredSize(new Dimension(100, 70));
+                                    menuBar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, -70));
+
+
+                                    int textWidth = name.length();
+                                    if (textWidth > 10) {
+                                        String usernameSubstring = name.substring(0,8) + "...";
+                                        menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
+                                    }
 
 
 
-                } else {
-                    JOptionPane.showMessageDialog(login.this, "Usuario o contraseña incorrecta","ERROR",JOptionPane.ERROR_MESSAGE);
-                    passField.setText("");
-                    setLoginstate(false);
+                                    menu.add(editarPerfil);
+                                    menu.add(cerrarSesion);
+                                    menuBar.add(menu);
+
+                                    panelNorte.add(menuBar, BorderLayout.EAST);
+                                    panelNorte.revalidate();
+                                    panelNorte.repaint();
+
+                                    //Ocultar el botón "Iniciar sesión"
+                                    panelNorte.remove(botonLogin);
+                                    loginstat=true;
+
+
+
+
+                            }
+                        }else {JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    }
+                }catch (Exception x){
+                    JOptionPane.showMessageDialog(login.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
                 }
+
+
             }
         });
 
@@ -145,13 +176,8 @@ public class login extends JFrame {
         return username.equals("admin") && password.equals("admin") || username.equals("Pep Guardiola") && password.equals("");
     }
 
-    public boolean isLoginstate() {
-        return loginstate;
-    }
 
-    public void setLoginstate(boolean loginstate) {
-        this.loginstate = loginstate;
-    }
+
 
     public boolean isDone() {
         return done;

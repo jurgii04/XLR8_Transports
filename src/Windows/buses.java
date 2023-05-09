@@ -8,6 +8,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import Dbconnection.GestorDB;
 
+import static Windows.ventana.loginstat;
+
 public class buses extends JFrame {
     ;
     public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin,GestorDB db  ){
@@ -114,7 +116,13 @@ public class buses extends JFrame {
                             } else {
                                 P.Pay();
                             }*/
-                            login l = new login(botonLogin, panelNorte,true, buses);
+                            if (loginstat){
+                                PayWindow P=new PayWindow();
+                            }
+                            else {
+                                login l = new login(botonLogin, panelNorte,true, buses);
+                            }
+
                         }
                     });
 

@@ -24,6 +24,9 @@ public class encription {
 
     public static void main(String[] args) {
         encription encription = new encription();
-        System.out.println(encription.encriptar("password123"));
+        //System.out.println(encription.encriptar("jefe123"));
+        //System.out.println(encription.encriptar("bus123"));
+        //System.out.println(encription.encriptar("reparto123"));
+        System.out.println(encription.encriptar("oussamaslmn1100"));
     }
 }
