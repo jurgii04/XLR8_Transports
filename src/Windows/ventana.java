@@ -51,7 +51,7 @@ public class ventana extends JFrame{
         JButton botonLogin = new JButton(("<html><u>Iniciar sesión</u></html>"));
         botonLogin.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
         botonLogin.setForeground(new Color(255, 255, 255));
-        botonLogin.setBackground(new Color(0, 150, 136));
+        botonLogin.setBackground(new Color(4, 140, 128, 255));
         botonLogin.setPreferredSize(new Dimension(100,70));
         botonLogin.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 

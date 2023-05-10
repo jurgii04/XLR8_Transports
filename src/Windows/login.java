@@ -72,7 +72,6 @@ public class login extends JFrame {
                     String [] data=db.logindata(username);
                     if (data==null){
                         JOptionPane.showMessageDialog(login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
-
                     }
                     else {
                         String pass=data[1];
@@ -97,6 +96,7 @@ public class login extends JFrame {
                                 default:
                                     frame.dispose();
                                     String name=db.selectFromTable("USERSACCS",new String[]{"NOMBRE_COMPLETO"},new String[]{"EMAIL='"+username+"'"})[0];
+                                    loginstat=true;
 
 
                                     //Mostrar el nombre de usuario
@@ -105,7 +105,24 @@ public class login extends JFrame {
                                     JMenuBar menuBar = new JMenuBar();
                                     JMenu menu = new JMenu("<html><b>Bienvenido<br><u>" + name + "</u></b></html>");
                                     JMenuItem editarPerfil = new JMenuItem("Editar perfil");
+                                    editarPerfil.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            editarPerfilEmpresa editarPerfilEmpresa = new editarPerfilEmpresa();
+                                        }
+                                    });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
+                                    cerrarSesion.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            panelNorte.remove(menuBar);
+                                            panelNorte.revalidate();
+                                            panelNorte.repaint();
+                                            panelNorte.add(botonLogin, BorderLayout.EAST);
+                                            loginstat=false;
+                                            tipouser="";
+                                        }
+                                    });
                                     menuBar.setBackground(new Color(0, 150, 136));
                                     menuBar.setPreferredSize(new Dimension(100, 70));
                                     menuBar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, -70));
@@ -135,7 +152,9 @@ public class login extends JFrame {
 
 
                             }
-                        }else {JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                        }else {
+                            JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                            passField.setText("");
                         }
 
                     }
@@ -171,12 +190,6 @@ public class login extends JFrame {
         // Mostrar la ventana
         frame.setVisible(true);
     }
-
-    private boolean authenticate(String username, String password) {
-        return username.equals("admin") && password.equals("admin") || username.equals("Pep Guardiola") && password.equals("");
-    }
-
-
 
 
     public boolean isDone() {

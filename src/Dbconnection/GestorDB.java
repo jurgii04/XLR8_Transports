@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.Date;
 
 public class GestorDB {
-    static final String SERVER_IP = "localhost";
+    static final String SERVER_IP = "10.14.0.226";
     static final String DB_NAME = "orcl";
     static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     static final String DB_URL = "jdbc:oracle:thin:@//" + SERVER_IP + ":1521/" + DB_NAME;
@@ -25,7 +25,6 @@ public class GestorDB {
             Class.forName(JDBC_DRIVER);
 
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
@@ -251,7 +250,7 @@ public class GestorDB {
         //DB.selectFromTable("EMPLEADOS" , new String[]{"DNI"} , new String[]{});
 
 
-        System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
+        //System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
 
 
     }
