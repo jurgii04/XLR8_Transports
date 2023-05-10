@@ -72,7 +72,6 @@ public class login extends JFrame {
                     String [] data=db.logindata(username);
                     if (data==null){
                         JOptionPane.showMessageDialog(login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
-
                     }
                     else {
                         String pass=data[1];
@@ -109,7 +108,7 @@ public class login extends JFrame {
                                     editarPerfil.addActionListener(new ActionListener() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-
+                                            editarPerfilEmpresa editarPerfilEmpresa = new editarPerfilEmpresa();
                                         }
                                     });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
@@ -153,7 +152,9 @@ public class login extends JFrame {
 
 
                             }
-                        }else {JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                        }else {
+                            JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                            passField.setText("");
                         }
 
                     }

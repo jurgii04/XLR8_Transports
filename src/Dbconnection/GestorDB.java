@@ -25,7 +25,6 @@ public class GestorDB {
             Class.forName(JDBC_DRIVER);
 
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("fjgldfñgsd");
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);

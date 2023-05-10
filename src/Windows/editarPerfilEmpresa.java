@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static Windows.login.ea;
 import static Windows.ventana.*;
@@ -16,19 +18,19 @@ import static Windows.ventana.*;
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
-public class ContactarConNos extends JFrame {
+public class editarPerfilEmpresa extends JFrame {
 
     private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel;
     private JTextField companyNameField ,emailField, dniField, phoneField, sectorField;
 
-    private JButton createButton;
+    private JButton updateButton;
 
-    public ContactarConNos() {
+    public editarPerfilEmpresa() {
         FlatLightLaf.install();
         GestorDB db = new GestorDB();
 
         // Set the title and size of the frame
-        setTitle("Crear cuenta de empresa");
+        setTitle("Editar perfil");
         setSize(550, 500);
 
         // Create the labels
@@ -48,42 +50,23 @@ public class ContactarConNos extends JFrame {
         emailField=new JTextField(20);
 
         // Create the button
-        createButton = new JButton("<html><h2>Enviar</h2></html>");
-        createButton.addActionListener(new ActionListener() {
+        updateButton = new JButton("<html><h2>Actualizar</h2></html>");
+
+        updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Gracias! Os contactaremos lo antes posible");
-                try {
-                    LocalDate currentDate = LocalDate.now();
+                Map<String, Object> datos = new LinkedHashMap<>();
+                datos.put("nombre_completo", companyNameField.getText());
+                datos.put("DNI", dniField.getText());
+                datos.put("telefono", phoneField.getText());
+                datos.put("sector", sectorField.getText());
 
+                String whereStAt = "EMAIL=?";
+                datos.put("email_parametro", ea);
 
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-
-                    String formattedDate = currentDate.format(formatter);
-
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\DatosEmpresas.txt"));
-                    writer.write("Empresa : " + companyNameField.getText());
-                    writer.newLine();
-                    writer.write("Email: "+ emailField.getText());
-                    writer.newLine();
-                    writer.write("DNI: "+ dniField.getText());
-                    writer.newLine();
-                    writer.write("Teléfono: "+ phoneField.getText());
-                    writer.newLine();
-                    writer.write("Sector: "+ sectorField.getText());
-                    writer.newLine();
-                    writer.write("Fecha: "+ formattedDate);
-                    writer.newLine();
-                    writer.write("==============================================");
-                    writer.close();
-
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                db.update("USERSACCS", whereStAt, datos);
             }
         });
-        if (tipouser.equals("Empresa")){
 
             String name=db.selectFromTable("USERSACCS",new String[]{"nombre_completo"},new String[]{"EMAIL='"+ea+"'"})[0];
             String ema=db.selectFromTable("USERSACCS",new String[]{"email"},new String[]{"EMAIL='"+ea+"'"})[0];
@@ -92,11 +75,10 @@ public class ContactarConNos extends JFrame {
             String sector=db.selectFromTable("USERSACCS",new String[]{"sector"},new String[]{"EMAIL='"+ea+"'"})[0];
             companyNameField.setText(name);
             emailField.setText(ema);
+            emailField.setEditable(false);
             dniField.setText(DNI);
             phoneField.setText(tele);
             sectorField.setText(sector);
-
-        }
 
         // Create a panel and add the components to it
         JPanel panel = new JPanel(new GridBagLayout());
@@ -163,7 +145,7 @@ public class ContactarConNos extends JFrame {
         c.gridy =7;
         c.gridwidth = 2;
         c.fill = GridBagConstraints.CENTER;
-        panel.add(createButton, c);
+        panel.add(updateButton, c);
 
         // Add the panel to the frame
         add(panel);
