@@ -1,7 +1,7 @@
-Empresa : zubiri
-Email: zubiri@.com
-Dni: 15854c
-Telefono: 6369854
-Sector: educacion
-FICHA: 2023-05-09
-==========================================================================================================
+Empresa : sdafasfas
+Email: asdfasdfasf
+DNI: dfasdfasfsadf
+Teléfono: sdfasdfasf
+Sector: asfasdfasdf
+Fecha: 2023-05-10
+=========================================================

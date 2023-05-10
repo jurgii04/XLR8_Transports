@@ -9,7 +9,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 public class PayWindow extends JFrame {
     public PayWindow() {// Set the title of the window
         FlatLightLaf.install();
-        setTitle("Pay for Ticket");
+        setTitle("Pagar ticket");
 
         // Set a beautiful theme for the window
         try {
@@ -24,19 +24,19 @@ public class PayWindow extends JFrame {
         paymentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Add the payment form components to the panel
-        JLabel cardNumberLabel = new JLabel("Card Number:");
+        JLabel cardNumberLabel = new JLabel("Número de la tarjeta:");
         cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField cardNumberField = new JTextField(20);
         cardNumberField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        JLabel nameOnCardLabel = new JLabel("Name on Card:");
+        JLabel nameOnCardLabel = new JLabel("Titular de la tarjeta:");
         nameOnCardLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField nameOnCardField = new JTextField(20);
         nameOnCardField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        JLabel expirationLabel = new JLabel("Expiration Date (MM/YY):");
+        JLabel expirationLabel = new JLabel("Fecha de caducidad (MM/YY):");
         expirationLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField expirationField = new JTextField(6);
         expirationField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        JLabel securityLabel = new JLabel("Security Code:");
+        JLabel securityLabel = new JLabel("CVV:");
         securityLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField securityField = new JTextField(3);
         securityField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -51,7 +51,7 @@ public class PayWindow extends JFrame {
         securityPanel.add(securityField);
         //-----
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        JButton payButton = new JButton("pay");
+        JButton payButton = new JButton("Pagar");
         payButton.setFont(new Font("Arial", Font.PLAIN, 16));
         payButton.setForeground(Color.black);
         payButton.setBackground(new Color(238, 238, 238));
@@ -72,7 +72,7 @@ public class PayWindow extends JFrame {
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JLabel successLabel = new JLabel("Transaction completed successfully!");
+                JLabel successLabel = new JLabel("Transacción compleatada exitosamente!");
                 ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\deal.png");
                 Image img = checkIcon.getImage();
                 Image resizedImg = img.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
@@ -81,7 +81,7 @@ public class PayWindow extends JFrame {
                 JPanel successPanel = new JPanel();
                 successPanel.add(iconLabel);
                 successPanel.add(successLabel);
-                JFrame successFrame = new JFrame("Transaction Successful");
+                JFrame successFrame = new JFrame("Transacción exitosa");
                 successFrame.add(successPanel);
                 successFrame.setSize(300, 100);
                 successFrame.setLocationRelativeTo(null);

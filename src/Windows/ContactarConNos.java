@@ -67,15 +67,15 @@ public class ContactarConNos extends JFrame {
                     writer.newLine();
                     writer.write("Email: "+ emailField.getText());
                     writer.newLine();
-                    writer.write("Dni: "+ dniField.getText());
+                    writer.write("DNI: "+ dniField.getText());
                     writer.newLine();
-                    writer.write("Telefono: "+ phoneField.getText());
+                    writer.write("Teléfono: "+ phoneField.getText());
                     writer.newLine();
                     writer.write("Sector: "+ sectorField.getText());
                     writer.newLine();
-                    writer.write("FICHA: "+ formattedDate);
+                    writer.write("Fecha: "+ formattedDate);
                     writer.newLine();
-                    writer.write("==========================================================================================================");
+                    writer.write("==============================================");
                     writer.close();
 
                 } catch (IOException ex) {
