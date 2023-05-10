@@ -62,7 +62,7 @@ public class ContactarConNos extends JFrame {
 
                     String formattedDate = currentDate.format(formatter);
 
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\DatosEmpresas.txt"));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\DatosEmpresas.txt",true));
                     writer.write("Empresa : " + companyNameField.getText());
                     writer.newLine();
                     writer.write("Email: "+ emailField.getText());
@@ -76,6 +76,7 @@ public class ContactarConNos extends JFrame {
                     writer.write("FICHA: "+ formattedDate);
                     writer.newLine();
                     writer.write("==========================================================================================================");
+                    writer.newLine();
                     writer.close();
 
                 } catch (IOException ex) {
@@ -178,6 +179,10 @@ public class ContactarConNos extends JFrame {
 
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
+    }
+
+    public static void main(String[] args) {
+        ContactarConNos c =new ContactarConNos();
     }
 
 
