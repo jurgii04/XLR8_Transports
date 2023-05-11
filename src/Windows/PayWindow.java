@@ -1,9 +1,13 @@
 package Windows;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.time.LocalDate;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class PayWindow extends JFrame {
@@ -26,16 +30,35 @@ public class PayWindow extends JFrame {
         // Add the payment form components to the panel
         JLabel cardNumberLabel = new JLabel("Número de la tarjeta:");
         cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        JTextField cardNumberField = new JTextField(20);
-        cardNumberField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        MaskFormatter dateFormatter = null;
+
+            try {
+                dateFormatter = new MaskFormatter("     ####     -     ####     -     ####     -     #### ");
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
+        JFormattedTextField cardNumberField = new JFormattedTextField(dateFormatter);
+        cardNumberField.setColumns(15);
+
+
         JLabel nameOnCardLabel = new JLabel("Titular de la tarjeta:");
         nameOnCardLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField nameOnCardField = new JTextField(20);
         nameOnCardField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         JLabel expirationLabel = new JLabel("Fecha de caducidad (MM/YY):");
         expirationLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        JTextField expirationField = new JTextField(6);
+        MaskFormatter dateFormatter2 = null;
+
+        try {
+            dateFormatter2 = new MaskFormatter("    ## / ## ");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        JFormattedTextField expirationField = new JFormattedTextField(dateFormatter2);
         expirationField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        expirationField.setColumns(6);
         JLabel securityLabel = new JLabel("CVV:");
         securityLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField securityField = new JTextField(3);
@@ -111,6 +134,11 @@ public class PayWindow extends JFrame {
         setVisible(true);
 
         pack();
+    }
+
+    public static void main(String[] args) {
+        PayWindow p =new PayWindow();
+
     }
 
 
