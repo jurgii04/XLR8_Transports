@@ -108,7 +108,7 @@ public class login extends JFrame {
                                     editarPerfil.addActionListener(new ActionListener() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-                                            editarPerfilEmpresa editarPerfilEmpresa = new editarPerfilEmpresa();
+                                            Windows.editarPerfil editarPerfilEmpresa = new editarPerfil();
                                         }
                                     });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");

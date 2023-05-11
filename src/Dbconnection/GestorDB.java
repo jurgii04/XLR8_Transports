@@ -83,6 +83,7 @@ public class GestorDB {
             for (Object valor:data.values()){
 
                 ps.setObject(index , valor);
+                index++;
             }
 
             ps.executeUpdate();
