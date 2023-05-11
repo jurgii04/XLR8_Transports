@@ -48,7 +48,7 @@ public class ContactarConNos extends JFrame {
         emailField=new JTextField(20);
 
         // Create the button
-        createButton = new JButton("<html><h2>Enviar</h2></html>");
+        createButton = new JButton("<html><h2>Enviar.</h2></html>");
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,20 +62,21 @@ public class ContactarConNos extends JFrame {
 
                     String formattedDate = currentDate.format(formatter);
 
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\DatosEmpresas.txt"));
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\DatosEmpresas.txt",true));
                     writer.write("Empresa : " + companyNameField.getText());
                     writer.newLine();
                     writer.write("Email: "+ emailField.getText());
                     writer.newLine();
-                    writer.write("DNI: "+ dniField.getText());
+                    writer.write("Dni: "+ dniField.getText());
                     writer.newLine();
-                    writer.write("Teléfono: "+ phoneField.getText());
+                    writer.write("Telefono: "+ phoneField.getText());
                     writer.newLine();
                     writer.write("Sector: "+ sectorField.getText());
                     writer.newLine();
-                    writer.write("Fecha: "+ formattedDate);
+                    writer.write("FICHA: "+ formattedDate);
                     writer.newLine();
-                    writer.write("==============================================");
+                    writer.write("==========================================================================================================");
+                    writer.newLine();
                     writer.close();
 
                 } catch (IOException ex) {
@@ -178,6 +179,10 @@ public class ContactarConNos extends JFrame {
 
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
+    }
+
+    public static void main(String[] args) {
+        ContactarConNos c =new ContactarConNos();
     }
 
 

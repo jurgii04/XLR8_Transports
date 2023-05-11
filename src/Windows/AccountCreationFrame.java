@@ -1,8 +1,12 @@
 package Windows;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,7 +17,8 @@ public class AccountCreationFrame extends JFrame {
 
 
         private JLabel nameLabel, lastNameLabel,password, emailLabel, dobLabel, dniLabel;
-        private JTextField nameField, lastNameField, emailField, dobField, dniField;
+        private JTextField nameField, lastNameField, emailField, dniField;
+
         private JPasswordField passwordf;
         private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
         private JButton createButton;
@@ -40,7 +45,18 @@ public class AccountCreationFrame extends JFrame {
             lastNameField = new JTextField(20);
             passwordf= new JPasswordField(20);
             emailField = new JTextField(20);
-            dobField = new JTextField(20);
+            MaskFormatter dateFormatter = null;
+            try {
+                    dateFormatter = new MaskFormatter("####-##-##");
+            } catch (ParseException e) {
+                    throw new RuntimeException(e);
+            }
+            JFormattedTextField dobField = new JFormattedTextField(dateFormatter);
+            dobField.setColumns(10);
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate = currentDate.format(formatter);
+            dobField.setValue(formattedDate);
             dniField = new JTextField(20);
 
             // Create the radio buttons

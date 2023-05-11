@@ -2,9 +2,15 @@ package Windows;
 
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.swing.text.MaskFormatter;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -84,7 +90,7 @@ public class Admin extends JFrame {
                 TablesToAcces=new String[]{"CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN"};
                 break;
             case "jefe":
-                TablesToAcces=new String[]{"VIAJES", "BILLETES", "BUSES", "CONDUCE_BUS", "CLIENTES", "HACER", "TELEFONOS_CLI","CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN","VEHÍCULOS","TELÉFONOS_EMP","EMPLEADOS","EMPLEADOS"};
+                TablesToAcces=new String[]{"VIAJES", "BILLETES", "BUSES", "CONDUCE_BUS", "CLIENTES", "HACER", "TELEFONOS_CLI","CAMIONES", "CONDUCE_CAMIÓN", "EMPRESA", "MERCANCIAS", "PEDIDOS", "VAN","VEHÍCULOS","TELÉFONOS_EMP","EMPLEADOS","USERSACCS"};
 
                 break;
             default:
@@ -119,6 +125,8 @@ public class Admin extends JFrame {
         add(tablaslist, BorderLayout.NORTH);
 
         add(panelBotones, BorderLayout.SOUTH);
+        Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
+        setIconImage(icono);
 
 
         setSize(870, 600);
@@ -253,9 +261,52 @@ public class Admin extends JFrame {
             valueLabel.setPreferredSize(new Dimension(80, 20));
             valueLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             rightPanel.add(valueLabel, BorderLayout.WEST);
-            JTextField textField = new JTextField();
+            MaskFormatter dateFormatter = null;
+            try {
+                dateFormatter = new MaskFormatter("####-##-##");
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+            JFormattedTextField textFieldx = new JFormattedTextField(dateFormatter);
+            textFieldx.setColumns(10);
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate0 = currentDate.format(formatter);
+            textFieldx.setValue(formattedDate0);
+            JTextField textField;
+
+            textField = new JTextField();
             textField.setPreferredSize(new Dimension(150, 20));
             rightPanel.add(textField, BorderLayout.CENTER);
+            comboBox.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    if (comboBox.getSelectedItem().toString().contains("FECHA")){
+                        rightPanel.remove(textField);
+
+                        rightPanel.add(textFieldx, BorderLayout.CENTER);
+
+
+                        upframe.revalidate();
+
+                        upframe.repaint();
+                    }else{
+                        rightPanel.removeAll();
+                        //rightPanel.remove(textField);
+                        rightPanel.add(valueLabel, BorderLayout.WEST);
+                        rightPanel.add(textField, BorderLayout.CENTER);
+                        upframe.revalidate();
+
+                        upframe.repaint();
+                    }
+
+
+
+
+                }
+            });
+
 
 
             JButton button = new JButton("Actualizar");
@@ -263,10 +314,25 @@ public class Admin extends JFrame {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
                     try {
+
                         String where = columnNames[0] + "=" + "'" + pkcom.getSelectedItem().toString() + "'";
                         Map<String, Object> datos = new LinkedHashMap<>();
-                        datos.put(comboBox.getSelectedItem().toString(), textField.getText());
+                        if (comboBox.getSelectedItem().toString().contains("FECHA")){
+
+                            SimpleDateFormat formatchnger = null;
+                            Date myDate = null;
+                            String formattedDate=null;
+
+                                formatchnger = new SimpleDateFormat("dd-MM-yyyy");
+                                myDate = new SimpleDateFormat("yyyy-MM-dd").parse(textFieldx.getText());
+                                formattedDate = formatchnger.format(myDate);
+                            datos.put(comboBox.getSelectedItem().toString(), formattedDate);
+                        }else {
+                            datos.put(comboBox.getSelectedItem().toString(), textField.getText());
+                        }
+
                         db.update(table, where, datos);
                         JOptionPane.showMessageDialog(null, "DATA updated 100%");
 
@@ -312,12 +378,35 @@ public class Admin extends JFrame {
             for (int i = 0; i < columnNames.length; i++) {
                 JLabel l = new JLabel(columnNames[i]);
                 l.setPreferredSize(new Dimension(90,50));
-                JTextField tf = new JTextField(20);
-                textFields[i] = tf;
-                JPanel row = new JPanel();
-                row.add(l);
-                row.add(tf);
-                mainPanel.add(row);
+                if (columnNames[i].contains("FECHA")){
+                    l.setPreferredSize(new Dimension(200,50));
+                    //l.setText(columnNames[i]+"                   ");
+                    MaskFormatter dateFormatter = null;
+                    try {
+                        dateFormatter = new MaskFormatter("####-##-##");
+                    } catch (ParseException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    JFormattedTextField tf = new JFormattedTextField(dateFormatter);
+                    tf.setColumns(10);
+                    LocalDate currentDate = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    String formattedDate0 = currentDate.format(formatter);
+                    tf.setValue(formattedDate0);
+                    textFields[i] = tf;
+                    JPanel row = new JPanel();
+                    row.add(l);
+                    row.add(tf);
+                    mainPanel.add(row);
+                }else{
+                    JTextField tf = new JTextField(20);
+                    textFields[i] = tf;
+                    JPanel row = new JPanel();
+                    row.add(l);
+                    row.add(tf);
+                    mainPanel.add(row);
+                }
+
             }
             JButton anadir=new JButton("Añadir");
             anadir.setPreferredSize(new Dimension(110, 20));
@@ -326,7 +415,25 @@ public class Admin extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     String[] textValues = new String[textFields.length];
                     for (int i = 0; i < textFields.length; i++) {
-                        textValues[i] = textFields[i].getText();
+                        if (columnNames[i].contains("FECHA")){
+                            SimpleDateFormat formatchnger = null;
+                            Date myDate = null;
+                            String formattedDate=null;
+                            try {
+                                formatchnger = new SimpleDateFormat("dd-MM-yyyy");
+                                myDate = new SimpleDateFormat("yyyy-MM-dd").parse(textFields[i].getText());
+                                formattedDate = formatchnger.format(myDate);
+                                //textFields[i].setText(formattedDate);
+                                System.out.println(columnNames[i]);
+                                textValues[i] = formattedDate;
+                            } catch (ParseException P) {
+                                throw new RuntimeException(P);
+                            }
+
+                        }else {
+                            textValues[i] = textFields[i].getText();
+                        }
+
                     }
 
                     Map<String, Object> datos = new LinkedHashMap<>();
