@@ -16,8 +16,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 public class editarPerfil extends JFrame {
 
     //Empresa
-    private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel;
+    private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel,passactulabel,newpasslabel;
     private JTextField companyNameField ,emailField, dniField, phoneField, sectorField;
+    private JPasswordField passactu,newpass;
 
     //Persona
     private JLabel nameLabel, emailLabel2, fechaNacimientoLabel, dniLabel2;
@@ -32,7 +33,7 @@ public class editarPerfil extends JFrame {
 
         // Set the title and size of the frame
         setTitle("Editar perfil");
-        setSize(550, 500);
+        setSize(550, 550);
 
         //Create a panel and add the components to it
         JPanel panel = new JPanel(new GridBagLayout());
@@ -45,6 +46,8 @@ public class editarPerfil extends JFrame {
             phoneLabel = new JLabel("<html><h3>Número de teléfono:</h3></html>");
             sectorLabel = new JLabel("<html><h3>Sector de Trabajo:</h3></html>");
             emailLabel= new JLabel("<html><h3>Email:</h3></html>");
+            passactulabel=new JLabel("<html><h3>Contraseña Actual:</h3></html>");
+            newpasslabel=new JLabel("<html><h3>Nueva Contraseña:</h3></html>");
 
             //Create the text fields
             companyNameField = new JTextField(20);
@@ -52,6 +55,8 @@ public class editarPerfil extends JFrame {
             phoneField = new JTextField(20);
             sectorField = new JTextField(20);
             emailField=new JTextField(20);
+            passactu = new JPasswordField(20);
+            newpass=new JPasswordField(20);
 
             //Create the button
             updateButton = new JButton("<html><h2>Actualizar</h2></html>");
@@ -59,15 +64,38 @@ public class editarPerfil extends JFrame {
             updateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    encription en=new encription();
                     Map<String, Object> datos = new LinkedHashMap<>();
                     datos.put("nombre_completo", companyNameField.getText());
                     datos.put("DNI", dniField.getText());
                     datos.put("telefono", phoneField.getText());
                     datos.put("sector", sectorField.getText());
-
                     String whereStAt = "EMAIL= '" + ea + "'";
 
-                    db.update("USERSACCS", whereStAt, datos);
+                    if (en.encriptar(passactu.getText()).equals(db.selectFromTable("USERSACCS",new String[]{"CONTRASENA"},new String[]{"EMAIL='"+ea+"'"})[0])){
+                        datos.put("CONTRASENA", en.encriptar(newpass.getText()));
+                        try {
+                            db.update("USERSACCS", whereStAt, datos);
+                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                        }catch (Exception x){
+                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    } else if (en.encriptar(passactu.getText()).equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")) {
+                        try {
+                            db.update("USERSACCS", whereStAt, datos);
+                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                        }catch (Exception x){
+                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(editarPerfil.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+
+
+
+
                 }
             });
 
@@ -94,9 +122,11 @@ public class editarPerfil extends JFrame {
 
             c.gridx = 0;
             c.gridy = 1;
+            panel.add(emailLabel, c);
 
             c.gridx = 1;
             c.gridy = 1;
+            panel.add(emailField, c);
 
             c.gridx = 0;
             c.gridy = 2;
@@ -124,23 +154,26 @@ public class editarPerfil extends JFrame {
 
             c.gridx = 0;
             c.gridy = 5;
-            panel.add(emailLabel, c);
+            panel.add(passactulabel, c);
 
             c.gridx = 1;
             c.gridy = 5;
-            panel.add(emailField, c);
+            panel.add(passactu, c);
 
             c.gridx = 0;
             c.gridy = 6;
+            panel.add(newpasslabel, c);
 
             c.gridx = 1;
             c.gridy = 6;
+            panel.add(newpass, c);
 
             c.gridx = 0;
-            c.gridy =7;
-            c.gridwidth = 2;
+            c.gridy =8;
+            c.gridwidth = 3;
             c.fill = GridBagConstraints.CENTER;
             panel.add(updateButton, c);
+            setVisible(true);
 
             // Add the panel to the frame
             add(panel);
@@ -149,12 +182,16 @@ public class editarPerfil extends JFrame {
             emailLabel2= new JLabel("<html><h3>Email:</h3></html>");
             fechaNacimientoLabel = new JLabel("<html><h3>Sector de Trabajo:</h3></html>");
             dniLabel2 = new JLabel("<html><h3>DNI:</h3></html>");
+            passactulabel=new JLabel("<html><h3>Contraseña Actual:</h3></html>");
+            newpasslabel=new JLabel("<html><h3>Nueva Contraseña:</h3></html>");
 
             //Create the text fields
             nameField = new JTextField(20);
             dniField2 = new JTextField(20);
             fechaNacimientoField = new JTextField(20);
             emailField2=new JTextField(20);
+            passactu = new JPasswordField(20);
+            newpass=new JPasswordField(20);
 
             updateButton = new JButton("<html><h2>Actualizar</h2></html>");
             updateButton.addActionListener(new ActionListener() {
@@ -165,10 +202,33 @@ public class editarPerfil extends JFrame {
                     datos.put("DNI", dniField2.getText());
                     datos.put("fecha_nacimiento", fechaNacimientoField.getText());
                     //datos.put("sector", sectorField.getText());
+                    encription en =new encription();
 
                     String whereStAt = "EMAIL= '" + ea + "'";
+                    if (en.encriptar(passactu.getText()).equals(db.selectFromTable("USERSACCS",new String[]{"CONTRASENA"},new String[]{"EMAIL='"+ea+"'"})[0])){
+                        datos.put("CONTRASENA", en.encriptar(newpass.getText()));
+                        try {
+                            db.update("USERSACCS", whereStAt, datos);
+                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                        }catch (Exception x){
+                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
 
-                    db.update("USERSACCS", whereStAt, datos);
+                    }
+                    else if (en.encriptar(passactu.getText()).equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")) {
+                        try {
+                            db.update("USERSACCS", whereStAt, datos);
+                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                        }catch (Exception x){
+                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(editarPerfil.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+
+
+
                 }
             });
 
@@ -218,12 +278,22 @@ public class editarPerfil extends JFrame {
 
             c.gridx = 0;
             c.gridy = 6;
+            panel.add(passactulabel, c);
 
             c.gridx = 1;
             c.gridy = 6;
+            panel.add(passactu, c);
 
             c.gridx = 0;
-            c.gridy =7;
+            c.gridy = 7;
+            panel.add(newpasslabel, c);
+
+            c.gridx = 1;
+            c.gridy = 7;
+            panel.add(newpass, c);
+
+            c.gridx = 0;
+            c.gridy =8;
             c.gridwidth = 2;
             c.fill = GridBagConstraints.CENTER;
             panel.add(updateButton, c);

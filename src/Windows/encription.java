@@ -27,6 +27,6 @@ public class encription {
         //System.out.println(encription.encriptar("jefe123"));
         //System.out.println(encription.encriptar("bus123"));
         //System.out.println(encription.encriptar("reparto123"));
-        System.out.println(encription.encriptar("oussamaslmn1100"));
+        System.out.println(encription.encriptar(""));
     }
 }
