@@ -20,8 +20,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 public class editarPerfilEmpresa extends JFrame {
 
-    private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel;
+    private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel,Contraseña;
     private JTextField companyNameField ,emailField, dniField, phoneField, sectorField;
+    private JPasswordField pass;
 
     private JButton updateButton;
 
@@ -40,6 +41,7 @@ public class editarPerfilEmpresa extends JFrame {
         phoneLabel = new JLabel("<html><h3>Número de teléfono:</h3></html>");
         sectorLabel = new JLabel("<html><h3>Sector de Trabajo:</h3></html>");
         emailLabel= new JLabel("<html><h3>Email:</h3></html>");
+        Contraseña= new JLabel("<html><h3>Contraseña:</h3></html>");
 
         // Create the text fields
         companyNameField = new JTextField(20);
@@ -48,6 +50,7 @@ public class editarPerfilEmpresa extends JFrame {
         phoneField = new JTextField(20);
         sectorField = new JTextField(20);
         emailField=new JTextField(20);
+        pass=new JPasswordField(20);
 
         // Create the button
         updateButton = new JButton("<html><h2>Actualizar</h2></html>");
@@ -55,14 +58,17 @@ public class editarPerfilEmpresa extends JFrame {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                encription enc=new encription();
                 Map<String, Object> datos = new LinkedHashMap<>();
                 datos.put("nombre_completo", companyNameField.getText());
                 datos.put("DNI", dniField.getText());
                 datos.put("telefono", phoneField.getText());
                 datos.put("sector", sectorField.getText());
+                datos.put("contrasena",enc.encriptar(pass.getText()) );
 
-                String whereStAt = "EMAIL=?";
-                datos.put("email_parametro", ea);
+                String whereStAt = "EMAIL='"+ea+"'";
+                System.out.println(whereStAt);
+
 
                 db.update("USERSACCS", whereStAt, datos);
             }
@@ -135,11 +141,11 @@ public class editarPerfilEmpresa extends JFrame {
 
         c.gridx = 0;
         c.gridy = 6;
-
+        panel.add(Contraseña, c);
 
         c.gridx = 1;
         c.gridy = 6;
-
+        panel.add(pass, c);
 
         c.gridx = 0;
         c.gridy =7;
