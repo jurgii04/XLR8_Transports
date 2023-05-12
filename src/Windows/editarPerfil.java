@@ -320,11 +320,8 @@ public class editarPerfil extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
 
-                    //System.out.println(path);
                     test();
 
-                    //System.out.println(path);
-                    remove(imagePanel);
                     CircleImagePanel imagePanel = null;
                     try {
 
@@ -334,11 +331,9 @@ public class editarPerfil extends JFrame {
                     }
 
                     add(imagePanel,BorderLayout.NORTH);
-                    /*imagePanel.repaint();
-                    imagePanel.revalidate();*/
 
-                    repaint();
-                    revalidate();
+                    imagePanel.repaint();
+                    imagePanel.revalidate();
                 }
 
                 @Override
@@ -368,10 +363,6 @@ public class editarPerfil extends JFrame {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-
-
-
 
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
