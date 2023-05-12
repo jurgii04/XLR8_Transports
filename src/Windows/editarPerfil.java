@@ -325,17 +325,18 @@ public class editarPerfil extends JFrame {
 
                     //System.out.println(path);
                     remove(imagePanel);
-                    CircleImagePanel imagePanel2 = null;
+                    CircleImagePanel imagePanel = null;
                     try {
 
-                        imagePanel2 = new CircleImagePanel(new File(path));
+                        imagePanel = new CircleImagePanel(new File(path));
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
 
-                    add(imagePanel2,BorderLayout.NORTH);
+                    add(imagePanel,BorderLayout.NORTH);
                     /*imagePanel.repaint();
                     imagePanel.revalidate();*/
+
                     repaint();
                     revalidate();
                 }

@@ -1,13 +1,9 @@
 package Windows;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,19 +17,55 @@ public class CircleImagePanel extends JPanel  {
     public CircleImagePanel(File file) throws IOException {
         // read the image file
         orgimg = ImageIO.read(file);
-        //System.out.println(orgimg);
-        image= new BufferedImage(120, 120, orgimg.getType());
-        Graphics2D g2d = image.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.drawImage(orgimg, 0, 0, 120, 120, null);
+
+        // create a new BufferedImage with the desired size (150x150)
+        BufferedImage resizedImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_ARGB);
+
+        // Create Graphics2D object for the resized image
+        Graphics2D g2d = resizedImage.createGraphics();
+
+        // Set rendering hints for smooth edges
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        // Create a circular mask image
+        BufferedImage maskImage = new BufferedImage(150, 150, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D maskGraphics = maskImage.createGraphics();
+
+        // Set the background of the mask to transparent
+        maskGraphics.setColor(new Color(0, 0, 0, 0));
+        maskGraphics.fillRect(0, 0, 150, 150);
+
+        // Set the fill color to white
+        maskGraphics.setColor(Color.WHITE);
+
+        // Draw a filled circle on the mask
+        int diameter = Math.min(150, 150);
+        int xOffset = (150 - diameter) / 2;
+        int yOffset = (150 - diameter) / 2;
+        maskGraphics.fillOval(xOffset, yOffset, diameter, diameter);
+
+        // Apply the mask to the resized image
+        g2d.drawImage(orgimg.getScaledInstance(150, 150, Image.SCALE_SMOOTH), 0, 0, null);
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_IN, 1.0f));
+        g2d.drawImage(maskImage, 0, 0, null);
+
+        // Dispose the graphics objects
         g2d.dispose();
-        //image.getScaledInstance(10, 10, java.awt.Image.SCALE_SMOOTH);
+        maskGraphics.dispose();
 
+        // Set the modified image as the image for drawing
+        image = resizedImage;
 
-
-        // set the panel size to match the image size
-        setPreferredSize(new Dimension(200, 200));
+        // Set the panel size to match the image size
+        setPreferredSize(new Dimension(150, 150));
     }
+
+
+
+
+
+
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -81,7 +113,7 @@ public class CircleImagePanel extends JPanel  {
     }
     public static void main(String[] args) {
         // create a file object for the image file
-        File imageFile = new File("src\\Windows\\images\\user.png");
+        File imageFile = new File("src\\Windows\\images\\PerfilFotos\\jurgi.png");
 
         // create a new Perfil window
         JFrame frame = new JFrame();
@@ -105,6 +137,7 @@ public class CircleImagePanel extends JPanel  {
         // show the window
         frame.setVisible(true);
     }
+
 
 
 }

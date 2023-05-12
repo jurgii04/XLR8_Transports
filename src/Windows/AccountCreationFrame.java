@@ -13,6 +13,9 @@ import java.util.Map;
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class AccountCreationFrame extends JFrame {
 
 
@@ -152,25 +155,39 @@ public class AccountCreationFrame extends JFrame {
                         }
                         else {gender="otro";}
 
-                        Map<String,Object> datos=new LinkedHashMap<>();
-                        datos.put("nombre_completo",nombre+" "+apellido);
-                        datos.put("tipo_user","Persona");
-                        datos.put("email",email);
-                        datos.put("fecha_nacimiento",fecha_nac);
-                        datos.put("DNI",dni);
-                        datos.put("genero",gender);
-                        datos.put("direccion","");
-                        datos.put("telefono","");
-                        datos.put("sector","");
-                        datos.put("contrasena",password);
-                        try {
-                                db.insert("USERSACCS",datos);
-                                JOptionPane.showMessageDialog(AccountCreationFrame.this,"Cuenta creada!");
-                        }
-                        catch (Exception x){
-                                JOptionPane.showMessageDialog(AccountCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 
+                        String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+                        Pattern pattern = Pattern.compile(emailPattern);
+
+                        Matcher matcher = pattern.matcher(email);
+
+                        if (matcher.matches()) {
+                                // La dirección de correo es válida
+                                Map<String,Object> datos=new LinkedHashMap<>();
+                                datos.put("nombre_completo",nombre+" "+apellido);
+                                datos.put("tipo_user","Persona");
+                                datos.put("email",email);
+                                datos.put("fecha_nacimiento",fecha_nac);
+                                datos.put("DNI",dni);
+                                datos.put("genero",gender);
+                                datos.put("direccion","");
+                                datos.put("telefono","");
+                                datos.put("sector","");
+                                datos.put("contrasena",password);
+                                try {
+                                        db.insert("USERSACCS",datos);
+                                        JOptionPane.showMessageDialog(AccountCreationFrame.this,"Cuenta creada!");
+                                }
+                                catch (Exception x){
+                                        JOptionPane.showMessageDialog(AccountCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
+                                }
+                        } else {
+                                JOptionPane.showMessageDialog(AccountCreationFrame.this,"Dirección de correo invalida","ERROR",JOptionPane.ERROR_MESSAGE);
                         }
+
+
+
 
                         /*nombre_completo VARCHAR(255) PRIMARY KEY,
                           email VARCHAR(255),

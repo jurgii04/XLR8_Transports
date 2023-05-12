@@ -48,7 +48,7 @@ public class ContactarConNos extends JFrame {
         emailField=new JTextField(20);
 
         // Create the button
-        createButton = new JButton("<html><h2>Enviar.</h2></html>");
+        createButton = new JButton("<html><h2>Enviar</h2></html>");
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

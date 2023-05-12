@@ -104,7 +104,7 @@ public class reparto extends JFrame  {
         Image resizedImgb = imgb.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
         ImageIcon resizedIconb = new ImageIcon(resizedImgb);
         JLabel iconLabelb = new JLabel(resizedIconb);
-        JLabel materialLabel1b = new JLabel("<html><center><h1><strong>material inflamable</strong></h1>Confíe en nosotros para transportar de manera segura sus materiales inflamables con nuestro equipo capacitado por expertos y camiones de última generación..</center></html>");
+        JLabel materialLabel1b = new JLabel("<html><center><h1><strong>Material inflamable</strong></h1>Confíe en nosotros para transportar de manera segura sus materiales inflamables con nuestro equipo capacitado por expertos y camiones de última generación..</center></html>");
         materialLabel1b.setFont(new Font("Arial", Font.PLAIN, 12));
         panelb.add(iconLabelb, BorderLayout.WEST);
         panelb.add(materialLabel1b, BorderLayout.CENTER);
@@ -204,7 +204,7 @@ public class reparto extends JFrame  {
         Image resizedImgbq = imgbq.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
         ImageIcon resizedIconbq = new ImageIcon(resizedImgbq);
         JLabel iconLabelbq = new JLabel(resizedIconbq);
-        JLabel materialLabel1bq = new JLabel("<html><center><h1><strong>material inflamable</strong></h1>Confíe en nosotros para transportar de manera segura sus materiales inflamables con nuestro equipo capacitado por expertos y camiones de última generación..</center></html>");
+        JLabel materialLabel1bq = new JLabel("<html><center><h1><strong>Material inflamable</strong></h1>Confíe en nosotros para transportar de manera segura sus materiales inflamables con nuestro equipo capacitado por expertos y camiones de última generación..</center></html>");
         materialLabel1b.setFont(new Font("Arial", Font.PLAIN, 12));
         panelbq.add(iconLabelbq, BorderLayout.WEST);
         panelbq.add(materialLabel1bq, BorderLayout.CENTER);
