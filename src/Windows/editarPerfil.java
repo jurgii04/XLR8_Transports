@@ -1,9 +1,15 @@
 package Windows;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,6 +32,7 @@ public class editarPerfil extends JFrame {
     private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
 
     private JButton updateButton;
+    public static String path="";
 
     public editarPerfil() {
         FlatLightLaf.install();
@@ -33,9 +40,10 @@ public class editarPerfil extends JFrame {
 
         // Set the title and size of the frame
         setTitle("Editar perfil");
-        setSize(550, 550);
+        setSize(550, 750);
 
         //Create a panel and add the components to it
+
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -305,12 +313,95 @@ public class editarPerfil extends JFrame {
             add(panel);
         }
 
+        try {
+            //System.out.println(path);
+            CircleImagePanel imagePanel = new CircleImagePanel(new File(path));
+            imagePanel.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    //System.out.println(path);
+                    test();
+
+                    //System.out.println(path);
+                    remove(imagePanel);
+                    CircleImagePanel imagePanel2 = null;
+                    try {
+
+                        imagePanel2 = new CircleImagePanel(new File(path));
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    add(imagePanel2,BorderLayout.NORTH);
+                    /*imagePanel.repaint();
+                    imagePanel.revalidate();*/
+                    repaint();
+                    revalidate();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+
+
+            // add the panel to the window
+            add(imagePanel,BorderLayout.NORTH);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
 
 
 
 
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
+    }
+    public void test(){
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(editarPerfil.this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try {
+                Image image = ImageIO.read(file);
+                // save the image to a file
+                File outputFile = new File("src\\Windows\\images\\PerfilFotos\\"+ea+".png");
+                ImageIO.write((BufferedImage) image, "png", outputFile);
+                // return the file path of the output file
+                String outputFilePath = outputFile.getAbsolutePath();
+                File pathcutting = new File(outputFilePath);
+                String basePath = new File("").getAbsolutePath();
+                String relativePath = pathcutting.getPath().replace(basePath, "");
+
+
+                path= relativePath.substring(1,relativePath.length());
+                GestorDB db =new GestorDB();
+                Map<String,Object> datos=new LinkedHashMap<>();
+                datos.put("IMG" ,path);
+                db.update("USERSACCS", "EMAIL='" + ea + "'", datos);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
 

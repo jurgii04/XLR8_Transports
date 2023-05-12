@@ -8,6 +8,7 @@ import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import static Windows.ventana.*;
+import static Windows.editarPerfil.*;
 
 public class login extends JFrame {
 
@@ -94,6 +95,7 @@ public class login extends JFrame {
                                     frame.dispose();
                                     break;
                                 default:
+                                    path=db.selectFromTable("USERSACCS",new String[]{"IMG"},new String[]{"EMAIL='"+username+"'"})[0];
                                     frame.dispose();
                                     String name=db.selectFromTable("USERSACCS",new String[]{"NOMBRE_COMPLETO"},new String[]{"EMAIL='"+username+"'"})[0];
                                     loginstat=true;
