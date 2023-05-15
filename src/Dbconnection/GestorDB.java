@@ -1,12 +1,12 @@
 package Dbconnection;
-import Windows.CompanyCreationFrame;
 
-import javax.swing.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class GestorDB {
     static final String SERVER_IP = "10.14.0.226";
