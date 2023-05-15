@@ -58,10 +58,10 @@ public class login extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             try {
-                String email = JOptionPane.showInputDialog(null, "Enter your email address:");
+                String email = JOptionPane.showInputDialog(null, "Introduce tu dirección de correo:");
                 if (!db.AccExist(email)){
                     if (email == null || email.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "No email address entered.","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Ninguna dirección de correo introducida","ERROR",JOptionPane.ERROR_MESSAGE);
                         System.out.println("No email address entered.");
                     } else {
                         Random rand = new Random();
@@ -78,9 +78,9 @@ public class login extends JFrame {
                                 "El equipo de XLR8 Transports.";
                         String input = "";
                         try {
-                            gmail g=new gmail(email,message,"Codigo de recuperacion");
+                            gmail g=new gmail(email,message,"Código de recuperación");
 
-                             input = JOptionPane.showInputDialog(null, "TE hemso enviado un codigo en el eamil , esciribilo:");
+                             input = JOptionPane.showInputDialog(null, "Revisa el correo electrónico e introduce el código:");
                             int number=0;
                             try {
                                 number = Integer.parseInt(input);
@@ -88,16 +88,16 @@ public class login extends JFrame {
 
                             } catch (NumberFormatException c) {
                                 // The user entered an invalid integer or clicked the Cancel button
-                                System.out.println("Invalid input or cancelled.");
+                                System.out.println("Entrada inválida o cancelada");
                             }
                             int trys=2;
                             for (int i=0;i<3;i++){
                                 //System.out.println(number);
 
                                 if ((randomNum!=number) && i==2){
-                                    JOptionPane.showMessageDialog(null, "Codigo no es correcto , no tiens mas intentos.","ERROR",JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(null, "El código no es correcto, no tienes mas intentos.","ERROR",JOptionPane.ERROR_MESSAGE);
                                 } else if (randomNum!=number) {
-                                    String intentos = JOptionPane.showInputDialog(null, "Codigo no es correcto, intenta otra vez(tienes "+trys+" intentos  ):");
+                                    String intentos = JOptionPane.showInputDialog(null, "El código no es correcto, intentalo otra vez (tienes "+trys+" intentos):");
                                     number = Integer.parseInt(input);
                                     trys--;
                                 }
@@ -122,7 +122,7 @@ public class login extends JFrame {
                                     encription en =new encription();
                                     datos.put("CONTRASENA", en.encriptar(newcontrasena));
                                     db.update("USERSACCS", "EMAIL= '" + email + "'", datos);
-                                    JOptionPane.showMessageDialog(null,"Contraseña se ha cambiado.","Cambiar la contraseña",JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null,"La contraseña ha sido cambiada.","Cambiar la contraseña",JOptionPane.INFORMATION_MESSAGE);
                                 }
 
                             }
@@ -216,6 +216,13 @@ public class login extends JFrame {
                                             Windows.editarPerfil editarPerfilEmpresa = new editarPerfil();
                                         }
                                     });
+                                    JMenuItem modificarBilletes = new JMenuItem("Mis billetes");
+                                    modificarBilletes.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+
+                                        }
+                                    });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
                                     cerrarSesion.addActionListener(new ActionListener() {
                                         @Override
@@ -242,6 +249,7 @@ public class login extends JFrame {
 
 
                                     menu.add(editarPerfil);
+                                    menu.add(modificarBilletes);
                                     menu.add(cerrarSesion);
                                     menuBar.add(menu);
 

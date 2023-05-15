@@ -320,10 +320,7 @@ public class editarPerfil extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
 
-                    //System.out.println(path);
                     test();
-
-                    //System.out.println(path);
 
                     CircleImagePanel imagePanel = null;
                     try {
@@ -334,8 +331,6 @@ public class editarPerfil extends JFrame {
                     }
 
                     add(imagePanel,BorderLayout.NORTH);
-                    /*imagePanel.repaint();
-                    imagePanel.revalidate();*/
 
                     imagePanel.repaint();
                     imagePanel.revalidate();

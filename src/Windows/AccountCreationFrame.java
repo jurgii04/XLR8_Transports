@@ -57,7 +57,7 @@ public class AccountCreationFrame extends JFrame {
             JFormattedTextField dobField = new JFormattedTextField(dateFormatter);
             dobField.setColumns(10);
             LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             String formattedDate = currentDate.format(formatter);
             dobField.setValue(formattedDate);
             dniField = new JTextField(20);
@@ -66,7 +66,6 @@ public class AccountCreationFrame extends JFrame {
             maleRadioButton = new JRadioButton("Masculino");
             femaleRadioButton = new JRadioButton("Femenino");
             otroRadioButton = new JRadioButton("Otro");
-            maleRadioButton.setSelected(true); // Select the male radio button by default
             ButtonGroup genderGroup = new ButtonGroup();
             genderGroup.add(maleRadioButton);
             genderGroup.add(femaleRadioButton);

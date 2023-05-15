@@ -98,7 +98,7 @@ public class PayWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ((cardNumberField.getText().isEmpty() || cardNumberField.getText()==null) || (nameOnCardField.getText().isEmpty() || nameOnCardField.getText()==null)|| (securityField.getText().isEmpty() || securityField.getText()==null)|| (expirationField.getText().isEmpty() || expirationField.getText()==null)){
-                    JOptionPane.showMessageDialog(null, "No puedes dejar campos vacios!","ERROR",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No puede haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
                     JLabel successLabel = new JLabel("Transacción compleatada exitosamente!");
                     ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\deal.png");

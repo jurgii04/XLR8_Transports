@@ -109,7 +109,7 @@ public class buses extends JFrame {
                         public void actionPerformed(ActionEvent e) {
 
                             if (loginstat){
-                                //PayWindow P=new PayWindow(optionDest,optionOrg,"12-07-2023",);
+                                PayWindow P=new PayWindow();
                             }
                             else {
                                 login l = new login(botonLogin, panelNorte,true, buses);
