@@ -90,7 +90,7 @@ public class buses extends JFrame {
                     // Create first trip panel
                     JPanel v1 = new JPanel(new BorderLayout());
                     v1.setBackground(Color.WHITE);
-                    JLabel labelI = new JLabel("<html><span style='font-size:16px; color:#333333;'>" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>6:00 (12h)</span></html>");
+                    JLabel labelI = new JLabel("<html><span style='font-size:16px; color:#333333;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:00 (12h)&nbsp;&nbsp;&nbsp;20:30&nbsp;&nbsp;&nbsp;01-09-2023</span></html>");
                     v1.add(labelI, BorderLayout.CENTER);
                     ImageIcon img = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
                     ImageIcon img2 = new ImageIcon("src\\Windows\\images\\madrid.jpg");
@@ -107,17 +107,9 @@ public class buses extends JFrame {
                     comprar.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            /*PayWindow P = new PayWindow();
-                            boolean use = test.get();
-                            System.out.println(use);
-                            if (use==false) {
-                                login l = new login(botonLogin, panelNorte);
-                                test.set(l.isLoginstate());
-                            } else {
-                                P.Pay();
-                            }*/
+
                             if (loginstat){
-                                PayWindow P=new PayWindow();
+                                //PayWindow P=new PayWindow(optionDest,optionOrg,"12-07-2023",);
                             }
                             else {
                                 login l = new login(botonLogin, panelNorte,true, buses);
@@ -132,7 +124,7 @@ public class buses extends JFrame {
                     // Create second trip panel
                     JPanel vII = new JPanel(new BorderLayout());
                     vII.setBackground(Color.WHITE);
-                    JLabel labelII = new JLabel("<html><span style='font-size:16px; color:#333333;'>" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>6:00 (12h)</span></html>");
+                    JLabel labelII = new JLabel("<html><span style='font-size:16px; color:#333333;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:00 (12h)&nbsp;&nbsp;&nbsp;06:30&nbsp;&nbsp;&nbsp;12-07-2023</span></html>");
                     vII.add(labelII, BorderLayout.CENTER);
                     ImageIcon imgII = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
                     ImageIcon img2II = new ImageIcon("src\\Windows\\images\\madrid.jpg");
@@ -149,7 +141,12 @@ public class buses extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
 
-                            login l = new login(botonLogin, panelNorte,true, buses);
+                            if (loginstat){
+                                PayWindow P=new PayWindow();
+                            }
+                            else {
+                                login l = new login(botonLogin, panelNorte,true, buses);
+                            }
                         }
                     });
                     vII.add(comprarII, BorderLayout.SOUTH);

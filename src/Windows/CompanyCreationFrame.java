@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -131,24 +133,37 @@ public class CompanyCreationFrame extends JFrame {
             String phone=phoneField.getText();
             String sector=sectorField.getText();
             String password=enc.encriptar(passwordF.getText());
-            Map<String,Object> datos=new LinkedHashMap<>();
-            datos.put("nombre_completo",name);
-            datos.put("tipo_user","Empresa");
-            datos.put("email",email);
-            datos.put("fecha_nacimiento","");
-            datos.put("DNI",dni);
-            datos.put("genero","");
-            datos.put("direccion",address);
-            datos.put("telefono",phone);
-            datos.put("sector",sector);
-            datos.put("contrasena",password);
-            try {
-                db.insert("USERSACCS",datos);
-                JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Cuenta creada!");
-            }catch (Exception x){
-                JOptionPane.showMessageDialog(CompanyCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+            String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            Pattern pattern = Pattern.compile(emailPattern);
 
+            Matcher matcher = pattern.matcher(email);
+
+            if (matcher.matches()) {
+                // La dirección de correo es válida
+                Map<String,Object> datos=new LinkedHashMap<>();
+                datos.put("nombre_completo",name);
+                datos.put("tipo_user","Empresa");
+                datos.put("email",email);
+                datos.put("fecha_nacimiento","");
+                datos.put("DNI",dni);
+                datos.put("genero","");
+                datos.put("direccion",address);
+                datos.put("telefono",phone);
+                datos.put("sector",sector);
+                datos.put("contrasena",password);
+                try {
+                    db.insert("USERSACCS",datos);
+                    JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Cuenta creada!");
+                }
+                catch (Exception x){
+                    JOptionPane.showMessageDialog(CompanyCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Dirección de correo invalida","ERROR",JOptionPane.ERROR_MESSAGE);
             }
+
+
         });
 
         // Set the frame to be centered on the screen

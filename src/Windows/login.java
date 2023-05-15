@@ -1,8 +1,12 @@
 package Windows;
 
+import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -13,6 +17,7 @@ import static Windows.editarPerfil.*;
 public class login extends JFrame {
 
     private boolean done=false;
+    public  static String name="";
     public static String ea;
 
     public login(JButton botonLogin, JPanel panelNorte , boolean paymode, JFrame ventana) {
@@ -25,7 +30,7 @@ public class login extends JFrame {
         frame.setIconImage(icono);
 
         frame.setLayout(new BorderLayout());
-        frame.setSize(350, 150);
+        frame.setSize(450, 150);
         frame.setResizable(false);
 
 
@@ -44,11 +49,109 @@ public class login extends JFrame {
         // Configurar el panel de botones
         JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton loginButton = new JButton("Iniciar sesión");
-        JButton cancelButton = new JButton("Cancelar");
+        JButton cancelButton = new JButton("¿Has olvidado la contraseña?");
         JButton Crear = new JButton("Crear Cuenta");
         buttonPane.add(loginButton);
         buttonPane.add(Crear);
         buttonPane.add(cancelButton);
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            try {
+                String email = JOptionPane.showInputDialog(null, "Enter your email address:");
+                if (!db.AccExist(email)){
+                    if (email == null || email.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No email address entered.","ERROR",JOptionPane.ERROR_MESSAGE);
+                        System.out.println("No email address entered.");
+                    } else {
+                        Random rand = new Random();
+                        int randomNum = rand.nextInt(90000) + 10000;
+                        String message ="Recientemente hemos recibido una solicitud para restablecer tu contraseña en nuestro sistema. Para completar el proceso de recuperación de contraseña, por favor utiliza el siguiente código de verificación:\n" +
+                                "\n" +
+                                "Código de verificación: "+randomNum+"\n" +
+                                "\n" +
+                                "Por favor, ingresa este código en la página de recuperación de contraseña para continuar con el proceso. Si no has solicitado un restablecimiento de contraseña, te recomendamos que tomes las medidas necesarias para proteger tu cuenta.\n" +
+                                "\n" +
+                                "Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactar a nuestro equipo de soporte. Estaremos encantados de ayudarte.\n" +
+                                "\n" +
+                                "Atentamente,\n" +
+                                "El equipo de XLR8 Transports.";
+                        String input = "";
+                        try {
+                            gmail g=new gmail(email,message,"Codigo de recuperacion");
+
+                             input = JOptionPane.showInputDialog(null, "TE hemso enviado un codigo en el eamil , esciribilo:");
+                            int number=0;
+                            try {
+                                number = Integer.parseInt(input);
+                                // Do something with the integer
+
+                            } catch (NumberFormatException c) {
+                                // The user entered an invalid integer or clicked the Cancel button
+                                System.out.println("Invalid input or cancelled.");
+                            }
+                            int trys=2;
+                            for (int i=0;i<3;i++){
+                                //System.out.println(number);
+
+                                if ((randomNum!=number) && i==2){
+                                    JOptionPane.showMessageDialog(null, "Codigo no es correcto , no tiens mas intentos.","ERROR",JOptionPane.ERROR_MESSAGE);
+                                } else if (randomNum!=number) {
+                                    String intentos = JOptionPane.showInputDialog(null, "Codigo no es correcto, intenta otra vez(tienes "+trys+" intentos  ):");
+                                    number = Integer.parseInt(input);
+                                    trys--;
+                                }
+
+                            }
+                            if (randomNum==number){
+                                JPasswordField passwordField = new JPasswordField();
+                                JLabel label = new JLabel("Ingresa tu contraseña: ");
+
+                                Object[] components = {label, passwordField};
+
+                                int option = JOptionPane.showConfirmDialog(
+                                        null,
+                                        components,
+                                        "Ingresa tu contraseña",
+                                        JOptionPane.OK_CANCEL_OPTION,
+                                        JOptionPane.PLAIN_MESSAGE
+                                );
+                                if (option == JOptionPane.OK_OPTION) {
+                                    String newcontrasena= passwordField.getText();
+                                    Map<String, Object> datos = new LinkedHashMap<>();
+                                    encription en =new encription();
+                                    datos.put("CONTRASENA", en.encriptar(newcontrasena));
+                                    db.update("USERSACCS", "EMAIL= '" + email + "'", datos);
+                                    JOptionPane.showMessageDialog(null,"Contraseña se ha cambiado.","Cambiar la contraseña",JOptionPane.INFORMATION_MESSAGE);
+                                }
+
+                            }
+                        } catch (MessagingException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        } catch (HeadlessException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        }
+
+
+                    }
+
+
+
+
+
+
+                    System.out.println("Entered email address: " + email);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Email no existe.","ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            }
+        });
 
         Crear.addActionListener(new ActionListener() {
             @Override
@@ -97,7 +200,7 @@ public class login extends JFrame {
                                 default:
                                     path=db.selectFromTable("USERSACCS",new String[]{"IMG"},new String[]{"EMAIL='"+username+"'"})[0];
                                     frame.dispose();
-                                    String name=db.selectFromTable("USERSACCS",new String[]{"NOMBRE_COMPLETO"},new String[]{"EMAIL='"+username+"'"})[0];
+                                     name=db.selectFromTable("USERSACCS",new String[]{"NOMBRE_COMPLETO"},new String[]{"EMAIL='"+username+"'"})[0];
                                     loginstat=true;
 
 

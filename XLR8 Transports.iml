@@ -51,6 +51,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="gradle-javacpp-1.5.8" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
   </component>
 </module>

@@ -194,6 +194,15 @@ public class GestorDB {
         }
         return data;
     }
+    public boolean AccExist(String Email){
+        int count = Integer.parseInt(selectFromTable("USERSACCS" , new String[]{"count(EMAIL)"}, new String[]{"EMAIL='"+Email+"'"})[0]);
+        if (count<=0){
+            return true;
+        }else{
+            return false;
+
+        }
+    }
 
 
     public static void main(String[] arg) {
@@ -214,7 +223,7 @@ public class GestorDB {
          * Finally, the code formats the date by calling the format method on the format object, passing in the Date object as an argument. The resulting
          * string is assigned to the formattedDate variable.
          * */
-        SimpleDateFormat formatchnger = null;
+        /*SimpleDateFormat formatchnger = null;
         Date myDate = null;
         String formattedDate=null;
         try {
@@ -233,7 +242,7 @@ public class GestorDB {
         data.put("JEFE", 16);
         //System.out.println(data.keySet());
         //System.out.println(data.values());
-        DB.insert("EMPLEADOS", data);
+        DB.insert("EMPLEADOS", data);*/
         /*//-------------------------------------update testing----------------------------------
         Map<String, Object> updata = new LinkedHashMap<>();
         updata.put("NOMBRE_APELLIDO" , "lionel messi");
@@ -252,6 +261,7 @@ public class GestorDB {
 
 
         //System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
+        System.out.println(DB.AccExist("slmn.momi@gmail.com"));
 
 
     }

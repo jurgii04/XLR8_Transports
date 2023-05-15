@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
+import static Windows.login.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -46,6 +47,7 @@ public class PayWindow extends JFrame {
         nameOnCardLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         JTextField nameOnCardField = new JTextField(20);
         nameOnCardField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        nameOnCardField.setText(name);
         JLabel expirationLabel = new JLabel("Fecha de caducidad (MM/YY):");
         expirationLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         MaskFormatter dateFormatter2 = null;
@@ -95,20 +97,25 @@ public class PayWindow extends JFrame {
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JLabel successLabel = new JLabel("Transacción compleatada exitosamente!");
-                ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\deal.png");
-                Image img = checkIcon.getImage();
-                Image resizedImg = img.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon resizedIcon = new ImageIcon(resizedImg);
-                JLabel iconLabel = new JLabel(resizedIcon);
-                JPanel successPanel = new JPanel();
-                successPanel.add(iconLabel);
-                successPanel.add(successLabel);
-                JFrame successFrame = new JFrame("Transacción exitosa");
-                successFrame.add(successPanel);
-                successFrame.setSize(300, 100);
-                successFrame.setLocationRelativeTo(null);
-                successFrame.setVisible(true);
+                if ((cardNumberField.getText().isEmpty() || cardNumberField.getText()==null) || (nameOnCardField.getText().isEmpty() || nameOnCardField.getText()==null)|| (securityField.getText().isEmpty() || securityField.getText()==null)|| (expirationField.getText().isEmpty() || expirationField.getText()==null)){
+                    JOptionPane.showMessageDialog(null, "No puedes dejar campos vacios!","ERROR",JOptionPane.ERROR_MESSAGE);
+                }else {
+                    JLabel successLabel = new JLabel("Transacción compleatada exitosamente!");
+                    ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\deal.png");
+                    Image img = checkIcon.getImage();
+                    Image resizedImg = img.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
+                    ImageIcon resizedIcon = new ImageIcon(resizedImg);
+                    JLabel iconLabel = new JLabel(resizedIcon);
+                    JPanel successPanel = new JPanel();
+                    successPanel.add(iconLabel);
+                    successPanel.add(successLabel);
+                    JFrame successFrame = new JFrame("Transacción exitosa");
+                    successFrame.add(successPanel);
+                    successFrame.setSize(300, 100);
+                    successFrame.setLocationRelativeTo(null);
+                    successFrame.setVisible(true);
+                }
+
             }
         });
         buttonPanel.add(payButton);

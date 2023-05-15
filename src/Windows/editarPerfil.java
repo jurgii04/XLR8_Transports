@@ -324,7 +324,7 @@ public class editarPerfil extends JFrame {
                     test();
 
                     //System.out.println(path);
-                    remove(imagePanel);
+
                     CircleImagePanel imagePanel = null;
                     try {
 
@@ -337,8 +337,8 @@ public class editarPerfil extends JFrame {
                     /*imagePanel.repaint();
                     imagePanel.revalidate();*/
 
-                    repaint();
-                    revalidate();
+                    imagePanel.repaint();
+                    imagePanel.revalidate();
                 }
 
                 @Override
@@ -365,8 +365,8 @@ public class editarPerfil extends JFrame {
 
             // add the panel to the window
             add(imagePanel,BorderLayout.NORTH);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(editarPerfil.this,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -400,7 +400,8 @@ public class editarPerfil extends JFrame {
                 db.update("USERSACCS", "EMAIL='" + ea + "'", datos);
 
             } catch (Exception ex) {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(editarPerfil.this,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
             }
         }
     }
