@@ -32,7 +32,7 @@ public class editarPerfil extends JFrame {
     private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
 
     private JButton updateButton;
-    public static String path="";
+    public static String path="src\\Windows\\images\\PerfilFotos\\user.png";
 
     public editarPerfil() {
         FlatLightLaf.install();

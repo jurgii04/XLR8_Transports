@@ -16,6 +16,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static Windows.editarPerfil.path;
+
 public class AccountCreationFrame extends JFrame {
 
 
@@ -50,7 +52,7 @@ public class AccountCreationFrame extends JFrame {
             emailField = new JTextField(20);
             MaskFormatter dateFormatter = null;
             try {
-                    dateFormatter = new MaskFormatter("####-##-##");
+                    dateFormatter = new MaskFormatter("##-##-####");
             } catch (ParseException e) {
                     throw new RuntimeException(e);
             }
@@ -173,9 +175,10 @@ public class AccountCreationFrame extends JFrame {
                                 datos.put("telefono","");
                                 datos.put("sector","");
                                 datos.put("contrasena",password);
+                                datos.put("IMG",path);
                                 try {
                                         db.insert("USERSACCS",datos);
-                                        JOptionPane.showMessageDialog(AccountCreationFrame.this,"Cuenta creada!");
+                                        JOptionPane.showMessageDialog(AccountCreationFrame.this,"Cuenta creada exitosamente");
                                 }
                                 catch (Exception x){
                                         JOptionPane.showMessageDialog(AccountCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);

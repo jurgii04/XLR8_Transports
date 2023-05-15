@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
+import static Windows.editarPerfil.path;
+
 public class CompanyCreationFrame extends JFrame {
 
     private JLabel companyNameLabel, addressLabel,password,emailLabel, dniLabel, phoneLabel, sectorLabel;
@@ -151,6 +153,7 @@ public class CompanyCreationFrame extends JFrame {
                 datos.put("telefono",phone);
                 datos.put("sector",sector);
                 datos.put("contrasena",password);
+                datos.put("IMG",path);
                 try {
                     db.insert("USERSACCS",datos);
                     JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Cuenta creada!");
