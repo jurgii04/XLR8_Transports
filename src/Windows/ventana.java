@@ -12,14 +12,17 @@ import java.awt.event.WindowEvent;
 
 public class ventana extends JFrame{
      public static boolean loginstat=false;
+     public static JButton vol;
+    public static JFrame frame;
+    public static JPanel panelNorte;
     public static String tipouser="";
-        GestorDB db;
+        public static GestorDB db;
 
     public ventana() {
         FlatLightLaf.install();
         db=new GestorDB();
         // Ventana principal
-        JFrame frame = new JFrame("XLR8 Transports");
+        frame = new JFrame("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(900,1000));
         frame.setResizable(false);
@@ -33,7 +36,7 @@ public class ventana extends JFrame{
 
 
         // Paneles
-        JPanel panelNorte = new JPanel();
+         panelNorte = new JPanel();
         panelNorte.setLayout(new BorderLayout());
 
         JPanel panelCentro = new JPanel();
@@ -58,7 +61,7 @@ public class ventana extends JFrame{
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login login = new login(botonLogin, panelNorte,false,frame);
+                login login = new login(botonLogin, panelNorte);
 
 
             }
@@ -122,6 +125,28 @@ public class ventana extends JFrame{
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        //crrate static botton
+        vol = new JButton("<html><u>Volver</u></html>");
+        vol.setPreferredSize(new Dimension(100, 70));
+        vol.setForeground(Color.WHITE);
+        vol.setBackground(new Color(4, 140, 128, 255));
+        vol.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+
+        vol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.getContentPane().removeAll();
+                frame.getContentPane().revalidate();
+                frame.getContentPane().repaint();
+                panelNorte.remove(vol);
+                JLabel labelAux = new JLabel();
+                labelAux.setPreferredSize(new Dimension(100, 70));
+                panelNorte.add(labelAux, BorderLayout.WEST);
+                frame.add(panelNorte, BorderLayout.NORTH);
+                frame.add(contentPane, BorderLayout.CENTER);
+                frame.setTitle("XLR8 Transports");
+            }
+        });
     }
 }
 

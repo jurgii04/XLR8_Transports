@@ -3,10 +3,8 @@ package Dbconnection;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class GestorDB {
     static final String SERVER_IP = "10.14.0.226";
@@ -122,6 +120,7 @@ public class GestorDB {
             // Build the SQL query
             String sql = "SELECT DISTINCT ";
             if (columnNames.length == 0) {
+                columnNames = selectFromTable("all_tab_columns", new String[]{"column_name"}, new String[]{"table_name = '" + tableName + "'"});
                 sql += "*";
             } else {
                 for (int i = 0; i < columnNames.length; i++) {
@@ -145,10 +144,13 @@ public class GestorDB {
 
             st = conn.createStatement();
             resu = st.executeQuery(sql);
+            //System.out.println(sql);
 
 
             while (resu.next()) {
+
                 for (int i = 0; i < columnNames.length; i++) {
+
                     String columnName = columnNames[i];
                     String columnValue = resu.getString(columnName);
                     //System.out.println(columnName + ": " + columnValue);
@@ -261,7 +263,11 @@ public class GestorDB {
 
 
         //System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
-        System.out.println(DB.AccExist("slmn.momi@gmail.com"));
+        //System.out.println(DB.AccExist("slmn.momi@gmail.com"));
+        String [] dataemp=DB.selectFromTable("EMPRESA" , new String[]{},new String[]{"NOMBRE_EMPRESA='Zubiri Manteo'"});
+        //String [] TEST=DB.selectFromTable("pedidos" , new String[]{"NUM_EMPRESA"},new String[]{});
+        System.out.println(Arrays.toString(dataemp));
+        //System.out.println(Arrays.toString(TEST));
 
 
     }

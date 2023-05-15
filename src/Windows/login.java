@@ -20,7 +20,7 @@ public class login extends JFrame {
     public  static String name="";
     public static String ea;
 
-    public login(JButton botonLogin, JPanel panelNorte , boolean paymode, JFrame ventana) {
+    public login(JButton botonLogin, JPanel panelNorte ) {
         FlatLightLaf.install();
         GestorDB db=new GestorDB();
         // Configurar la ventana principal
@@ -244,6 +244,22 @@ public class login extends JFrame {
                                     if (textWidth > 10) {
                                         String usernameSubstring = name.substring(0,8) + "...";
                                         menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
+                                    }
+                                    if (tipouser.equals("Empresa")){
+                                        JMenuItem pedidos = new JMenuItem("Ver pedidos");
+
+                                        pedidos.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                ventana.frame.getContentPane().removeAll();
+                                                ventana.frame.getContentPane().revalidate();
+                                                ventana.frame.getContentPane().repaint();
+                                                VerPedidos v= new VerPedidos(ventana.frame,panelNorte);
+
+                                            }
+                                        });
+                                        menu.add(pedidos);
+
                                     }
 
 

@@ -50,7 +50,7 @@ public class AllTest {
     static void cleanup() {
         System.out.println("After all tests");
     }
-    @Test
+
     @DisplayName("Test for Encription")
     @RepeatedTest(3)
     public void testEncription() {
@@ -141,7 +141,7 @@ public class AllTest {
         assertEquals(resu,1);
         db.closeDB();
     }
-    @Test
+
     @ParameterizedTest
     @CsvSource({"monitor, 5", "keyboard, 20", "mouse, 10" })
     void hasStock(String product, int number) {
