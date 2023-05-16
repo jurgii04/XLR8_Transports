@@ -62,8 +62,6 @@ public class ventana extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 login login = new login(botonLogin, panelNorte);
-
-
             }
         });
         ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\logo.png");

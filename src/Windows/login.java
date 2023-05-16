@@ -20,18 +20,18 @@ public class login extends JFrame {
     public  static String name="";
     public static String ea;
 
-    public login(JButton botonLogin, JPanel panelNorte ) {
+    public login(JButton botonLogin, JPanel panelNorte) {
         FlatLightLaf.install();
         GestorDB db=new GestorDB();
         // Configurar la ventana principal
-        JFrame frame = new JFrame("Introduce usuario y contraseña");
+        JFrame login = new JFrame("Introduce usuario y contraseña");
 
         Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
-        frame.setIconImage(icono);
+        login.setIconImage(icono);
 
-        frame.setLayout(new BorderLayout());
-        frame.setSize(450, 150);
-        frame.setResizable(false);
+        login.setLayout(new BorderLayout());
+        login.setSize(450, 150);
+        login.setResizable(false);
 
 
         // Configurar el panel de contenido
@@ -161,8 +161,8 @@ public class login extends JFrame {
         });
 
         // Agregar los paneles a la ventana
-        frame.add(contentPane, BorderLayout.CENTER);
-        frame.add(buttonPane, BorderLayout.SOUTH);
+        login.add(contentPane, BorderLayout.CENTER);
+        login.add(buttonPane, BorderLayout.SOUTH);
 
         // Configurar el botón de inicio de sesión
         loginButton.addActionListener(new ActionListener() {
@@ -185,21 +185,21 @@ public class login extends JFrame {
                         if (password.equals(pass)){
                             switch (tipo){
                                 case "adminbuses":
-                                    frame.dispose();
+                                    login.dispose();
                                     a= new Admin(tipo);
 
                                     break;
                                 case "adminreparto":
                                     a= new Admin(tipo);
-                                    frame.dispose();
+                                    login.dispose();
                                     break;
                                 case "jefe":
                                     a= new Admin(tipo);
-                                    frame.dispose();
+                                    login.dispose();
                                     break;
                                 default:
                                     path=db.selectFromTable("USERSACCS",new String[]{"IMG"},new String[]{"EMAIL='"+username+"'"})[0];
-                                    frame.dispose();
+                                    login.dispose();
                                      name=db.selectFromTable("USERSACCS",new String[]{"NOMBRE_COMPLETO"},new String[]{"EMAIL='"+username+"'"})[0];
                                     loginstat=true;
 
@@ -220,7 +220,9 @@ public class login extends JFrame {
                                     modificarBilletes.addActionListener(new ActionListener() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-
+                                            frame.getContentPane().removeAll();
+                                            frame.getContentPane().revalidate();
+                                            frame.getContentPane().repaint();
                                         }
                                     });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
@@ -239,33 +241,31 @@ public class login extends JFrame {
                                     menuBar.setPreferredSize(new Dimension(100, 70));
                                     menuBar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, -70));
 
-
                                     int textWidth = name.length();
                                     if (textWidth > 10) {
                                         String usernameSubstring = name.substring(0,8) + "...";
                                         menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
                                     }
-                                    if (tipouser.equals("Empresa")){
+
                                         JMenuItem pedidos = new JMenuItem("Ver pedidos");
 
                                         pedidos.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                ventana.frame.getContentPane().removeAll();
-                                                ventana.frame.getContentPane().revalidate();
-                                                ventana.frame.getContentPane().repaint();
-                                                VerPedidos v= new VerPedidos(ventana.frame,panelNorte);
+                                                frame.getContentPane().removeAll();
+                                                frame.getContentPane().revalidate();
+                                                frame.getContentPane().repaint();
+                                                VerPedidos v= new VerPedidos(frame,panelNorte);
 
                                             }
                                         });
-                                        menu.add(pedidos);
-
-                                    }
-
-
 
                                     menu.add(editarPerfil);
-                                    menu.add(modificarBilletes);
+                                    if (tipouser.equals("Persona")) {
+                                        menu.add(modificarBilletes);
+                                    } else if (tipouser.equals("Empresa")) {
+                                        menu.add(pedidos);
+                                    }
                                     menu.add(cerrarSesion);
                                     menuBar.add(menu);
 
@@ -299,7 +299,7 @@ public class login extends JFrame {
         // Configurar el botón de cancelar
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                login.dispose();
             }
         });
 
@@ -314,10 +314,10 @@ public class login extends JFrame {
             }
         });
 
-        frame.setLocationRelativeTo(null);
+        login.setLocationRelativeTo(null);
 
         // Mostrar la ventana
-        frame.setVisible(true);
+        login.setVisible(true);
     }
 
 

@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import Dbconnection.GestorDB;
 
@@ -13,7 +12,7 @@ import static Windows.ventana.loginstat;
 public class buses extends JFrame {
     public static JButton volver;
     ;
-    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin,GestorDB db  ){
+    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
 
 
 
