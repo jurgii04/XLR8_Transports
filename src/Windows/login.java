@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import Dbconnection.GestorDB;
+import Objects.User;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import static Windows.ventana.*;
@@ -19,6 +20,7 @@ public class login extends JFrame {
     private boolean done=false;
     public  static String name="";
     public static String ea;
+    public static User user;
 
     public login(JButton botonLogin, JPanel panelNorte) {
         FlatLightLaf.install();
@@ -235,6 +237,7 @@ public class login extends JFrame {
                                             panelNorte.add(botonLogin, BorderLayout.EAST);
                                             loginstat=false;
                                             tipouser="";
+                                            user=new User();
                                         }
                                     });
                                     menuBar.setBackground(new Color(0, 150, 136));
@@ -246,8 +249,26 @@ public class login extends JFrame {
                                         String usernameSubstring = name.substring(0,8) + "...";
                                         menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
                                     }
+                                    if (tipouser.equals("Persona")){
+                                        String nombre_completo=db.selectFromTable("USERSACCS" ,new String[]{"nombre_completo"},new String[]{"EMAIL='"+username+"'"})[0];
+                                        String EMAIL=ea;
+                                        String FECHA_NACIMIENTO=db.selectFromTable("USERSACCS" ,new String[]{"FECHA_NACIMIENTO"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String DNI=db.selectFromTable("USERSACCS" ,new String[]{"DNI"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String GENERO=db.selectFromTable("USERSACCS" ,new String[]{"GENERO"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String IMG=path;
+                                        user=new User(nombre_completo,EMAIL,FECHA_NACIMIENTO,DNI,GENERO,IMG);
+                                    }
 
                                         JMenuItem pedidos = new JMenuItem("Ver pedidos");
+                                        String nombre_completo=db.selectFromTable("USERSACCS" ,new String[]{"nombre_completo"},new String[]{"EMAIL='"+username+"'"})[0];
+                                        String EMAIL=ea;
+                                        String DIRECCION=db.selectFromTable("USERSACCS" ,new String[]{"DIRECCION"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String DNI=db.selectFromTable("USERSACCS" ,new String[]{"DNI"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String TELEFONO=db.selectFromTable("USERSACCS" ,new String[]{"TELEFONO"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String SECTOR=db.selectFromTable("USERSACCS" ,new String[]{"SECTOR"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String IMG=path;
+                                        user=new User(nombre_completo,EMAIL,DIRECCION,DNI,TELEFONO,IMG,SECTOR);
+
 
                                         pedidos.addActionListener(new ActionListener() {
                                             @Override

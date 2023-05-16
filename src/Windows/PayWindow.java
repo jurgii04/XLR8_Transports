@@ -7,8 +7,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
+
+import static Windows.buses.*;
+
 import static Windows.login.*;
 
+import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class PayWindow extends JFrame {
@@ -115,12 +123,47 @@ public class PayWindow extends JFrame {
                     successFrame.setLocationRelativeTo(null);
                     successFrame.setVisible(true);*/
                     try {
+                        GestorDB db =new GestorDB();
                         gmail g=new gmail(ea,"src\\Windows\\images\\tickets.jpg");
                         JOptionPane.showMessageDialog(null, "Transacción compleatada exitosamente!Hemos enviado el ticket a tu eamil.","Transacción compleatada",JOptionPane.INFORMATION_MESSAGE);
+                        Map<String,Object> data=new LinkedHashMap<>();
+                        Random rand = new Random();
+                        int randomNum = rand.nextInt(01) + 60;
+                        //calculate the age
+                        LocalDate dateOfBirth = LocalDate.parse(user.getFECHA_NACIMIENTO(),
+                                java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+                        // Calculate the age based on the current date and add the cliente to db
+                        LocalDate currentDate = LocalDate.now();
+                        Period period = Period.between(dateOfBirth, currentDate);
+                        int age = period.getYears();
+                        data.put("DNI",user.getDNI());
+                        data.put("NOMBRE",user.getNombre_completo());
+                        data.put("EDAD",age);
+                        data.put("NUM_DE_ASIENTO",randomNum);
+                        int exist=Integer.parseInt(db.selectFromTable("CLIENTES",new String[]{"count(DNI)"},new String[]{"DNI='"+user.getDNI()+"'"})[0]);
+                        if (exist==0){
+                            db.insert("CLIENTES",data);
+                        }
+
+                        //insert the billete in db
+                        String num_viage=db.selectFromTable("VIAJES" , new String[]{"NUM_VIAJE"},new String[]{"DESTINO='"+optionDest+"'","ORIGEN='"+optionOrg+"'"})[0];
+                        Map<String,Object> databill=new LinkedHashMap<>();
+                        databill.put("NUM_BILLETE",bill.getNum_billete());
+                        databill.put("FECHA",bill.getFecha());
+                        databill.put("PRECIO",bill.getPrecio());
+                        databill.put("TIPO_PAGO",bill.getTipo_pago());
+                        databill.put("DESTINO",bill.getDestino());
+                        databill.put("ORIGEN",bill.getOrigen());
+                        databill.put("DNI",bill.getDNI());
+                        databill.put("NUM_VIAJE",num_viage);
+                        db.insert("BILLETES",databill);
+
 
 
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                        ex.printStackTrace();
 
                     }
                 }

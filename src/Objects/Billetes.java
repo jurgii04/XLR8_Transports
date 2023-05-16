@@ -1,17 +1,22 @@
 package Objects;
 
-import java.util.Date;
-
 public class Billetes {
     private int Num_billete;
-    private Date fecha;
+    private String fecha;
     private float precio;
     private String tipo_pago;
     private String destino;
     private String origen;
     private String DNI;
     private int Num_viaje;
-    public Billetes(){
+    public Billetes(int Num_billete,String fecha,float precio,String tipo_pago,String destino,String origen,String DNI){
+        this.Num_billete=Num_billete;
+        this.fecha=fecha;
+        this.precio=precio;
+        this.tipo_pago=tipo_pago;
+        this.destino=destino;
+        this.origen=origen;
+        this.DNI=DNI;
 
 
     }
@@ -24,11 +29,11 @@ public class Billetes {
         Num_billete = num_billete;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

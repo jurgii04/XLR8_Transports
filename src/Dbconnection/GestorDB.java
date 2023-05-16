@@ -1,5 +1,7 @@
 package Dbconnection;
 
+import Windows.login;
+
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -287,7 +289,7 @@ public class GestorDB {
 
         //System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
         //System.out.println(DB.AccExist("slmn.momi@gmail.com"));
-        String [] dataemp=DB.selectFromTable("EMPRESA" , new String[]{},new String[]{"NOMBRE_EMPRESA='Zubiri Manteo'"});
+        String [] dataemp=DB.selectFromTable("PEDIDOS" , new String[]{},new String[]{"NUM_EMPRESA in(select NUM_EMPRESA from EMPRESA  where NOMBRE_EMPRESA='Zubiri Manteo')"});
         //String [] TEST=DB.selectFromTable("pedidos" , new String[]{"NUM_EMPRESA"},new String[]{});
         System.out.println(Arrays.toString(dataemp));
         //System.out.println(Arrays.toString(TEST));

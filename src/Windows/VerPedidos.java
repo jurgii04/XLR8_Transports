@@ -27,6 +27,8 @@ public class VerPedidos extends JFrame {
         ped.add(panelNorte, BorderLayout.NORTH);
         ped.add(pb, BorderLayout.CENTER);
         String [] dataemp=db.selectFromTable("PEDIDOS" , new String[]{},new String[]{"NUM_EMPRESA in(select NUM_EMPRESA from EMPRESA  where NOMBRE_EMPRESA='"+login.name+"')"});
+        int rows=dataemp.length/10;
+
 
 
         System.out.println(Arrays.toString(dataemp));

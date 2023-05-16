@@ -6,13 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Dbconnection.GestorDB;
+import Objects.Billetes;
 
 import static Windows.ventana.loginstat;
 
 public class buses extends JFrame {
     public static JButton volver;
     ;
-    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
+
+    static String  optionDest;
+    static String  optionOrg;
+    static Billetes bill;
+    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin,GestorDB db ){
 
 
 
@@ -77,8 +82,8 @@ public class buses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 viajes.removeAll();
 
-                String optionOrg = org.getSelectedItem().toString();
-                String optionDest = dest.getSelectedItem().toString();
+                 optionOrg = org.getSelectedItem().toString();
+                 optionDest = dest.getSelectedItem().toString();
                 if (optionOrg.equals(optionDest)){
                     JOptionPane.showMessageDialog(null , "El destino y el origen no pueden ser iguales", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
