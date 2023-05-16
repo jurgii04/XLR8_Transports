@@ -30,7 +30,7 @@ public class AccountCreationFrame extends JFrame {
         private encription encry;
         GestorDB db;
 
-    public AccountCreationFrame() {
+    public AccountCreationFrame(JFrame type) {
             FlatLightLaf.install();
             // Set the title and size of the frame
             setTitle("Crear una cuenta");
@@ -179,6 +179,8 @@ public class AccountCreationFrame extends JFrame {
                                 try {
                                         db.insert("USERSACCS",datos);
                                         JOptionPane.showMessageDialog(AccountCreationFrame.this,"Cuenta creada exitosamente");
+                                        type.dispose();
+                                        dispose();
                                 }
                                 catch (Exception x){
                                         JOptionPane.showMessageDialog(AccountCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);

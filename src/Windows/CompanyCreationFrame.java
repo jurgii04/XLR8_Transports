@@ -19,7 +19,7 @@ public class CompanyCreationFrame extends JFrame {
     private JPasswordField passwordF;
     private JButton createButton;
 
-    public CompanyCreationFrame() {
+    public CompanyCreationFrame(JFrame type) {
         FlatLightLaf.install();
         GestorDB db=new GestorDB();
 
@@ -156,7 +156,9 @@ public class CompanyCreationFrame extends JFrame {
                 datos.put("IMG",path);
                 try {
                     db.insert("USERSACCS",datos);
-                    JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Cuenta creada!");
+                    JOptionPane.showMessageDialog(CompanyCreationFrame.this,"Cuenta creada exitosamente");
+                    type.dispose();
+                    dispose();
                 }
                 catch (Exception x){
                     JOptionPane.showMessageDialog(CompanyCreationFrame.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
