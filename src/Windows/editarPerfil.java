@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -365,9 +366,6 @@ public class editarPerfil extends JFrame {
         }
 
 
-
-
-
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
     }
@@ -391,7 +389,7 @@ public class editarPerfil extends JFrame {
                 path= relativePath.substring(1,relativePath.length());
                 GestorDB db =new GestorDB();
                 Map<String,Object> datos=new LinkedHashMap<>();
-                datos.put("IMG" ,path);
+                datos.put("IMG", path);
                 db.update("USERSACCS", "EMAIL='" + ea + "'", datos);
 
             } catch (Exception ex) {

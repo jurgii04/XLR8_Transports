@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
+import static Windows.login.ea;
+
 public class GestorDB {
     static final String SERVER_IP = "10.14.0.226";
     static final String DB_NAME = "orcl";
@@ -112,8 +114,6 @@ public class GestorDB {
     public  String[] selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
         ArrayList<String> data=new ArrayList<>();
 
-
-
         try {
 
 
@@ -179,6 +179,29 @@ public class GestorDB {
         }
         return data.toArray(new String[data.size()]);
     }
+
+    public byte[] selectIMG(String email) throws SQLException {
+        byte[] imageData = null;
+
+        PreparedStatement ps = conn.prepareStatement("SELECT IMG2 FROM USERSACCS WHERE email = ?");
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Obtener los datos de la columna BLOB
+            Blob imageBlob = rs.getBlob("IMG2");
+            imageData = imageBlob.getBytes(1, (int) imageBlob.length());
+        }
+
+        rs.close();
+        ps.close();
+
+        return imageData;
+    }
+
+
+
+
     public String [] logindata(String email){
         String [] data=new String[2];
 
