@@ -100,7 +100,7 @@ public class PayWindow extends JFrame {
                 if ((cardNumberField.getText().isEmpty() || cardNumberField.getText()==null) || (nameOnCardField.getText().isEmpty() || nameOnCardField.getText()==null)|| (securityField.getText().isEmpty() || securityField.getText()==null)|| (expirationField.getText().isEmpty() || expirationField.getText()==null)){
                     JOptionPane.showMessageDialog(null, "No puede haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
-                    JLabel successLabel = new JLabel("Transacción compleatada exitosamente!");
+                    /*JLabel successLabel = new JLabel("Transacción compleatada exitosamente!");
                     ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\deal.png");
                     Image img = checkIcon.getImage();
                     Image resizedImg = img.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
@@ -113,7 +113,16 @@ public class PayWindow extends JFrame {
                     successFrame.add(successPanel);
                     successFrame.setSize(300, 100);
                     successFrame.setLocationRelativeTo(null);
-                    successFrame.setVisible(true);
+                    successFrame.setVisible(true);*/
+                    try {
+                        gmail g=new gmail(ea,"src\\Windows\\images\\tickets.jpg");
+                        JOptionPane.showMessageDialog(null, "Transacción compleatada exitosamente!Hemos enviado el ticket a tu eamil.","Transacción compleatada",JOptionPane.INFORMATION_MESSAGE);
+
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+
+                    }
                 }
 
             }

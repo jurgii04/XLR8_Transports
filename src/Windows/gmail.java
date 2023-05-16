@@ -1,5 +1,6 @@
 package Windows;
 
+import java.io.IOException;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -39,9 +40,70 @@ public class gmail {
             throw e;
         }
     }
+    public gmail(String toEmail ,String ticpath) throws MessagingException, IOException {
+        String username = "xlr8trans@gmail.com";
+        String password = "bmufsiyfarvqzgba";
+
+
+
+        // SMTP server configuration
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        // Create a session with account credentials
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Create a MimeMessage object
+            Message message = new MimeMessage(session);
+
+            // Set sender's address
+            message.setFrom(new InternetAddress(username));
+
+            // Set recipient's address
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+
+            // Set email subject
+            message.setSubject("Adjunto encontrará su boleto de viaje, el cual contiene un código de barras único. Este código de barras es su identificador personal para el viaje. Asegúrese de tenerlo a mano para cualquier consulta o al abordar el transporte correspondiente.");
+
+            // Create a multipart message
+            MimeMultipart multipart = new MimeMultipart();
+
+            // Create the message body part (text)
+            MimeBodyPart textBodyPart = new MimeBodyPart();
+            textBodyPart.setText("Please see the attached photo.");
+
+            // Create the message body part (photo attachment)
+            MimeBodyPart attachmentBodyPart = new MimeBodyPart();
+            attachmentBodyPart.attachFile(ticpath); // Replace with the actual file path
+
+            // Add body parts to the multipart message
+            multipart.addBodyPart(textBodyPart);
+            multipart.addBodyPart(attachmentBodyPart);
+
+            // Set the content of the message to the multipart object
+            message.setContent(multipart);
+
+            // Send the email
+            Transport.send(message);
+
+            System.out.println("Email sent successfully!");
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
 
     public static void main(String[] args) {
-
+        //gmail g=new gmail();
 
     }
 }

@@ -11,6 +11,7 @@ import Dbconnection.GestorDB;
 import static Windows.ventana.loginstat;
 
 public class buses extends JFrame {
+    public static JButton volver;
     ;
     public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin,GestorDB db  ){
 
@@ -21,7 +22,7 @@ public class buses extends JFrame {
         JPanel formulario = new JPanel();
         JPanel boton = new JPanel();
 
-        JButton volver = new JButton("<html><u>Volver</u></html>");
+        volver = new JButton("<html><u>Volver</u></html>");
         volver.setPreferredSize(new Dimension(100, 70));
         volver.setForeground(Color.WHITE);
         volver.setBackground(new Color(4, 140, 128, 255));
@@ -109,10 +110,10 @@ public class buses extends JFrame {
                         public void actionPerformed(ActionEvent e) {
 
                             if (loginstat){
-                                PayWindow P=new PayWindow();
+                                //PayWindow P=new PayWindow(optionDest,optionOrg,"12-07-2023",);
                             }
                             else {
-                                login l = new login(botonLogin, panelNorte,true, buses);
+                                login l = new login(botonLogin, panelNorte);
                             }
 
                         }
@@ -145,7 +146,7 @@ public class buses extends JFrame {
                                 PayWindow P=new PayWindow();
                             }
                             else {
-                                login l = new login(botonLogin, panelNorte,true, buses);
+                                login l = new login(botonLogin, panelNorte);
                             }
                         }
                     });
