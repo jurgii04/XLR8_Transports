@@ -18,8 +18,10 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 public class ContactarConNos extends JFrame {
 
-    private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel;
+    private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel, consultaLabel;
     private JTextField companyNameField ,emailField, dniField, phoneField, sectorField;
+
+    private JTextArea consultaArea;
 
     private JButton createButton;
 
@@ -29,7 +31,7 @@ public class ContactarConNos extends JFrame {
 
         // Set the title and size of the frame
         setTitle("Crear cuenta de empresa");
-        setSize(550, 500);
+        setSize(650, 600);
 
         // Create the labels
         companyNameLabel = new JLabel("<html><h3>Nombre completo de la empresa:</h3></html>");
@@ -38,6 +40,7 @@ public class ContactarConNos extends JFrame {
         phoneLabel = new JLabel("<html><h3>Número de teléfono:</h3></html>");
         sectorLabel = new JLabel("<html><h3>Sector de Trabajo:</h3></html>");
         emailLabel= new JLabel("<html><h3>Email:</h3></html>");
+        consultaLabel= new JLabel("<html><h3>Mensaje:</h3></html>");
 
         // Create the text fields
         companyNameField = new JTextField(20);
@@ -47,17 +50,19 @@ public class ContactarConNos extends JFrame {
         sectorField = new JTextField(20);
         emailField=new JTextField(20);
 
+        consultaArea = new JTextArea();
+
         // Create the button
         createButton = new JButton("<html><h2>Enviar</h2></html>");
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Gracias! Os contactaremos lo antes posible");
+                JOptionPane.showMessageDialog(null, "¡Gracias! Os contactaremos lo antes posible");
                 try {
                     LocalDate currentDate = LocalDate.now();
 
 
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 
                     String formattedDate = currentDate.format(formatter);
@@ -73,7 +78,9 @@ public class ContactarConNos extends JFrame {
                     writer.newLine();
                     writer.write("Sector: "+ sectorField.getText());
                     writer.newLine();
-                    writer.write("FICHA: "+ formattedDate);
+                    writer.write("Fecha: "+ formattedDate);
+                    writer.newLine();
+                    writer.write("Mensaje: "+ consultaArea.getText());
                     writer.newLine();
                     writer.write("==========================================================================================================");
                     writer.newLine();
@@ -82,6 +89,7 @@ public class ContactarConNos extends JFrame {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
+                dispose();
             }
         });
         if (tipouser.equals("Empresa")){
@@ -154,10 +162,16 @@ public class ContactarConNos extends JFrame {
 
         c.gridx = 0;
         c.gridy = 6;
-
+        panel.add(consultaLabel, c);
 
         c.gridx = 1;
         c.gridy = 6;
+        JScrollPane scrollPane = new JScrollPane(consultaArea);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(240,150));
+        consultaArea.setLineWrap(true);
+        consultaArea.setWrapStyleWord(true);
+        panel.add(scrollPane, c);
 
 
         c.gridx = 0;
@@ -171,11 +185,6 @@ public class ContactarConNos extends JFrame {
 
         // Set the frame visible
         setVisible(true);
-
-        // Set the default close operation
-
-
-
 
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);

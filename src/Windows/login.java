@@ -223,6 +223,7 @@ public class login extends JFrame {
                                             frame.getContentPane().removeAll();
                                             frame.getContentPane().revalidate();
                                             frame.getContentPane().repaint();
+                                            //buses buses = new buses(frame,panelNorte,contentPane,botonLogin,db);
                                         }
                                     });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");

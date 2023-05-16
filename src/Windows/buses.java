@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 import Dbconnection.GestorDB;
 
 import static Windows.ventana.loginstat;
+import static Windows.ventana.vol;
 
 public class buses extends JFrame {
-    public static JButton volver;
-    ;
+
     public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
 
 
@@ -21,27 +21,7 @@ public class buses extends JFrame {
         JPanel formulario = new JPanel();
         JPanel boton = new JPanel();
 
-        volver = new JButton("<html><u>Volver</u></html>");
-        volver.setPreferredSize(new Dimension(100, 70));
-        volver.setForeground(Color.WHITE);
-        volver.setBackground(new Color(4, 140, 128, 255));
-        volver.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        panelNorte.add(volver, BorderLayout.WEST);
-        volver.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buses.getContentPane().removeAll();
-                buses.getContentPane().revalidate();
-                buses.getContentPane().repaint();
-                panelNorte.remove(volver);
-                JLabel labelAux = new JLabel();
-                labelAux.setPreferredSize(new Dimension(100, 70));
-                panelNorte.add(labelAux, BorderLayout.WEST);
-                buses.add(panelNorte, BorderLayout.NORTH);
-                buses.add(contentPane, BorderLayout.CENTER);
-                buses.setTitle("XLR8 Transports");
-            }
-        });
+        panelNorte.add(vol, BorderLayout.WEST);
 
         buses.add(panelNorte, BorderLayout.NORTH);
         buses.add(pb, BorderLayout.CENTER);

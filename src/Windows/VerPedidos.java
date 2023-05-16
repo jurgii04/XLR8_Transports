@@ -1,19 +1,12 @@
 package Windows;
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 import com.formdev.flatlaf.FlatLightLaf;
 
-import Dbconnection.GestorDB;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
 
-import static Windows.buses.volver;
 import static Windows.ventana.db;
-import static Windows.ventana.loginstat;
 
 public class VerPedidos extends JFrame {
 
