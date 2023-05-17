@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
-import static Windows.login.*;
+import static Windows.Login.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -115,7 +115,7 @@ public class PayWindow extends JFrame {
                     successFrame.setLocationRelativeTo(null);
                     successFrame.setVisible(true);*/
                     try {
-                        gmail g=new gmail(ea,"src\\Windows\\images\\tickets.jpg");
+                        Gmail g=new Gmail(ea,"src\\Windows\\images\\tickets.jpg");
                         JOptionPane.showMessageDialog(null, "Transacción compleatada exitosamente!Hemos enviado el ticket a tu eamil.","Transacción compleatada",JOptionPane.INFORMATION_MESSAGE);
 
 

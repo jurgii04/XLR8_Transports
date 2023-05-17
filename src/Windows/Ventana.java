@@ -7,16 +7,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class Ventana extends JFrame{
+public class ventana extends JFrame{
      public static boolean loginstat=false;
-     public static JButton volverButton;
+     public static JButton vol;
     public static JFrame frame;
     public static JPanel panelNorte;
     public static String tipouser="";
         public static GestorDB db;
 
-    public Ventana() {
+    public ventana() {
         FlatLightLaf.install();
         db=new GestorDB();
         // Ventana principal
@@ -59,7 +61,7 @@ public class Ventana extends JFrame{
         botonLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login = new Login(botonLogin, panelNorte);
+                login login = new login(botonLogin, panelNorte);
             }
         });
         ImageIcon checkIcon = new ImageIcon("src\\Windows\\images\\logo.png");
@@ -88,7 +90,7 @@ public class Ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                Buses b = new Buses(frame , panelNorte, contentPane, botonLogin,db );
+                buses b = new buses(frame , panelNorte, contentPane, botonLogin,db );
             }
         });
 
@@ -101,7 +103,7 @@ public class Ventana extends JFrame{
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                Reparto r= new Reparto(frame, panelNorte, contentPane);
+                reparto r= new reparto(frame, panelNorte, contentPane);
             }
         });
         opcion2.setIcon(fondo2);
@@ -122,19 +124,19 @@ public class Ventana extends JFrame{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         //crrate static botton
-        volverButton = new JButton("<html><u>Volver</u></html>");
-        volverButton.setPreferredSize(new Dimension(100, 70));
-        volverButton.setForeground(Color.WHITE);
-        volverButton.setBackground(new Color(4, 140, 128, 255));
-        volverButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        vol = new JButton("<html><u>Volver</u></html>");
+        vol.setPreferredSize(new Dimension(100, 70));
+        vol.setForeground(Color.WHITE);
+        vol.setBackground(new Color(4, 140, 128, 255));
+        vol.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        volverButton.addActionListener(new ActionListener() {
+        vol.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();
-                panelNorte.remove(volverButton);
+                panelNorte.remove(vol);
                 JLabel labelAux = new JLabel();
                 labelAux.setPreferredSize(new Dimension(100, 70));
                 panelNorte.add(labelAux, BorderLayout.WEST);

@@ -16,7 +16,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static Windows.editarPerfil.path;
+import static Windows.EditarPerfil.path;
 
 public class AccountCreationFrame extends JFrame {
 
@@ -27,7 +27,7 @@ public class AccountCreationFrame extends JFrame {
         private JPasswordField passwordf;
         private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
         private JButton createButton;
-        private encription encry;
+        private Encription encry;
         GestorDB db;
 
     public AccountCreationFrame(JFrame type) {
@@ -140,7 +140,7 @@ public class AccountCreationFrame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                         //nameField, lastNameField, emailField, dobField, dniField;
-                        encry=new encription();
+                        encry=new Encription();
                         String nombre=nameField.getText();
                         String apellido=lastNameField.getText();
                         String email=emailField.getText();

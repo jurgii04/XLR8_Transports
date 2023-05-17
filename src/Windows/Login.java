@@ -9,18 +9,20 @@ import java.util.Map;
 import java.util.Random;
 
 import Dbconnection.GestorDB;
+import Objects.User;
 import com.formdev.flatlaf.FlatLightLaf;
 
-import static Windows.Ventana.*;
-import static Windows.EditarPerfil.*;
+import static Windows.ventana.*;
+import static Windows.editarPerfil.*;
 
-public class Login extends JFrame {
+public class login extends JFrame {
 
     private boolean done=false;
     public  static String name="";
     public static String ea;
+    public static User user;
 
-    public Login(JButton botonLogin, JPanel panelNorte) {
+    public login(JButton botonLogin, JPanel panelNorte) {
         FlatLightLaf.install();
         GestorDB db=new GestorDB();
         // Configurar la ventana principal
@@ -78,7 +80,7 @@ public class Login extends JFrame {
                                 "El equipo de XLR8 Transports.";
                         String input = "";
                         try {
-                            Gmail g=new Gmail(email,message,"Código de recuperación");
+                            gmail g=new gmail(email,message,"Código de recuperación");
 
                              input = JOptionPane.showInputDialog(null, "Revisa el correo electrónico e introduce el código:");
                             int number=0;
@@ -119,7 +121,7 @@ public class Login extends JFrame {
                                 if (option == JOptionPane.OK_OPTION) {
                                     String newcontrasena= passwordField.getText();
                                     Map<String, Object> datos = new LinkedHashMap<>();
-                                    Encription en =new Encription();
+                                    encription en =new encription();
                                     datos.put("CONTRASENA", en.encriptar(newcontrasena));
                                     db.update("USERSACCS", "EMAIL= '" + email + "'", datos);
                                     JOptionPane.showMessageDialog(null,"La contraseña ha sido cambiada.","Cambiar la contraseña",JOptionPane.INFORMATION_MESSAGE);
@@ -168,14 +170,14 @@ public class Login extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try{
-                    Encription enc=new Encription();
+                    encription enc=new encription();
                     String username = userField.getText();
                     ea=username;
                     String password = enc.encriptar(passField.getText());
 
                     String [] data=db.logindata(username);
                     if (data==null){
-                        JOptionPane.showMessageDialog(Login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
                     }
                     else {
                         String pass=data[1];
@@ -213,7 +215,7 @@ public class Login extends JFrame {
                                     editarPerfil.addActionListener(new ActionListener() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-                                            Windows.EditarPerfil editarPerfilEmpresa = new EditarPerfil();
+                                            Windows.editarPerfil editarPerfilEmpresa = new editarPerfil();
                                         }
                                     });
                                     JMenuItem modificarBilletes = new JMenuItem("Mis billetes");
@@ -236,6 +238,7 @@ public class Login extends JFrame {
                                             panelNorte.add(botonLogin, BorderLayout.EAST);
                                             loginstat=false;
                                             tipouser="";
+                                            user=new User();
                                         }
                                     });
                                     menuBar.setBackground(new Color(0, 150, 136));
@@ -247,8 +250,26 @@ public class Login extends JFrame {
                                         String usernameSubstring = name.substring(0,8) + "...";
                                         menu.setText("<html><b>Bienvenido<br><u>" + usernameSubstring + "</u></b></html>");
                                     }
+                                    if (tipouser.equals("Persona")){
+                                        String nombre_completo=db.selectFromTable("USERSACCS" ,new String[]{"nombre_completo"},new String[]{"EMAIL='"+username+"'"})[0];
+                                        String EMAIL=ea;
+                                        String FECHA_NACIMIENTO=db.selectFromTable("USERSACCS" ,new String[]{"FECHA_NACIMIENTO"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String DNI=db.selectFromTable("USERSACCS" ,new String[]{"DNI"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String GENERO=db.selectFromTable("USERSACCS" ,new String[]{"GENERO"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String IMG=path;
+                                        user=new User(nombre_completo,EMAIL,FECHA_NACIMIENTO,DNI,GENERO,IMG);
+                                    }
 
                                         JMenuItem pedidos = new JMenuItem("Ver pedidos");
+                                        String nombre_completo=db.selectFromTable("USERSACCS" ,new String[]{"nombre_completo"},new String[]{"EMAIL='"+username+"'"})[0];
+                                        String EMAIL=ea;
+                                        String DIRECCION=db.selectFromTable("USERSACCS" ,new String[]{"DIRECCION"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String DNI=db.selectFromTable("USERSACCS" ,new String[]{"DNI"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String TELEFONO=db.selectFromTable("USERSACCS" ,new String[]{"TELEFONO"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String SECTOR=db.selectFromTable("USERSACCS" ,new String[]{"SECTOR"},new String[]{"EMAIL='"+username+"'"})[0];;
+                                        String IMG=path;
+                                        user=new User(nombre_completo,EMAIL,DIRECCION,DNI,TELEFONO,IMG,SECTOR);
+
 
                                         pedidos.addActionListener(new ActionListener() {
                                             @Override
@@ -283,13 +304,13 @@ public class Login extends JFrame {
 
                             }
                         }else {
-                            JOptionPane.showMessageDialog(Login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
                             passField.setText("");
                         }
 
                     }
                 }catch (Exception x){
-                    JOptionPane.showMessageDialog(Login.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(login.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 
                 }
 

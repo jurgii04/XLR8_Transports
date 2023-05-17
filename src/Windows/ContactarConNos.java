@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static Windows.login.ea;
-import static Windows.ventana.*;
+import static Windows.Login.ea;
+import static Windows.Ventana.*;
 
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;

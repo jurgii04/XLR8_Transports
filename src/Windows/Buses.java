@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 
 import Dbconnection.GestorDB;
 
-import static Windows.ventana.loginstat;
-import static Windows.ventana.vol;
+import static Windows.Ventana.loginstat;
+import static Windows.Ventana.volverButton;
 
-public class buses extends JFrame {
+public class Buses extends JFrame {
 
-    public buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
+    public Buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
 
 
 
@@ -21,7 +21,7 @@ public class buses extends JFrame {
         JPanel formulario = new JPanel();
         JPanel boton = new JPanel();
 
-        panelNorte.add(vol, BorderLayout.WEST);
+        panelNorte.add(volverButton, BorderLayout.WEST);
 
         buses.add(panelNorte, BorderLayout.NORTH);
         buses.add(pb, BorderLayout.CENTER);
@@ -92,7 +92,7 @@ public class buses extends JFrame {
                                 //PayWindow P=new PayWindow(optionDest,optionOrg,"12-07-2023",);
                             }
                             else {
-                                login l = new login(botonLogin, panelNorte);
+                                Login l = new Login(botonLogin, panelNorte);
                             }
 
                         }
@@ -125,7 +125,7 @@ public class buses extends JFrame {
                                 PayWindow P=new PayWindow();
                             }
                             else {
-                                login l = new login(botonLogin, panelNorte);
+                                Login l = new Login(botonLogin, panelNorte);
                             }
                         }
                     });

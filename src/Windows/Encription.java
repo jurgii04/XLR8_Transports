@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Encription {
+public class encription {
     public String encriptar(String password) {
         StringBuilder stringBuilder;
         try {
@@ -23,7 +23,7 @@ public class Encription {
     }
 
     public static void main(String[] args) {
-        Encription encription = new Encription();
+        encription encription = new encription();
         //System.out.println(encription.encriptar("jefe123"));
         //System.out.println(encription.encriptar("bus123"));
         //System.out.println(encription.encriptar("reparto123"));

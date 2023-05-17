@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
-import static Windows.editarPerfil.path;
+import static Windows.EditarPerfil.path;
 
 public class CompanyCreationFrame extends JFrame {
 
@@ -127,7 +127,7 @@ public class CompanyCreationFrame extends JFrame {
         // Add action listener to the create button
         createButton.addActionListener(e -> {
             //passwordF,companyNameField, addressField,emailField, dniField, phoneField, sectorField;
-            encription enc=new encription();
+            Encription enc=new Encription();
             String name=companyNameField.getText();
             String address=addressField.getText();
             String email=emailField.getText();

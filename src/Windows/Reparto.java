@@ -6,9 +6,9 @@ import java.awt.event.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-public class Reparto extends JFrame  {
+public class reparto extends JFrame  {
 
-    public Reparto(JFrame reparto, JPanel panelNorte, JPanel contentPane) {
+    public reparto(JFrame reparto, JPanel panelNorte, JPanel contentPane) {
         FlatLightLaf.install();
 
         // Set up the "Volver" button
