@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="activation-1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/HELPERS/activation-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/HELPERS/flatlaf-3.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/HELPERS/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/HELPERS/ojdbc11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+  </library>
+</component>

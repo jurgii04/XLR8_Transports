@@ -225,6 +225,7 @@ public class login extends JFrame {
                                             frame.getContentPane().removeAll();
                                             frame.getContentPane().revalidate();
                                             frame.getContentPane().repaint();
+                                            modificarBilletes modificarBilletes = new modificarBilletes(panelNorte, frame, contentPane);
                                         }
                                     });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");

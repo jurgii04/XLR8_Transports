@@ -8,7 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ojdbc11" level="project" />
-    <orderEntry type="library" name="flatlaf-3.1.1" level="project" />
     <orderEntry type="module-library">
       <library name="JUnit5.8.1">
         <CLASSES>
@@ -51,7 +50,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="activation-1.1" level="project" />
   </component>
 </module>
