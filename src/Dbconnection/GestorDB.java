@@ -1,12 +1,7 @@
 package Dbconnection;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
-
-import static Windows.login.ea;
 
 public class GestorDB {
     static final String SERVER_IP = "10.14.0.226";

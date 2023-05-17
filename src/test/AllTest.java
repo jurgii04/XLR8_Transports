@@ -4,6 +4,7 @@ import Objects.*;
 
 import Windows.*;
 
+import Windows.Buses;
 import org.junit.Assume;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -14,12 +15,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import javax.swing.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.util.*;
 
 import static org.junit.Assert.assertFalse;
@@ -29,14 +24,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(Suite.class)
 @SuiteClasses({
         GestorDB.class,
-        login.class,
-        encription.class,
-        buses.class,
+        Login.class,
+        Encription.class,
+        Buses.class,
         Billetes.class,
         Van.class,
-        login.class,
+        Login.class,
         Hacer.class,
-        ventana.class
+        Ventana.class
 
 })
 public class AllTest {
@@ -55,7 +50,7 @@ public class AllTest {
     @RepeatedTest(3)
     public void testEncription() {
 
-        encription enc = new encription();
+        Encription enc = new Encription();
         String password = "password123";
         String expected = "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f";
         String actual = enc.encriptar(password);

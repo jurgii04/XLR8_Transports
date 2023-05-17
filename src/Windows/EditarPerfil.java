@@ -10,17 +10,16 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static Windows.login.ea;
-import static Windows.ventana.tipouser;
+import static Windows.Login.ea;
+import static Windows.Ventana.tipouser;
 
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
 
-public class editarPerfil extends JFrame {
+public class EditarPerfil extends JFrame {
 
     //Empresa
     private JLabel companyNameLabel,emailLabel, dniLabel, phoneLabel, sectorLabel,passactulabel,newpasslabel;
@@ -35,7 +34,7 @@ public class editarPerfil extends JFrame {
     private JButton updateButton;
     public static String path="src\\Windows\\images\\PerfilFotos\\user.png";
 
-    public editarPerfil() {
+    public EditarPerfil() {
         FlatLightLaf.install();
         GestorDB db = new GestorDB();
 
@@ -73,7 +72,7 @@ public class editarPerfil extends JFrame {
             updateButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    encription en=new encription();
+                    Encription en=new Encription();
                     Map<String, Object> datos = new LinkedHashMap<>();
                     datos.put("nombre_completo", companyNameField.getText());
                     datos.put("DNI", dniField.getText());
@@ -85,21 +84,21 @@ public class editarPerfil extends JFrame {
                         datos.put("CONTRASENA", en.encriptar(newpass.getText()));
                         try {
                             db.update("USERSACCS", whereStAt, datos);
-                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
                         }catch (Exception x){
-                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                         }
 
                     } else if (en.encriptar(passactu.getText()).equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")) {
                         try {
                             db.update("USERSACCS", whereStAt, datos);
-                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
                         }catch (Exception x){
-                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(editarPerfil.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(EditarPerfil.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
                     }
 
 
@@ -211,29 +210,29 @@ public class editarPerfil extends JFrame {
                     datos.put("DNI", dniField2.getText());
                     datos.put("fecha_nacimiento", fechaNacimientoField.getText());
                     //datos.put("sector", sectorField.getText());
-                    encription en =new encription();
+                    Encription en =new Encription();
 
                     String whereStAt = "EMAIL= '" + ea + "'";
                     if (en.encriptar(passactu.getText()).equals(db.selectFromTable("USERSACCS",new String[]{"CONTRASENA"},new String[]{"EMAIL='"+ea+"'"})[0])){
                         datos.put("CONTRASENA", en.encriptar(newpass.getText()));
                         try {
                             db.update("USERSACCS", whereStAt, datos);
-                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
                         }catch (Exception x){
-                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                         }
 
                     }
                     else if (en.encriptar(passactu.getText()).equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")) {
                         try {
                             db.update("USERSACCS", whereStAt, datos);
-                            JOptionPane.showMessageDialog(editarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, "Perfil Actualizado","Perfil Actualizado",JOptionPane.INFORMATION_MESSAGE);
                         }catch (Exception x){
-                            JOptionPane.showMessageDialog(editarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(EditarPerfil.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(editarPerfil.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(EditarPerfil.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
                     }
 
 
@@ -362,7 +361,7 @@ public class editarPerfil extends JFrame {
             // add the panel to the window
             add(imagePanel,BorderLayout.NORTH);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(editarPerfil.this,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(EditarPerfil.this,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -371,7 +370,7 @@ public class editarPerfil extends JFrame {
     }
     public void test(){
         JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(editarPerfil.this);
+        int result = fileChooser.showOpenDialog(EditarPerfil.this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             try {
@@ -393,7 +392,7 @@ public class editarPerfil extends JFrame {
                 db.update("USERSACCS", "EMAIL='" + ea + "'", datos);
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(editarPerfil.this,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(EditarPerfil.this,ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 
             }
         }

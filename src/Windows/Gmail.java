@@ -5,8 +5,8 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-public class gmail {
-    public gmail(String eamil,String Mensage,String Subject) throws MessagingException {
+public class Gmail {
+    public Gmail(String eamil, String Mensage, String Subject) throws MessagingException {
         String to = eamil;
         String from = "xlr8trans@gmail.com";
         String password = "bmufsiyfarvqzgba";
@@ -40,7 +40,7 @@ public class gmail {
             throw e;
         }
     }
-    public gmail(String toEmail ,String ticpath) throws MessagingException, IOException {
+    public Gmail(String toEmail , String ticpath) throws MessagingException, IOException {
         String username = "xlr8trans@gmail.com";
         String password = "bmufsiyfarvqzgba";
 

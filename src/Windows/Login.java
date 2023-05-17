@@ -12,17 +12,17 @@ import Dbconnection.GestorDB;
 import Objects.User;
 import com.formdev.flatlaf.FlatLightLaf;
 
-import static Windows.ventana.*;
-import static Windows.editarPerfil.*;
+import static Windows.Ventana.*;
+import static Windows.EditarPerfil.*;
 
-public class login extends JFrame {
+public class Login extends JFrame {
 
     private boolean done=false;
     public  static String name="";
     public static String ea;
     public static User user;
 
-    public login(JButton botonLogin, JPanel panelNorte) {
+    public Login(JButton botonLogin, JPanel panelNorte) {
         FlatLightLaf.install();
         GestorDB db=new GestorDB();
         // Configurar la ventana principal
@@ -80,7 +80,7 @@ public class login extends JFrame {
                                 "El equipo de XLR8 Transports.";
                         String input = "";
                         try {
-                            gmail g=new gmail(email,message,"Código de recuperación");
+                            Gmail g=new Gmail(email,message,"Código de recuperación");
 
                              input = JOptionPane.showInputDialog(null, "Revisa el correo electrónico e introduce el código:");
                             int number=0;
@@ -121,7 +121,7 @@ public class login extends JFrame {
                                 if (option == JOptionPane.OK_OPTION) {
                                     String newcontrasena= passwordField.getText();
                                     Map<String, Object> datos = new LinkedHashMap<>();
-                                    encription en =new encription();
+                                    Encription en =new Encription();
                                     datos.put("CONTRASENA", en.encriptar(newcontrasena));
                                     db.update("USERSACCS", "EMAIL= '" + email + "'", datos);
                                     JOptionPane.showMessageDialog(null,"La contraseña ha sido cambiada.","Cambiar la contraseña",JOptionPane.INFORMATION_MESSAGE);
@@ -170,14 +170,14 @@ public class login extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try{
-                    encription enc=new encription();
+                    Encription enc=new Encription();
                     String username = userField.getText();
                     ea=username;
                     String password = enc.encriptar(passField.getText());
 
                     String [] data=db.logindata(username);
                     if (data==null){
-                        JOptionPane.showMessageDialog(login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(Login.this, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
                     }
                     else {
                         String pass=data[1];
@@ -215,7 +215,7 @@ public class login extends JFrame {
                                     editarPerfil.addActionListener(new ActionListener() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-                                            Windows.editarPerfil editarPerfilEmpresa = new editarPerfil();
+                                            EditarPerfil editarPerfilEmpresa = new EditarPerfil();
                                         }
                                     });
                                     JMenuItem modificarBilletes = new JMenuItem("Mis billetes");
@@ -304,13 +304,13 @@ public class login extends JFrame {
 
                             }
                         }else {
-                            JOptionPane.showMessageDialog(login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(Login.this, "La contraseña no es correcta","ERROR",JOptionPane.ERROR_MESSAGE);
                             passField.setText("");
                         }
 
                     }
                 }catch (Exception x){
-                    JOptionPane.showMessageDialog(login.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(Login.this, x.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
 
                 }
 
