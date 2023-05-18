@@ -71,7 +71,16 @@ public class PayWindow extends JFrame {
         expirationField.setColumns(6);
         JLabel securityLabel = new JLabel("CVV:");
         securityLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        JTextField securityField = new JTextField(3);
+
+        MaskFormatter dateFormatter3 = null;
+
+        try {
+            dateFormatter3 = new MaskFormatter("   ###      ");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        JFormattedTextField securityField = new JFormattedTextField(dateFormatter3);
         securityField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         JPanel expirationPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
