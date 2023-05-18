@@ -1,7 +1,10 @@
 package Dbconnection;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 public class GestorDB {
     static final String SERVER_IP = "10.14.0.226";
@@ -310,7 +313,7 @@ public class GestorDB {
          * Finally, the code formats the date by calling the format method on the format object, passing in the Date object as an argument. The resulting
          * string is assigned to the formattedDate variable.
          * */
-        /*SimpleDateFormat formatchnger = null;
+        SimpleDateFormat formatchnger = null;
         Date myDate = null;
         String formattedDate=null;
         try {
@@ -321,7 +324,7 @@ public class GestorDB {
             throw new RuntimeException(e);
         }
 
-        Map<String, Object> data = new LinkedHashMap<>();
+        /*Map<String, Object> data = new LinkedHashMap<>();
         data.put("NUEMP", 16);
         data.put("FECHA_CONTRATO", formattedDate);
         data.put("DNI", 1548740);
@@ -349,9 +352,9 @@ public class GestorDB {
 
         //System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
         //System.out.println(DB.AccExist("slmn.momi@gmail.com"));
-        String [] dataemp=DB.selectFromTable("EMPRESA" , new String[]{},new String[]{"NOMBRE_EMPRESA='Zubiri Manteo'"});
+        //String [] dataemp=DB.selectFromTable("EMPRESA" , new String[]{},new String[]{"NOMBRE_EMPRESA='Zubiri Manteo'"});
         //String [] TEST=DB.selectFromTable("pedidos" , new String[]{"NUM_EMPRESA"},new String[]{});
-        System.out.println(Arrays.toString(dataemp));
+        //System.out.println(Arrays.toString(dataemp));
         //System.out.println(Arrays.toString(TEST));
 
 

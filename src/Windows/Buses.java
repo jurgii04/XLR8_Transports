@@ -4,13 +4,24 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import Dbconnection.GestorDB;
 
+import static Windows.Login.user;
 import static Windows.Ventana.loginstat;
 import static Windows.Ventana.volverButton;
+import static Windows.ModificarBilletes.optionDest;
+import static Windows.ModificarBilletes.optionOrg;
+import Objects.Billetes;
+
 
 public class Buses extends JFrame {
+    static Billetes bill;
+    static String billdate;
+
 
     public Buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
 
@@ -57,8 +68,8 @@ public class Buses extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 viajes.removeAll();
 
-                String optionOrg = org.getSelectedItem().toString();
-                String optionDest = dest.getSelectedItem().toString();
+                optionOrg = org.getSelectedItem().toString();
+                optionDest = dest.getSelectedItem().toString();
                 if (optionOrg.equals(optionDest)){
                     JOptionPane.showMessageDialog(null , "Origen y destino no pueden ser iguales", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
@@ -89,7 +100,20 @@ public class Buses extends JFrame {
                         public void actionPerformed(ActionEvent e) {
 
                             if (loginstat){
-                                //PayWindow P=new PayWindow(optionDest,optionOrg,"12-07-2023",);
+                                PayWindow P=new PayWindow();
+                                int biilnum= Integer.parseInt(db.selectFromTable("BILLETES",new String[]{"max(NUM_BILLETE)"},new String[]{})[0]);
+                                SimpleDateFormat formatchnger = null;
+                                Date myDate = null;
+                                String formattedDate=null;
+                                try {
+                                    formatchnger = new SimpleDateFormat("dd-MMM-yyyy");
+                                    myDate = new SimpleDateFormat("yyyy-MM-dd").parse("2023-09-01");
+                                    formattedDate = formatchnger.format(myDate);
+                                } catch (ParseException p) {
+                                    throw new RuntimeException(p);
+                                }
+                                billdate="2023-09-01";
+                                bill=new Billetes(biilnum+1,formattedDate,50,"tarjeta",optionDest,optionOrg,user.getDNI());
                             }
                             else {
                                 Login l = new Login(botonLogin, panelNorte);
@@ -123,6 +147,19 @@ public class Buses extends JFrame {
 
                             if (loginstat){
                                 PayWindow P=new PayWindow();
+                                int biilnum= Integer.parseInt(db.selectFromTable("BILLETES",new String[]{"max(NUM_BILLETE)"},new String[]{})[0]);
+                                SimpleDateFormat formatchnger = null;
+                                Date myDate = null;
+                                String formattedDate=null;
+                                try {
+                                    formatchnger = new SimpleDateFormat("dd-MMM-yyyy");
+                                    myDate = new SimpleDateFormat("yyyy-MM-dd").parse("2023-09-01");
+                                    formattedDate = formatchnger.format(myDate);
+                                } catch (ParseException p) {
+                                    throw new RuntimeException(p);
+                                }
+                                billdate="2023-09-01";
+                                bill=new Billetes(biilnum+1,formattedDate,50,"tarjeta",optionDest,optionOrg,user.getDNI());
                             }
                             else {
                                 Login l = new Login(botonLogin, panelNorte);

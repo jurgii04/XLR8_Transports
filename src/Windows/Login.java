@@ -258,9 +258,7 @@ public class Login extends JFrame {
                                         String GENERO=db.selectFromTable("USERSACCS" ,new String[]{"GENERO"},new String[]{"EMAIL='"+username+"'"})[0];;
                                         String IMG=path;
                                         user=new User(nombre_completo,EMAIL,FECHA_NACIMIENTO,DNI,GENERO,IMG);
-                                    }
-
-                                        JMenuItem pedidos = new JMenuItem("Ver pedidos");
+                                    } else if (tipouser.equals("Empresa")) {
                                         String nombre_completo=db.selectFromTable("USERSACCS" ,new String[]{"nombre_completo"},new String[]{"EMAIL='"+username+"'"})[0];
                                         String EMAIL=ea;
                                         String DIRECCION=db.selectFromTable("USERSACCS" ,new String[]{"DIRECCION"},new String[]{"EMAIL='"+username+"'"})[0];;
@@ -269,8 +267,12 @@ public class Login extends JFrame {
                                         String SECTOR=db.selectFromTable("USERSACCS" ,new String[]{"SECTOR"},new String[]{"EMAIL='"+username+"'"})[0];;
                                         String IMG=path;
                                         user=new User(nombre_completo,EMAIL,DIRECCION,DNI,TELEFONO,IMG,SECTOR);
+                                    }
 
 
+
+
+                                        JMenuItem pedidos = new JMenuItem("Ver pedidos");
                                         pedidos.addActionListener(new ActionListener() {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {

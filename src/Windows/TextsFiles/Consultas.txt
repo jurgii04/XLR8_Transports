@@ -1,0 +1,18 @@
+El numero del pedido : 14
+Empresa : Zubiri Manteo
+Email: zubiri@.com
+Dni: 15854c
+Telefono: 6369854
+Sector: Educacion
+Fecha: 17-05-2023
+Mensaje: quiero anular el pedido hoy , por favor contactanos 
+==========================================================================================================
+El numero del pedido : 14
+Empresa : Zubiri Manteo
+Email: zubiri@.com
+Dni: 15854c
+Telefono: 6369854
+Sector: Educacion
+Fecha: 17-05-2023
+Mensaje: 
+==========================================================================================================
