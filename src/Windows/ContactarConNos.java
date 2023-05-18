@@ -30,7 +30,7 @@ public class ContactarConNos extends JFrame {
         GestorDB db = new GestorDB();
 
         // Set the title and size of the frame
-        setTitle("Crear cuenta de empresa");
+        setTitle("Contactar");
         setSize(650, 600);
 
         // Create the labels

@@ -60,7 +60,7 @@ public class Buses extends JFrame {
                 String optionOrg = org.getSelectedItem().toString();
                 String optionDest = dest.getSelectedItem().toString();
                 if (optionOrg.equals(optionDest)){
-                    JOptionPane.showMessageDialog(null , "El destino y el origen no pueden ser iguales", "ERROR",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null , "Origen y destino no pueden ser iguales", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
 
                     // Create main panel

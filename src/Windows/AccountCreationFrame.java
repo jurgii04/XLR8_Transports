@@ -136,7 +136,7 @@ public class AccountCreationFrame extends JFrame {
 
 
             // Add action listener to the create button
-            createButton.addActionListener(new ActionListener() {
+            createButton.addActionListener(new ActionListener() {;
                 @Override
                 public void actionPerformed(ActionEvent e) {
                         //nameField, lastNameField, emailField, dobField, dniField;

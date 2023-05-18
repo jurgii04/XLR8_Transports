@@ -106,11 +106,78 @@ public class GestorDB {
         return rowsDeleted;
     }
 
-    public  String[] selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
+    public  String[] selectFromTableNoDistinct(String tableName, String[] columnNames, String[] whereConditions) {
         ArrayList<String> data=new ArrayList<>();
 
         try {
 
+            // Build the SQL query
+            String sql = "SELECT ";
+            if (columnNames.length == 0) {
+                columnNames = selectFromTable("all_tab_columns", new String[]{"column_name"}, new String[]{"table_name = '" + tableName + "'"});
+                sql += "*";
+            } else {
+                for (int i = 0; i < columnNames.length; i++) {
+                    sql += columnNames[i];
+                    if (i < columnNames.length - 1) {
+                        sql += ", ";
+                    }
+                }
+            }
+            sql += " FROM " + tableName;
+            if (whereConditions.length > 0) {
+                sql += " WHERE ";
+                for (int i = 0; i < whereConditions.length; i++) {
+                    sql += whereConditions[i];
+                    if (i < whereConditions.length - 1) {
+                        sql += " AND ";
+                    }
+                }
+            }
+
+
+            st = conn.createStatement();
+            resu = st.executeQuery(sql);
+            //System.out.println(sql);
+
+
+            while (resu.next()) {
+
+                for (int i = 0; i < columnNames.length; i++) {
+
+                    String columnName = columnNames[i];
+                    String columnValue = resu.getString(columnName);
+                    //System.out.println(columnName + ": " + columnValue);
+
+                    data.add(columnValue);
+                }
+            }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (resu != null) {
+                    resu.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return data.toArray(new String[data.size()]);
+    }
+
+    public  String[] selectFromTable(String tableName, String[] columnNames, String[] whereConditions) {
+        ArrayList<String> data=new ArrayList<>();
+
+        try {
 
             // Build the SQL query
             String sql = "SELECT DISTINCT ";
@@ -175,7 +242,7 @@ public class GestorDB {
         return data.toArray(new String[data.size()]);
     }
 
-    public byte[] selectIMG(String email) throws SQLException {
+    /*public byte[] selectIMG(String email) throws SQLException {
         byte[] imageData = null;
 
         PreparedStatement ps = conn.prepareStatement("SELECT IMG2 FROM USERSACCS WHERE email = ?");
@@ -192,7 +259,7 @@ public class GestorDB {
         ps.close();
 
         return imageData;
-    }
+    }*/
 
 
 
