@@ -239,6 +239,18 @@ public class Login extends JFrame {
                                             loginstat=false;
                                             tipouser="";
                                             user=new User();
+
+                                            frame.getContentPane().removeAll();
+                                            frame.getContentPane().revalidate();
+                                            frame.getContentPane().repaint();
+                                            panelNorte.remove(volverButton);
+                                            JLabel labelAux = new JLabel();
+                                            labelAux.setPreferredSize(new Dimension(100, 70));
+                                            panelNorte.add(labelAux, BorderLayout.WEST);
+                                            frame.add(panelNorte, BorderLayout.NORTH);
+                                            frame.add(panelCentro, BorderLayout.CENTER);
+                                            frame.setTitle("XLR8 Transports");
+
                                         }
                                     });
                                     menuBar.setBackground(new Color(0, 150, 136));

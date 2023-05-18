@@ -11,10 +11,11 @@ import java.awt.event.ActionListener;
 public class Ventana extends JFrame{
      public static boolean loginstat=false;
      public static JButton volverButton;
-    public static JFrame frame;
-    public static JPanel panelNorte;
-    public static String tipouser="";
-        public static GestorDB db;
+     public static JFrame frame;
+     public static JPanel panelCentro;
+     public static JPanel panelNorte;
+     public static String tipouser="";
+     public static GestorDB db;
 
     public Ventana() {
         FlatLightLaf.install();
@@ -34,10 +35,10 @@ public class Ventana extends JFrame{
 
 
         // Paneles
-         panelNorte = new JPanel();
+        panelNorte = new JPanel();
         panelNorte.setLayout(new BorderLayout());
 
-        JPanel panelCentro = new JPanel();
+        panelCentro = new JPanel();
         panelCentro.setLayout(new GridLayout(2,1));
 
         JPanel panel1 = new JPanel();
@@ -139,7 +140,7 @@ public class Ventana extends JFrame{
                 labelAux.setPreferredSize(new Dimension(100, 70));
                 panelNorte.add(labelAux, BorderLayout.WEST);
                 frame.add(panelNorte, BorderLayout.NORTH);
-                frame.add(contentPane, BorderLayout.CENTER);
+                frame.add(panelCentro, BorderLayout.CENTER);
                 frame.setTitle("XLR8 Transports");
             }
         });
