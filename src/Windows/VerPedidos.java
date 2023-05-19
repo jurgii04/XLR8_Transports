@@ -88,7 +88,7 @@ public class VerPedidos extends JFrame {
                 // Create the components
                 JLabel pedidoLabel = new JLabel("ID Pedido: ");
                 JComboBox<String> comboBox = new JComboBox<>(codigos);
-                JLabel messageLabel = new JLabel("Message");
+                JLabel messageLabel = new JLabel("Mensaje");
                 JTextArea textField = new JTextArea();
                 JScrollPane scrollPane = new JScrollPane(textField);
                 textField.setLineWrap(true);
@@ -119,15 +119,15 @@ public class VerPedidos extends JFrame {
                             String formattedDate = currentDate.format(formatter);
 
                             BufferedWriter writer = new BufferedWriter(new FileWriter("src\\Windows\\TextsFiles\\Consultas.txt",true));
-                            writer.write("El numero del pedido : " + comboBox.getSelectedItem().toString());
+                            writer.write("El numero del pedido: " + comboBox.getSelectedItem().toString());
                             writer.newLine();
-                            writer.write("Empresa : " + user.getNombre_completo());
+                            writer.write("Empresa: " + user.getNombre_completo());
                             writer.newLine();
                             writer.write("Email: "+ user.getEMAIL());
                             writer.newLine();
                             writer.write("Dni: "+ user.getDNI());
                             writer.newLine();
-                            writer.write("Telefono: "+ user.getTELEFONO());
+                            writer.write("Teléfono: "+ user.getTELEFONO());
                             writer.newLine();
                             writer.write("Sector: "+ user.getSECTOR());
                             writer.newLine();
@@ -161,7 +161,7 @@ public class VerPedidos extends JFrame {
 
                 // Create a JLabel for the end text
                 JLabel endLabel = new JLabel();
-                progressBar.setForeground(Color.BLACK);
+                progressBar.setForeground(new Color(0, 150, 136));
 
                 // Create a JPanel to hold the components
                 JPanel panel = new JPanel();
@@ -185,9 +185,9 @@ public class VerPedidos extends JFrame {
 
                             progressBar.setValue(randomNumber);
                             // Create a JOptionPane and set the panel as the message
-                            JOptionPane.showMessageDialog(null, panel, "Order Progress", JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(null, panel, "Progreso del pedido", JOptionPane.PLAIN_MESSAGE);
                         }catch (Exception x){
-                            JOptionPane.showMessageDialog(null, "Por favor! selectionar un pedido.","Error" , JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Selecciona un pedido","Error" , JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 });

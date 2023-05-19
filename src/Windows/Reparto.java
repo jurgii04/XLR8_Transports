@@ -6,6 +6,8 @@ import java.awt.event.*;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import static Windows.Ventana.panelCentro;
+
 public class Reparto extends JFrame  {
 
     public Reparto(JFrame reparto, JPanel panelNorte, JPanel contentPane) {
@@ -28,7 +30,7 @@ public class Reparto extends JFrame  {
                 reparto.getContentPane().repaint();
                 panelNorte.remove(volver);
                 reparto.add(panelNorte, BorderLayout.NORTH);
-                reparto.add(contentPane, BorderLayout.CENTER);
+                reparto.add(panelCentro, BorderLayout.CENTER);
                 reparto.setTitle("XLR8 Transports");
             }
         });

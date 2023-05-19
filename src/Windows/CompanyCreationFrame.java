@@ -54,7 +54,7 @@ public class CompanyCreationFrame extends JFrame {
         emailField=new JTextField(20);
 
         // Create the button
-        createButton = new JButton("<html><h2>Create</h2></html>");
+        createButton = new JButton("<html><h2>Crear cuenta</h2></html>");
 
         // Create a panel and add the components to it
         JPanel panel = new JPanel(new GridBagLayout());

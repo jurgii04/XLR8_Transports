@@ -115,7 +115,7 @@ public class PayWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ((cardNumberField.getText().isEmpty() || cardNumberField.getText()==null) || (nameOnCardField.getText().isEmpty() || nameOnCardField.getText()==null)|| (securityField.getText().isEmpty() || securityField.getText()==null)|| (expirationField.getText().isEmpty() || expirationField.getText()==null)){
-                    JOptionPane.showMessageDialog(null, "No puede haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No puede haber campos vacíos","ERROR",JOptionPane.ERROR_MESSAGE);
                 }else {
 
                     try {
@@ -174,10 +174,7 @@ public class PayWindow extends JFrame {
                         System.out.println(Integer.parseInt(num_viage));
                         db.insert("BILLETES",databill);
                         Gmail g=new Gmail(ea,"src\\Windows\\images\\tickets.jpg");
-                        JOptionPane.showMessageDialog(null, "Transacción compleatada exitosamente!Hemos enviado el ticket a tu eamil.","Transacción compleatada",JOptionPane.INFORMATION_MESSAGE);
-
-
-
+                        JOptionPane.showMessageDialog(null, "Transacción completada exitosamente! El ticket ha sido enviado a tu email.","Transacción completada",JOptionPane.INFORMATION_MESSAGE);
 
                     } catch (Exception ex) {
                         //JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);

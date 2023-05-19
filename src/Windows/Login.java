@@ -51,12 +51,12 @@ public class Login extends JFrame {
         // Configurar el panel de botones
         JPanel buttonPane = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton loginButton = new JButton("Iniciar sesión");
-        JButton cancelButton = new JButton("¿Has olvidado la contraseña?");
+        JButton changePasswordButton = new JButton("¿Has olvidado la contraseña?");
         JButton Crear = new JButton("Crear Cuenta");
         buttonPane.add(loginButton);
         buttonPane.add(Crear);
-        buttonPane.add(cancelButton);
-        cancelButton.addActionListener(new ActionListener() {
+        buttonPane.add(changePasswordButton);
+        changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             try {
@@ -124,7 +124,7 @@ public class Login extends JFrame {
                                     Encription en =new Encription();
                                     datos.put("CONTRASENA", en.encriptar(newcontrasena));
                                     db.update("USERSACCS", "EMAIL= '" + email + "'", datos);
-                                    JOptionPane.showMessageDialog(null,"La contraseña ha sido cambiada.","Cambiar la contraseña",JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(null,"La contraseña ha sido cambiada.","Actualizar contraseña",JOptionPane.INFORMATION_MESSAGE);
                                 }
 
                             }
@@ -228,6 +228,17 @@ public class Login extends JFrame {
                                             ModificarBilletes modificarBilletes = new ModificarBilletes(panelNorte);
                                         }
                                     });
+                                    JMenuItem pedidos = new JMenuItem("Mis pedidos");
+                                    pedidos.addActionListener(new ActionListener() {
+                                        @Override
+                                        public void actionPerformed(ActionEvent e) {
+                                            frame.getContentPane().removeAll();
+                                            frame.getContentPane().revalidate();
+                                            frame.getContentPane().repaint();
+                                            VerPedidos v= new VerPedidos(frame,panelNorte);
+
+                                        }
+                                    });
                                     JMenuItem cerrarSesion = new JMenuItem("Cerrar sesión");
                                     cerrarSesion.addActionListener(new ActionListener() {
                                         @Override
@@ -281,21 +292,6 @@ public class Login extends JFrame {
                                         user=new User(nombre_completo,EMAIL,DIRECCION,DNI,TELEFONO,IMG,SECTOR);
                                     }
 
-
-
-
-                                        JMenuItem pedidos = new JMenuItem("Ver pedidos");
-                                        pedidos.addActionListener(new ActionListener() {
-                                            @Override
-                                            public void actionPerformed(ActionEvent e) {
-                                                frame.getContentPane().removeAll();
-                                                frame.getContentPane().revalidate();
-                                                frame.getContentPane().repaint();
-                                                VerPedidos v= new VerPedidos(frame,panelNorte);
-
-                                            }
-                                        });
-
                                     menu.add(editarPerfil);
                                     if (tipouser.equals("Persona")) {
                                         menu.add(modificarBilletes);
@@ -312,9 +308,6 @@ public class Login extends JFrame {
                                     //Ocultar el botón "Iniciar sesión"
                                     panelNorte.remove(botonLogin);
                                     loginstat=true;
-
-
-
 
                             }
                         }else {
@@ -333,7 +326,7 @@ public class Login extends JFrame {
         });
 
         // Configurar el botón de cancelar
-        cancelButton.addActionListener(new ActionListener() {
+        changePasswordButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 login.dispose();
             }

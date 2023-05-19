@@ -16,3 +16,12 @@ Sector: Educacion
 Fecha: 17-05-2023
 Mensaje: 
 ==========================================================================================================
+El numero del pedido : 2
+Empresa : Zubiri Manteo
+Email: zubiri@.com
+Dni: 15854c
+Telefono: 6369854
+Sector: Educacion
+Fecha: 18-05-2023
+Mensaje: Hola, me gustaria saber cuanto tiempo tardara
+==========================================================================================================

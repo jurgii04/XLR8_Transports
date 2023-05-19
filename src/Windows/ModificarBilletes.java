@@ -72,8 +72,8 @@ public class ModificarBilletes extends JFrame {
         billete.setBackground(Color.WHITE);
         JLabel labelI = new JLabel("<html><span style='font-size:16px; color:#333333;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + origen[i] + " <span style='color:#999999;'>==></span> " + destino[i] + " <span style='color:#999999;'> - Precio</span> <span style='color:#FF9900;'> "+ precio[i] + "€ </span></span><br><span style='font-size:14px; color:#666666;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:00 (12h)&nbsp;&nbsp;&nbsp;20:30&nbsp;&nbsp;&nbsp; " +fecha[i].substring(0,10) + " </span></html>");
         billete.add(labelI, BorderLayout.CENTER);
-        ImageIcon img = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
-        ImageIcon img2 = new ImageIcon("src\\Windows\\images\\madrid.jpg");
+        ImageIcon img = new ImageIcon("src\\Windows\\images\\" + destino[i] + ".jpg");
+        ImageIcon img2 = new ImageIcon("src\\Windows\\images\\" + origen[i] +".jpg");
         JLabel labelimg1 = new JLabel(img);
         labelimg1.setPreferredSize(new Dimension(100, 100));
         JLabel labelimg2 = new JLabel(img2);
@@ -91,6 +91,7 @@ public class ModificarBilletes extends JFrame {
                 try {
                     MaskFormatter dateFormatter = new MaskFormatter("####-##-##");
                     JFormattedTextField fechaNueva = new JFormattedTextField(dateFormatter);
+                    fechaNueva.setText(fecha[i]);
                     fechaNueva.setHorizontalAlignment(SwingConstants.CENTER);
 
                     int cambiarFecha = JOptionPane.showConfirmDialog(null,fechaNueva,"Introduce la fecha deseada",JOptionPane.OK_CANCEL_OPTION);

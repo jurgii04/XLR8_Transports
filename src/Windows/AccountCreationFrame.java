@@ -75,7 +75,7 @@ public class AccountCreationFrame extends JFrame {
             genderGroup.add(otroRadioButton);
 
             // Create the button
-            createButton = new JButton("Create");
+            createButton = new JButton("Crear cuenta");
 
             // Create a panel and add the components to it
             JPanel panel = new JPanel(new GridBagLayout());
