@@ -71,14 +71,14 @@ public class Gmail {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
 
             // Set email subject
-            message.setSubject("Adjunto encontrará su boleto de viaje, el cual contiene un código de barras único. Este código de barras es su identificador personal para el viaje. Asegúrese de tenerlo a mano para cualquier consulta o al abordar el transporte correspondiente.");
+            message.setSubject("Disfrute de su viaje. Gracias por confiar en XLR8 Transports");
 
             // Create a multipart message
             MimeMultipart multipart = new MimeMultipart();
 
             // Create the message body part (text)
             MimeBodyPart textBodyPart = new MimeBodyPart();
-            textBodyPart.setText("Please see the attached photo.");
+            textBodyPart.setText("Adjunto a este correo encontrará su boleto de viaje, el cual contiene un código de barras único. \n\nEste código de barras es su identificador personal para el viaje. Asegúrese de tenerlo a mano para cualquier consulta o al abordar el transporte correspondiente. \n\nGracias por viajar con nosotros. \n\nAtentamente,\n" + "El equipo de XLR8 Transports.");
 
             // Create the message body part (photo attachment)
             MimeBodyPart attachmentBodyPart = new MimeBodyPart();
