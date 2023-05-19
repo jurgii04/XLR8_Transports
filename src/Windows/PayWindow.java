@@ -175,7 +175,7 @@ public class PayWindow extends JFrame {
                         db.insert("BILLETES",databill);
                         Gmail g=new Gmail(ea,"src\\Windows\\images\\tickets.jpg");
                         JOptionPane.showMessageDialog(null, "Transacción completada exitosamente! El ticket ha sido enviado a tu email.","Transacción completada",JOptionPane.INFORMATION_MESSAGE);
-
+                        dispose();
                     } catch (Exception ex) {
                         //JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
                         ex.printStackTrace();

@@ -87,8 +87,8 @@ public class Buses extends JFrame {
                     v1.setBackground(Color.WHITE);
                     JLabel labelI = new JLabel("<html><span style='font-size:16px; color:#333333;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:00 (12h)&nbsp;&nbsp;&nbsp;20:30&nbsp;&nbsp;&nbsp;01-09-2023</span></html>");
                     v1.add(labelI, BorderLayout.CENTER);
-                    ImageIcon img = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
-                    ImageIcon img2 = new ImageIcon("src\\Windows\\images\\madrid.jpg");
+                    ImageIcon img = new ImageIcon("src\\Windows\\images\\"+optionDest+".jpg");
+                    ImageIcon img2 = new ImageIcon("src\\Windows\\images\\"+optionOrg+".jpg");
                     JLabel labelimg1 = new JLabel(img);
                     labelimg1.setPreferredSize(new Dimension(100, 100));
                     JLabel labelimg2 = new JLabel(img2);
@@ -134,8 +134,8 @@ public class Buses extends JFrame {
                     vII.setBackground(Color.WHITE);
                     JLabel labelII = new JLabel("<html><span style='font-size:16px; color:#333333;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + optionOrg + " <span style='color:#999999;'>==></span> " + optionDest + " <span style='color:#999999;'>Precio</span> <span style='color:#FF9900;'>50€</span></span><br><span style='font-size:14px; color:#666666;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:00 (12h)&nbsp;&nbsp;&nbsp;06:30&nbsp;&nbsp;&nbsp;12-07-2023</span></html>");
                     vII.add(labelII, BorderLayout.CENTER);
-                    ImageIcon imgII = new ImageIcon("src\\Windows\\images\\barcelona.jpg");
-                    ImageIcon img2II = new ImageIcon("src\\Windows\\images\\madrid.jpg");
+                    ImageIcon imgII = new ImageIcon("src\\Windows\\images\\"+optionDest+".jpg");
+                    ImageIcon img2II = new ImageIcon("src\\Windows\\images\\"+optionOrg+".jpg");
                     JLabel labelimg1II = new JLabel(imgII);
                     labelimg1II.setPreferredSize(new Dimension(100, 100));
                     JLabel labelimg2II = new JLabel(img2II);

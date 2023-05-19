@@ -96,25 +96,33 @@ public class Login extends JFrame {
                             for (int i=0;i<3;i++){
                                 //System.out.println(number);
 
+
                                 if ((randomNum!=number) && i==2){
                                     JOptionPane.showMessageDialog(null, "El código no es correcto, no tienes mas intentos.","ERROR",JOptionPane.ERROR_MESSAGE);
                                 } else if (randomNum!=number) {
-                                    String intentos = JOptionPane.showInputDialog(null, "El código no es correcto, intentalo otra vez (tienes "+trys+" intentos):");
-                                    number = Integer.parseInt(input);
+                                    input = JOptionPane.showInputDialog(null, "El código no es correcto, intentalo otra vez (tienes "+trys+" intentos):");
+                                    try {
+                                        number = Integer.parseInt(input);
+                                        // Do something with the integer
+
+                                    } catch (NumberFormatException c) {
+                                        // The user entered an invalid integer or clicked the Cancel button
+                                        System.out.println("Entrada inválida o cancelada");
+                                    }
                                     trys--;
                                 }
 
                             }
                             if (randomNum==number){
                                 JPasswordField passwordField = new JPasswordField();
-                                JLabel label = new JLabel("Ingresa tu contraseña: ");
+                                JLabel label = new JLabel("Ingresa tu nueva contraseña: ");
 
                                 Object[] components = {label, passwordField};
 
                                 int option = JOptionPane.showConfirmDialog(
                                         null,
                                         components,
-                                        "Ingresa tu contraseña",
+                                        "Ingresa tu nueva contraseña",
                                         JOptionPane.OK_CANCEL_OPTION,
                                         JOptionPane.PLAIN_MESSAGE
                                 );
