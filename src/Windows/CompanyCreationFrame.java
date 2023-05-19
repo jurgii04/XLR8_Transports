@@ -2,6 +2,7 @@ package Windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -9,15 +10,22 @@ import java.util.regex.Pattern;
 
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
+import org.junit.Test;
 
 import static Windows.EditarPerfil.path;
+import static org.junit.Assert.assertTrue;
 
 public class CompanyCreationFrame extends JFrame {
 
     private JLabel companyNameLabel, addressLabel,password,emailLabel, dniLabel, phoneLabel, sectorLabel;
-    private JTextField companyNameField, addressField,emailField, dniField, phoneField, sectorField;
-    private JPasswordField passwordF;
-    private JButton createButton;
+    public JTextField companyNameField;
+    public JTextField addressField;
+    public JTextField emailField;
+    public JTextField dniField;
+    public JTextField phoneField;
+    public JTextField sectorField;
+    public JPasswordField passwordF;
+    public JButton createButton;
 
     public CompanyCreationFrame(JFrame type) {
         FlatLightLaf.install();
@@ -174,6 +182,7 @@ public class CompanyCreationFrame extends JFrame {
         // Set the frame to be centered on the screen
         setLocationRelativeTo(null);
     }
+
 
 
 }

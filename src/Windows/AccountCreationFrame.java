@@ -21,13 +21,14 @@ import static Windows.EditarPerfil.path;
 public class AccountCreationFrame extends JFrame {
 
 
-        private JLabel nameLabel, lastNameLabel,password, emailLabel, dobLabel, dniLabel;
-        private JTextField nameField, lastNameField, emailField, dniField;
+        public JLabel nameLabel, lastNameLabel,password, emailLabel, dobLabel, dniLabel;
+        public JTextField nameField, lastNameField, emailField, dniField;
+        public JFormattedTextField dobField;
 
-        private JPasswordField passwordf;
-        private JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
-        private JButton createButton;
-        private Encription encry;
+        public JPasswordField passwordf;
+        public JRadioButton maleRadioButton, femaleRadioButton, otroRadioButton;
+        public JButton createButton;
+        public Encription encry;
         GestorDB db;
 
     public AccountCreationFrame(JFrame type) {
@@ -56,7 +57,7 @@ public class AccountCreationFrame extends JFrame {
             } catch (ParseException e) {
                     throw new RuntimeException(e);
             }
-            JFormattedTextField dobField = new JFormattedTextField(dateFormatter);
+             dobField = new JFormattedTextField(dateFormatter);
             dobField.setColumns(10);
             LocalDate currentDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

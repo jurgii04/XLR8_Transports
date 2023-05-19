@@ -9,7 +9,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 public class ChooseTypeFrame extends JFrame {
 
-    private JButton personaButton, empresaButton;
+    public JButton personaButton;
+    public JButton empresaButton;
 
     public ChooseTypeFrame() {
         // Set the Look and Feel

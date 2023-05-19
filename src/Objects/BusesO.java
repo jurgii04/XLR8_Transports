@@ -1,6 +1,6 @@
 package Objects;
 
-public class Buses {
+public class BusesO {
     private String matricula;
     private int num_asientos;
 

@@ -21,6 +21,7 @@ import Objects.Billetes;
 public class Buses extends JFrame {
     static Billetes bill;
     static String billdate;
+    public JButton buscar;
 
 
     public Buses(JFrame buses, JPanel panelNorte, JPanel contentPane , JButton botonLogin, GestorDB db){
@@ -31,8 +32,11 @@ public class Buses extends JFrame {
         buses.setTitle("Buses");
         JPanel formulario = new JPanel();
         JPanel boton = new JPanel();
+        if (volverButton != null) {
+            panelNorte.add(volverButton);
+        }
 
-        panelNorte.add(volverButton, BorderLayout.WEST);
+        //panelNorte.add(volverButton, BorderLayout.WEST);
 
         buses.add(panelNorte, BorderLayout.NORTH);
         buses.add(pb, BorderLayout.CENTER);
@@ -57,7 +61,7 @@ public class Buses extends JFrame {
         JLabel  origen = new JLabel("Origen →  ");
         JComboBox org= new JComboBox<>(origin);
         org.setPreferredSize(new Dimension(150 , org.getPreferredSize().height));
-        JButton buscar =new JButton("Buscar");
+         buscar =new JButton("Buscar");
         buscar.setForeground(Color.WHITE);
         buscar.setBackground(new Color(4, 140, 128, 255));
         buscar.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
