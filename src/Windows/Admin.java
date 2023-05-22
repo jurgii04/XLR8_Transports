@@ -27,7 +27,7 @@ public class Admin extends JFrame {
     public Admin(String  AdminType) {
 
 
-        super("Ventana de Viajes");
+        super("Ventana de administrador");
 
         FlatLightLaf.install();
 

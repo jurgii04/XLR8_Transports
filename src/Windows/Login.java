@@ -154,7 +154,7 @@ public class Login extends JFrame {
 
                     System.out.println("Entered email address: " + email);
                 }else {
-                    JOptionPane.showMessageDialog(null, "Email no existe.","ERROR",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Email no existe.","ERROR",JOptionPane.ERROR_MESSAGE);
                 }
 
             }catch (Exception ex){
