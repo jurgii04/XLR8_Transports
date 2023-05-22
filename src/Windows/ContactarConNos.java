@@ -190,9 +190,7 @@ public class ContactarConNos extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public static void main(String[] args) {
-        ContactarConNos c =new ContactarConNos();
-    }
+
 
 
 

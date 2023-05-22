@@ -102,32 +102,7 @@ public class CircleImagePanel extends JPanel  {
         // draw the final image to the panel
         g.drawImage(bufferedImage, 0, 0, null);
     }
-    public static void main(String[] args) {
-        // create a file object for the image file
-        File imageFile = new File("src\\Windows\\images\\PerfilFotos\\jurgi.png");
 
-        // create a new Perfil window
-        JFrame frame = new JFrame();
-
-        // create a new panel with the circle image
-        try {
-            CircleImagePanel imagePanel = new CircleImagePanel(imageFile);
-
-            // add the panel to the window
-            frame.add(imagePanel);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        // resize the window to fit the panel
-        frame.pack();
-
-        // center the window on the screen
-        frame.setLocationRelativeTo(null);
-
-        // show the window
-        frame.setVisible(true);
-    }
 
 
 

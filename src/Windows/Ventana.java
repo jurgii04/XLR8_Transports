@@ -85,7 +85,7 @@ public class Ventana extends JFrame{
         opcion1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println(frame.getTitle());
+
                 frame.getContentPane().removeAll();
                 frame.getContentPane().revalidate();
                 frame.getContentPane().repaint();

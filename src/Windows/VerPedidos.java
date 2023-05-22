@@ -219,13 +219,6 @@ public class VerPedidos extends JFrame {
                 frame.setVisible(true);
             }
         });
-
-
-
-
-        //System.out.println(Arrays.toString(dataemp));
-
-
     }
 
 

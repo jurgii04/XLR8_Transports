@@ -423,8 +423,7 @@ public class Admin extends JFrame {
                                 formatchnger = new SimpleDateFormat("dd-MM-yyyy");
                                 myDate = new SimpleDateFormat("yyyy-MM-dd").parse(textFields[i].getText());
                                 formattedDate = formatchnger.format(myDate);
-                                //textFields[i].setText(formattedDate);
-                                System.out.println(columnNames[i]);
+
                                 textValues[i] = formattedDate;
                             } catch (ParseException P) {
                                 throw new RuntimeException(P);
@@ -503,9 +502,9 @@ public class Admin extends JFrame {
 
 
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
        // jefe/adminreparto/adminbuses
 
         Admin ventana = new Admin("jefe");
-    }
+    }*/
 }

@@ -314,7 +314,7 @@ public class EditarPerfil extends JFrame {
         }
 
         try {
-            //System.out.println(path);
+
             CircleImagePanel imagePanel = new CircleImagePanel(new File(path));
             imagePanel.addMouseListener(new MouseListener() {
                 @Override
