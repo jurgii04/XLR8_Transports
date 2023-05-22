@@ -101,6 +101,8 @@ public class PayWindow extends JFrame {
         payButton.setFocusPainted(false);
         payButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+        FlatLightLaf.install();
+
         // Add hover effect
         payButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

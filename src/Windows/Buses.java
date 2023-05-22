@@ -32,11 +32,8 @@ public class Buses extends JFrame {
         buses.setTitle("Buses");
         JPanel formulario = new JPanel();
         JPanel boton = new JPanel();
-        if (volverButton != null) {
-            panelNorte.add(volverButton);
-        }
 
-        //panelNorte.add(volverButton, BorderLayout.WEST);
+        panelNorte.add(volverButton, BorderLayout.WEST);
 
         buses.add(panelNorte, BorderLayout.NORTH);
         buses.add(pb, BorderLayout.CENTER);
