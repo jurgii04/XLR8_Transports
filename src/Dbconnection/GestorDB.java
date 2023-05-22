@@ -141,7 +141,7 @@ public class GestorDB {
 
             st = conn.createStatement();
             resu = st.executeQuery(sql);
-            //System.out.println(sql);
+
 
 
             while (resu.next()) {
@@ -150,7 +150,7 @@ public class GestorDB {
 
                     String columnName = columnNames[i];
                     String columnValue = resu.getString(columnName);
-                    //System.out.println(columnName + ": " + columnValue);
+
 
                     data.add(columnValue);
                 }
@@ -209,7 +209,7 @@ public class GestorDB {
 
             st = conn.createStatement();
             resu = st.executeQuery(sql);
-            //System.out.println(sql);
+
 
 
             while (resu.next()) {
@@ -218,7 +218,7 @@ public class GestorDB {
 
                     String columnName = columnNames[i];
                     String columnValue = resu.getString(columnName);
-                    //System.out.println(columnName + ": " + columnValue);
+
 
                     data.add(columnValue);
                 }
@@ -245,24 +245,7 @@ public class GestorDB {
         return data.toArray(new String[data.size()]);
     }
 
-    /*public byte[] selectIMG(String email) throws SQLException {
-        byte[] imageData = null;
 
-        PreparedStatement ps = conn.prepareStatement("SELECT IMG2 FROM USERSACCS WHERE email = ?");
-        ps.setString(1, email);
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            // Obtener los datos de la columna BLOB
-            Blob imageBlob = rs.getBlob("IMG2");
-            imageData = imageBlob.getBytes(1, (int) imageBlob.length());
-        }
-
-        rs.close();
-        ps.close();
-
-        return imageData;
-    }*/
 
 
 
@@ -323,40 +306,5 @@ public class GestorDB {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
-        /*Map<String, Object> data = new LinkedHashMap<>();
-        data.put("NUEMP", 16);
-        data.put("FECHA_CONTRATO", formattedDate);
-        data.put("DNI", 1548740);
-        data.put("NOMBRE_APELLIDO", "goat");
-        data.put("JEFE", 16);
-        //System.out.println(data.keySet());
-        //System.out.println(data.values());
-        DB.insert("EMPLEADOS", data);*/
-        /*//-------------------------------------update testing----------------------------------
-        Map<String, Object> updata = new LinkedHashMap<>();
-        updata.put("NOMBRE_APELLIDO" , "lionel messi");
-        /*for (Map.Entry<String,Object> datageter : updata .entrySet()){
-            //values = values + datageter.getKey() + "=" + datageter.getValue() + ",";
-            System.out.println(datageter.getKey() + "=" + datageter.getValue() + ",");
-        }
-
-        //DB.update("EMPLEADOS" , "NUEMP=16" , updata);
-        //---------------------- delete method testing
-        //DB.delete("EMPLEADOS" , "NUEMP in (16 , 17)");
-        //------------select method testing
-        String[] columnNames = {"NUEMP" ,"NOMBRE_APELLIDO" };
-        String[] whereConditions = {"JEFE=3"};*/
-        //DB.selectFromTable("EMPLEADOS" , new String[]{"DNI"} , new String[]{});
-
-
-        //System.out.println(Arrays.toString(DB.selectFromTable("EMPLEADOS", new String[]{"DNI"}, new String[]{})));
-        //System.out.println(DB.AccExist("slmn.momi@gmail.com"));
-        //String [] dataemp=DB.selectFromTable("EMPRESA" , new String[]{},new String[]{"NOMBRE_EMPRESA='Zubiri Manteo'"});
-        //String [] TEST=DB.selectFromTable("pedidos" , new String[]{"NUM_EMPRESA"},new String[]{});
-        //System.out.println(Arrays.toString(dataemp));
-        //System.out.println(Arrays.toString(TEST));
-
-
     }
 }

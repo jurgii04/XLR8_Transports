@@ -34,7 +34,7 @@ public class Gmail {
             message.setText(Mensage);
 
             Transport.send(message);
-            System.out.println("Email sent successfully.");
+
 
         } catch (MessagingException e) {
             throw e;
@@ -94,16 +94,10 @@ public class Gmail {
             // Send the email
             Transport.send(message);
 
-            System.out.println("Email sent successfully!");
+
         } catch (Exception e) {
             throw e;
         }
-
-    }
-
-
-    public static void main(String[] args) {
-        //gmail g=new gmail();
 
     }
 }

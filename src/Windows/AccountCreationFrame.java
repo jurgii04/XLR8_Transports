@@ -126,21 +126,14 @@ public class AccountCreationFrame extends JFrame {
             c.gridy = 7;
             panel.add(createButton, c);
 
-            // Add the panel to the frame
             add(panel);
         setLocationRelativeTo(null);
-
-        // Set the frame visible
             setVisible(true);
 
-            // Set the default close operation
-
-
-            // Add action listener to the create button
             createButton.addActionListener(new ActionListener() {;
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                        //nameField, lastNameField, emailField, dobField, dniField;
+
                         encry=new Encription();
                         String nombre=nameField.getText();
                         String apellido=lastNameField.getText();
@@ -149,7 +142,7 @@ public class AccountCreationFrame extends JFrame {
                         String dni=dniField.getText();
                         String password=encry.encriptar(passwordf.getText());
                         String gender="";
-                        //maleRadioButton, femaleRadioButton, otroRadioButton;
+
                         if(maleRadioButton.isSelected()){
                                 gender="Male";
                         } else if (femaleRadioButton.isSelected()) {
@@ -190,39 +183,8 @@ public class AccountCreationFrame extends JFrame {
                         } else {
                                 JOptionPane.showMessageDialog(AccountCreationFrame.this,"Dirección de correo invalida","ERROR",JOptionPane.ERROR_MESSAGE);
                         }
-
-
-
-
-                        /*nombre_completo VARCHAR(255) PRIMARY KEY,
-                          email VARCHAR(255),
-                          fecha_nacimiento VARCHAR(255),
-                          DNI VARCHAR(255),
-                          genero VARCHAR(255),
-                          contrasena VARCHAR(500),
-                          direccion VARCHAR(255),
-                          telefono VARCHAR(255),
-                          sector VARCHAR(255),
-                          tipo_user VARCHAR(255)*/
-
-
-
-                        /*System.out.println(nombre);
-                        System.out.println(apellido);
-                        System.out.println(email);
-                        System.out.println(fecha_nac);
-                        System.out.println(dni);
-                        System.out.println(password);
-                        System.out.println(gender);*/
-
-
-
                 }
             });
         }
-
-
-
-
 }
 

@@ -2,18 +2,14 @@ package Windows;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import Dbconnection.GestorDB;
 import com.formdev.flatlaf.FlatLightLaf;
-import org.junit.Test;
-
 import static Windows.EditarPerfil.path;
-import static org.junit.Assert.assertTrue;
+
 
 public class CompanyCreationFrame extends JFrame {
 

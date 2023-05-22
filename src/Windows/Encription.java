@@ -22,11 +22,11 @@ public class Encription {
         return String.valueOf(stringBuilder);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Encription encription = new Encription();
         //System.out.println(encription.encriptar("jefe123"));
         //System.out.println(encription.encriptar("bus123"));
         //System.out.println(encription.encriptar("reparto123"));
         System.out.println(encription.encriptar(""));
-    }
+    }*/
 }

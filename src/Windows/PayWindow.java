@@ -165,15 +165,7 @@ public class PayWindow extends JFrame {
                         databill.put("ORIGEN",bill.getOrigen());
                         databill.put("DNI",bill.getDNI());
                         databill.put("NUM_VIAJE",Integer.parseInt(num_viage));
-                        System.out.println(bill.getNum_billete());
-                        System.out.println(bill.getFecha());
-                        System.out.println(formattedDate);
-                        System.out.println(bill.getPrecio());
-                        System.out.println(bill.getTipo_pago());
-                        System.out.println(bill.getDestino());
-                        System.out.println(bill.getOrigen());
-                        System.out.println(bill.getDNI());
-                        System.out.println(Integer.parseInt(num_viage));
+
                         db.insert("BILLETES",databill);
                         Gmail g=new Gmail(ea,"src\\Windows\\images\\tickets.jpg");
                         JOptionPane.showMessageDialog(null, "Transacción completada exitosamente! El ticket ha sido enviado a tu email.","Transacción completada",JOptionPane.INFORMATION_MESSAGE);
@@ -211,13 +203,4 @@ public class PayWindow extends JFrame {
 
         pack();
     }
-
-    public static void main(String[] args) {
-        PayWindow p =new PayWindow();
-
-    }
-
-
-
-
 }

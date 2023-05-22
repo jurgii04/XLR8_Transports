@@ -64,7 +64,7 @@ public class Login extends JFrame {
                 if (!db.AccExist(email)){
                     if (email == null || email.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Ninguna dirección de correo introducida","ERROR",JOptionPane.ERROR_MESSAGE);
-                        System.out.println("No email address entered.");
+
                     } else {
                         Random rand = new Random();
                         int randomNum = rand.nextInt(90000) + 10000;
@@ -90,11 +90,12 @@ public class Login extends JFrame {
 
                             } catch (NumberFormatException c) {
                                 // The user entered an invalid integer or clicked the Cancel button
-                                System.out.println("Entrada inválida o cancelada");
+                                JOptionPane.showMessageDialog(null, "La entrada no es un numero.","ERROR",JOptionPane.ERROR_MESSAGE);
+
                             }
                             int trys=2;
                             for (int i=0;i<3;i++){
-                                //System.out.println(number);
+
 
 
                                 if ((randomNum!=number) && i==2){
@@ -107,7 +108,8 @@ public class Login extends JFrame {
 
                                     } catch (NumberFormatException c) {
                                         // The user entered an invalid integer or clicked the Cancel button
-                                        System.out.println("Entrada inválida o cancelada");
+                                        JOptionPane.showMessageDialog(null, "La entrada no es un numero.","ERROR",JOptionPane.ERROR_MESSAGE);
+
                                     }
                                     trys--;
                                 }
@@ -152,7 +154,7 @@ public class Login extends JFrame {
 
 
 
-                    System.out.println("Entered email address: " + email);
+
                 }else {
                         JOptionPane.showMessageDialog(null, "Email no existe.","ERROR",JOptionPane.ERROR_MESSAGE);
                 }
@@ -190,7 +192,7 @@ public class Login extends JFrame {
                     else {
                         String pass=data[1];
                         String tipo=data[0];
-                        //System.out.println(pass);
+
                         Admin  a;
                         if (password.equals(pass)){
                             switch (tipo){
