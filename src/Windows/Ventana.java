@@ -24,7 +24,7 @@ public class Ventana extends JFrame{
         frame = new JFrame("XLR8 Transports");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(900,1000));
-        frame.setResizable(false);
+        //frame.setResizable(false);
 
         // Icono de la ventana
         Image icono = new ImageIcon("src\\Windows\\images\\X8.png").getImage();
