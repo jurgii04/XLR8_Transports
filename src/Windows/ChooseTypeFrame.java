@@ -31,12 +31,14 @@ public class ChooseTypeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccountCreationFrame a =new AccountCreationFrame(ChooseTypeFrame.this);
+                dispose();
             }
         });
         empresaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CompanyCreationFrame c =new CompanyCreationFrame(ChooseTypeFrame.this);
+                dispose();
             }
         });
 
