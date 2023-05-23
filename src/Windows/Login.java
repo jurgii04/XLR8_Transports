@@ -271,6 +271,10 @@ public class Login extends JFrame {
                                             frame.add(panelNorte, BorderLayout.NORTH);
                                             frame.add(panelCentro, BorderLayout.CENTER);
                                             frame.setTitle("XLR8 Transports");
+                                            panelNorte.remove(volverButton);
+                                            panelNorte.repaint();
+                                            panelNorte.revalidate();
+                                            path="src\\Windows\\images\\PerfilFotos\\user.png";
 
                                         }
                                     });

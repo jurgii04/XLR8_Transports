@@ -7,6 +7,7 @@ import java.awt.event.*;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import static Windows.Ventana.panelCentro;
+import static Windows.Ventana.volverButton;
 
 public class Reparto extends JFrame  {
 
@@ -16,24 +17,8 @@ public class Reparto extends JFrame  {
         // Set up the "Volver" button
         reparto.setTitle("Reparto");
 
-        JButton volver = new JButton("<html><u>Volver</u></html>");
-        volver.setPreferredSize(new Dimension(100, 70));
-        volver.setForeground(Color.WHITE);
-        volver.setBackground(new Color(4, 140, 128, 255));
-        volver.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        panelNorte.add(volver, BorderLayout.WEST);
-        volver.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                reparto.getContentPane().removeAll();
-                reparto.getContentPane().revalidate();
-                reparto.getContentPane().repaint();
-                panelNorte.remove(volver);
-                reparto.add(panelNorte, BorderLayout.NORTH);
-                reparto.add(panelCentro, BorderLayout.CENTER);
-                reparto.setTitle("XLR8 Transports");
-            }
-        });
+
+        panelNorte.add(volverButton, BorderLayout.WEST);
         reparto.add(panelNorte, BorderLayout.NORTH);
 
         // Set up the panel that holds the "Volver" button
